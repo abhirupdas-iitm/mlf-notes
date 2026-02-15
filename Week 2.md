@@ -830,3 +830,278 @@ With this, we complete our recap of continuity and differentiability in one dime
 `***********************************************************************************`
 
 ---
+## Lecture 3  
+### Univariate Calculus – Derivatives and Linear Approximations  
+
+---
+### 1. Derivative of a Differentiable Function
+
+Let us consider a differentiable function  
+$$
+f : \mathbb{R} \rightarrow \mathbb{R}.
+$$
+We define the derivative of $f$ at a point $x^\star$ as
+$$
+f'(x^\star)
+=
+\lim_{x \to x^\star}
+\frac{f(x) - f(x^\star)}{x - x^\star}.
+$$
+We observe that this definition involves a limit, so we cannot directly manipulate the expression algebraically without care.  
+However, if we restrict ourselves to values of $x$ that are very close to $x^\star$, we may treat
+$$
+\frac{f(x) - f(x^\star)}{x - x^\star}
+\approx
+f'(x^\star)
+\quad
+\text{(for } x \text{ near } x^\star\text{)}.
+$$
+Rearranging, we obtain
+$$
+f(x)
+\approx
+f(x^\star)
++
+f'(x^\star)(x - x^\star),
+\quad
+\text{for } x \approx x^\star.
+$$
+---
+### 2. Linear Approximation
+
+We define the linear approximation of $f$ around $x^\star$ as
+$$
+L_{x^\star}[f](x)
+=
+f(x^\star)
++
+f'(x^\star)(x - x^\star).
+$$
+Thus, we write
+$$
+f(x)
+\approx
+L_{x^\star}[f](x),
+\quad
+\text{around } x = x^\star.
+$$
+We note that:
+- $f(x^\star)$ is a constant.
+- $f'(x^\star)$ is also a constant.
+- The right-hand side is linear in $x$.
+Therefore, $L_{x^\star}[f]$ is a linear function of $x$ that approximates $f$ near $x^\star$.
+---
+### 3. Example: Quadratic Function
+
+Let us consider
+$$
+f(x) = x^2.
+$$
+We choose
+$$
+x^\star = 1.
+$$
+We compute:
+$$
+f'(x) = 2x,
+$$
+so
+$$
+f'(1) = 2.
+$$
+Now we construct the linear approximation:
+$$
+L_{1}[f](x)
+=
+f(1) + f'(1)(x - 1).
+$$
+Since
+$$
+f(1) = 1,
+$$
+we obtain
+$$
+L_{1}[f](x)
+=
+1 + 2(x - 1)
+=
+2x - 1.
+$$
+Thus,
+$$
+f(x) \approx 2x - 1,
+\quad
+\text{around } x = 1.
+$$
+We interpret this as follows:
+- The graph of $y = 2x - 1$ is a straight line.
+- This line touches the curve $y = x^2$ at the point $(1,1)$.
+- Near $x = 1$, the line closely approximates the curve.
+- As we move farther from $1$, the approximation deteriorates.
+---
+### 4. Tangent Line Interpretation
+
+We observe that the graph of the linear approximation
+$$
+G_{L_{x^\star}[f]}
+$$
+is a subset of $\mathbb{R}^2$.
+We say that this line is tangent to the graph of $f$, denoted $G_f$, at the point
+$$
+(x^\star, f(x^\star)).
+$$
+Thus, the linear approximation corresponds geometrically to the tangent line to the curve at that point.
+
+---
+### 5. Classical Linear Approximations
+
+#### (i) $\sin x$ around $x^\star = 0$
+Let
+$$
+f(x) = \sin x.
+$$
+We compute
+$$
+f'(x) = \cos x,
+\quad
+f'(0) = 1,
+\quad
+f(0) = 0.
+$$
+Thus,
+$$
+\sin x
+\approx
+0 + 1(x - 0)
+=
+x,
+\quad
+\text{around } x = 0.
+$$
+---
+#### (ii) $e^x$ around $x^\star = 0$
+Let
+$$
+f(x) = e^x.
+$$
+We compute
+$$
+f'(x) = e^x,
+\quad
+f'(0) = 1,
+\quad
+f(0) = 1.
+$$
+Thus,
+$$
+e^x
+\approx
+1 + x,
+\quad
+\text{around } x = 0.
+$$
+---
+#### (iii) $\log(1+x)$ around $x^\star = 0$
+Let
+$$
+f(x) = \log(1+x).
+$$
+We compute
+$$
+f'(x) = \frac{1}{1+x},
+\quad
+f'(0) = 1,
+\quad
+f(0) = 0.
+$$
+Thus,
+$$
+\log(1+x)
+\approx
+x,
+\quad
+\text{around } x = 0.
+$$
+---
+#### (iv) $(1+x)^r$ around $x^\star = 0$
+
+Let
+$$
+f(x) = (1+x)^r,
+$$
+where $r$ is a constant.
+We compute
+$$
+f'(x) = r(1+x)^{r-1},
+\quad
+f'(0) = r,
+\quad
+f(0) = 1.
+$$
+Thus,
+$$
+(1+x)^r
+\approx
+1 + r x,
+\quad
+\text{around } x = 0.
+$$
+---
+### 6. Application: Approximating $0.99^7$
+
+We observe that
+$$
+0.99^7 = (1 - 0.01)^7.
+$$
+Using the approximation
+$$
+(1+x)^r \approx 1 + r x
+\quad
+\text{for small } x,
+$$
+we set
+$$
+x = -0.01, \quad r = 7.
+$$
+Thus,
+$$
+(0.99)^7
+\approx
+1 + 7(-0.01)
+=
+1 - 0.07
+=
+0.93.
+$$
+Hence, among the options
+- $0.95$
+- $0.93$
+- $0.91$
+- $0.9$
+we conclude that
+$$
+0.93
+$$
+is the closest approximation.
+
+---
+### Core Insight
+
+We summarize the key principle:
+For a differentiable function,
+$$
+f(x)
+\approx
+f(x^\star)
++
+f'(x^\star)(x - x^\star),
+\quad
+\text{near } x = x^\star.
+$$
+We recognize that linear approximation simplifies complicated functions into linear forms locally, and this idea forms the foundation of optimization and machine learning.
+
+---
+`***********************************************************************************`
+
+---
+
