@@ -1225,3 +1225,235 @@ Dimensionality reduction is the foundation for many modern representation learni
 
 ---
 
+
+## Lecture 6
+### Unsupervised Learning – Density Estimation
+
+---
+## 1. Density Estimation Overview
+
+With dimensionality reduction completed, we now move to the second major unsupervised learning problem: **density estimation**.
+
+In density estimation, the output of the learning algorithm is a **probabilistic model**.
+
+We recall that a probabilistic model assigns a score to different configurations of reality.
+
+For example, suppose we want to construct a model capable of generating tweets that resemble tweets from a specific account. Assuming tweets are generated independently at random from that account, we attempt to construct a robot account that can generate similar tweets.
+
+A density estimation model enables exactly this: it assigns high probability to sentences that resemble the original source and low probability to unlikely sentences.
+
+---
+## 2. Formal Setup
+
+### Data
+We are given:
+$$
+\{x^1, x^2, \dots, x^n\}
+$$
+Where:
+$$
+x^i \in \mathbb{R}^d
+$$
+Each $x^i$ represents one data instance (e.g., a tweet represented as a vector).
+
+---
+### Model
+
+The goal is to learn a probability mapping:
+$$
+P : \mathbb{R}^d \rightarrow \mathbb{R}_+
+$$
+
+such that:
+
+1. $P(x) \geq 0$ for all $x$
+2. The probabilities sum (or integrate) to 1
+
+In discrete form (e.g., tweets of length 128 from an alphabet of size 26):
+$$
+\sum_{x \in 26^{128}} P(x) = 1
+$$
+---
+### Goal
+
+We want:
+
+- $P(x)$ to be large if $x$ belongs to the data
+- $P(x)$ to be small otherwise
+
+---
+## 3. Loss Function – Negative Log Likelihood
+
+We define the loss as:
+$$
+\mathcal{L}(P) =
+\frac{1}{n}
+\sum_{i=1}^{n}
+-
+\log \left(P(x^i)\right)
+$$
+This is called the **negative log likelihood**.
+
+### Interpretation
+
+- If $P(x^i)$ is large, then $-\log P(x^i)$ is small.
+- If $P(x^i)$ is small, then $-\log P(x^i)$ is large.
+- If $P(x^i) = 0$, then loss becomes infinite.
+
+Therefore, we aim to:
+$$
+\min_P \mathcal{L}(P)
+$$
+---
+## 4. Illustration 1 (1D Example)
+Let:
+$$
+d = 1
+$$
+Suppose we are given 4 data points:
+$$
+x^1 = 2.3
+$$
+$$
+x^2 = 2.7
+$$
+$$
+x^3 = 4.6
+$$
+$$
+x^4 = 4.9
+$$
+---
+### Candidate Models
+#### Model $P_1$
+$$
+P_1(x) =
+\begin{cases}
+\frac{1}{10} & \text{if } x \in [0,10] \\
+0 & \text{otherwise}
+\end{cases}
+$$
+---
+#### Model $P_2$
+$$
+P_2(x) =
+\begin{cases}
+\frac{1}{5} & \text{if } x \in [0,5] \\
+0 & \text{otherwise}
+\end{cases}
+$$
+---
+#### Model $P_3$
+$$
+P_3(x) =
+\begin{cases}
+\frac{1}{5} & \text{if } x \in [3,8] \\
+0 & \text{otherwise}
+\end{cases}
+$$
+---
+### Evaluate Likelihoods
+
+For data points:
+$$
+2.3,\ 2.7,\ 4.6,\ 4.9
+$$
+- Under $P_1$: each gets $\frac{1}{10}$
+- Under $P_2$: each gets $\frac{1}{5}$
+- Under $P_3$: first two get $0$, last two get $\frac{1}{5}$
+
+---
+### Compute Loss
+
+#### Loss of $P_1$
+$$
+-\log\left(\frac{1}{10}\right)
+-
+\log\left(\frac{1}{10}\right)
+-
+\log\left(\frac{1}{10}\right)
+-
+\log\left(\frac{1}{10}\right)
+$$
+---
+#### Loss of $P_2$
+$$
+-\log\left(\frac{1}{5}\right)
+-
+\log\left(\frac{1}{5}\right)
+-
+\log\left(\frac{1}{5}\right)
+-
+\log\left(\frac{1}{5}\right)
+$$
+---
+#### Loss of $P_3$
+Since two probabilities are zero:
+$$
+-\log(0) = \infty
+$$
+Therefore:
+$$
+\mathcal{L}(P_3) = \infty
+$$
+
+---
+### Conclusion
+We observe:
+$$
+\mathcal{L}(P_2) < \mathcal{L}(P_1) < \mathcal{L}(P_3)
+$$
+Thus, $P_2$ is the best among these three models.
+
+---
+## 5. Illustration 2 (2D Gaussian Mixture Intuition)
+
+Now suppose:
+$$
+d = 2
+$$
+We are given 9 data points in $\mathbb{R}^2$.
+We consider two Gaussian mixture models:
+
+- Model $P_1$ with three centers aligned with visible clusters in the data.
+- Model $P_2$ with three centers placed away from the visible clusters.
+
+We compute the negative log likelihood for both.
+Since $P_1$ assigns higher probability to regions where data clusters appear, it yields smaller negative log likelihood.
+Thus:
+$$
+\mathcal{L}(P_1) < \mathcal{L}(P_2)
+$$
+
+Therefore, $P_1$ is the better density model.
+
+---
+## 6. Core Ideas of Density Estimation
+
+- We are given unlabeled data.
+- We learn a probability distribution over the data space.
+- We ensure probabilities sum (or integrate) to 1.
+- We maximize likelihood (equivalently minimize negative log likelihood).
+- The learned model can generate or score new data.
+
+---
+## 7. Wrap-up for Week 1
+
+We have now covered the two major unsupervised learning problems:
+
+1. Dimensionality Reduction
+2. Density Estimation
+
+Across Week 1, we have introduced:
+
+- Supervised learning (regression and classification)
+- Unsupervised learning (dimensionality reduction and density estimation)
+- Loss functions for each paradigm
+- The general principle of learning as optimization over model families
+
+In later lectures, we will develop concrete algorithms that search over infinite model classes and compute optimal solutions efficiently.
+
+---
+`***********************************************************************************`
+
+---
