@@ -14,7 +14,7 @@ We begin with foundational concepts:
 - Sets and functions  
 - Mathematical notation  
 - Logic  
-- Graphical visualisation of functions  
+- Graphical visualization of functions  
 
 ---
 ## 2. Basic Sets
@@ -300,4 +300,533 @@ These tools form the mathematical foundation required for the rest of the course
 `***********************************************************************************`
 
 ---
+  
+## Lecture 2 — Univariate Calculus: Continuity and Differentiability  
 
+---
+### Continuity of Functions  
+In this lecture, we restrict ourselves to **real-valued one-dimensional functions**:
+$$
+f : \mathbb{R} \to \mathbb{R}
+$$
+### Definition — Continuity at a Point  
+We say that a function $f : \mathbb{R} \to \mathbb{R}$ is **continuous at a point** $x^\star \in \mathbb{R}$ if for **all sequences** $\{x_i\}_{i=1}^\infty$ converging to $x^\star$, we have:
+$$
+\lim_{i \to \infty} x_i = x^\star 
+\;\Rightarrow\;
+\lim_{i \to \infty} f(x_i) = f(x^\star)
+$$
+Equivalently, we write:
+$$
+\lim_{x \to x^\star} f(x) = f(x^\star)
+$$
+---
+### Example 1 — Continuous Function  
+
+Let us consider:
+$$
+f(x) = x^2
+$$
+We test continuity at $x^\star = 2$.
+Let us take a sequence converging to $2$:
+$$
+x_i = 3,\; 2.5,\; 2.25,\; \dots
+$$
+Then:
+$$
+f(x_i) = 9,\; 6.25,\; (2.25)^2,\; \dots
+$$
+We observe that:
+$$
+\lim_{i \to \infty} x_i = 2
+\quad \text{and} \quad
+\lim_{i \to \infty} f(x_i) = 4 = f(2)
+$$
+Hence, $f(x)=x^2$ is continuous at $x^\star=2$.
+In fact, we know that $x^2$ is continuous everywhere.
+
+---
+### Example 2 — Discontinuous Function  
+
+Let us define:
+$$
+f(x) =
+\begin{cases}
+-1 & x < 0 \\
+0 & x = 0 \\
+1 & x > 0
+\end{cases}
+$$
+We test continuity at $x^\star = 0$.
+#### Sequence 1 (approaching from the right)
+$$
+x_i = 1,\; \tfrac12,\; \tfrac14,\; \dots
+$$
+Then:
+$$
+f(x_i) = 1,\; 1,\; 1,\; \dots
+$$
+Thus,
+$$
+\lim_{i\to\infty} f(x_i) = 1
+$$
+#### Sequence 2 (approaching from the left)
+$$
+x_i = -1,\; -\tfrac12,\; -\tfrac14,\; \dots
+$$
+Then:
+$$
+f(x_i) = -1,\; -1,\; -1,\; \dots
+$$
+Thus,
+$$
+\lim_{i\to\infty} f(x_i) = -1
+$$
+Since the limits disagree and are not equal to $f(0)=0$, the function is **not continuous at 0**.
+
+---
+### Example 3 — Piecewise Function  
+
+Let us define:
+$$
+f(x) =
+\begin{cases}
+2x + 1 & x > 1 \\
+3 & x \le 1
+\end{cases}
+$$
+We observe that:
+- From the right at $x=1$: $2(1)+1=3$
+- From the left at $x=1$: value is $3$
+
+Since both agree with $f(1)=3$, we conclude that the function is continuous at $x=1$.
+
+---
+### Example 4 — $f(x)=\frac{1}{x}$  
+
+Let us consider:
+$$
+f(x) = \frac{1}{x}
+$$
+Take the sequence:
+$$
+x_i = 1,\; \tfrac12,\; \tfrac14,\; \dots
+$$
+Then:
+$$
+f(x_i) = 1,\; 2,\; 4,\; 8,\; \dots
+$$
+This diverges.
+Hence $f(x)$ is **not continuous at 0**.
+However, it is continuous on any domain that excludes 0.
+
+---
+### Example 5 — Oscillatory Discontinuity  
+
+Let us consider:
+$$
+f(x) = \cos\!\left(\frac{1}{x}\right)
+$$
+Using:
+$$
+x_i = 1,\; \tfrac12,\; \tfrac14,\; \dots
+$$
+we get:
+$$
+f(x_i) = \cos(1),\; \cos(2),\; \cos(4),\; \cos(8),\; \dots
+$$
+This sequence does not converge.
+Hence the function is not continuous at 0.
+
+---
+## Differentiability of Functions  
+
+#### Definition — Differentiability at a Point  
+
+We say that $f : \mathbb{R} \to \mathbb{R}$ is **differentiable at $x^\star$** if the limit
+$$
+\lim_{x \to x^\star}
+\frac{f(x) - f(x^\star)}{x - x^\star}
+$$
+exists.
+If this limit exists, we denote it by:
+$$
+f'(x^\star)
+$$
+---
+### Key Implication  
+
+If $f$ is **not continuous** at $x^\star$, then $f$ is **not differentiable** at $x^\star$.
+However, the converse is false: a function can be continuous but not differentiable.
+
+---
+### Example — $f(x)=|x|$  
+Let:
+$$
+f(x) = |x|
+$$
+Consider:
+$$
+x_i = 1,\; \tfrac12,\; \tfrac14,\; \dots
+$$
+Then:
+
+$$
+\frac{f(x_i)-f(0)}{x_i}
+=
+\frac{x_i}{x_i}
+=
+1
+$$
+Now consider:
+$$
+x_i = -1,\; -\tfrac12,\; -\tfrac14,\; \dots
+$$
+Then:
+$$
+\frac{f(x_i)-f(0)}{x_i}
+=
+\frac{-x_i}{x_i}
+=
+-1
+$$
+Since the limits differ, the derivative does not exist at $0$.
+Thus $|x|$ is **continuous but not differentiable at 0**.
+
+---
+### Piecewise Example — Not Continuous  
+
+Let:
+$$
+f(x)=
+\begin{cases}
+4x+2 & x \ge 2 \\
+2x+8 & x < 2
+\end{cases}
+$$
+Left and right limits differ at $x=2$.
+Hence $f$ is not continuous and therefore not differentiable at $2$.
+
+---
+### Piecewise Example — Continuous but Not Differentiable  
+
+Let:
+$$
+f(x)=
+\begin{cases}
+4x+2 & x \ge 2 \\
+2x+6 & x < 2
+\end{cases}
+$$
+This function is continuous at $2$, but:
+$$
+\lim_{x\to2^+} 
+\frac{f(x)-f(2)}{x-2} = 4
+$$
+$$
+\lim_{x\to2^-}
+\frac{f(x)-f(2)}{x-2} = 2
+$$
+Since the limits differ, $f$ is not differentiable at $2$.
+
+---
+## Alternate Expression for the Derivative  
+
+We can rewrite the derivative as:
+$$
+f'(x^\star)
+=
+\lim_{h \to 0}
+\frac{f(x^\star + h) - f(x^\star)}{h}
+$$
+---
+## Geometric Interpretation  
+
+We interpret:
+$$
+\frac{f(x^\star + h) - f(x^\star)}{h}
+$$
+as the slope of the secant line between:
+$$
+(x^\star, f(x^\star))
+\quad \text{and} \quad
+(x^\star + h, f(x^\star + h))
+$$
+As $h \to 0$, the secant line approaches the tangent line.
+Thus:
+$$
+f'(x^\star)
+$$
+represents the **slope of the tangent line** to the curve at $x^\star$.
+
+---
+With this, we complete our recap of continuity and differentiability in one dimension.
+
+---
+`***********************************************************************************`
+
+---
+  
+## Lecture 2 — Univariate Calculus: Continuity and Differentiability  
+
+---
+### Continuity of Functions  
+In this lecture, we restrict ourselves to **real-valued one-dimensional functions**:
+$$
+f : \mathbb{R} \to \mathbb{R}
+$$
+### Definition — Continuity at a Point  
+
+We say that a function $f : \mathbb{R} \to \mathbb{R}$ is **continuous at a point** $x^\star \in \mathbb{R}$ if for **all sequences** $\{x_i\}_{i=1}^\infty$ converging to $x^\star$, we have:
+$$
+\lim_{i \to \infty} x_i = x^\star 
+\;\Rightarrow\;
+\lim_{i \to \infty} f(x_i) = f(x^\star)
+$$
+Equivalently, we write:
+$$
+\lim_{x \to x^\star} f(x) = f(x^\star)
+$$
+---
+### Example 1 — Continuous Function  
+
+Let us consider:
+$$
+f(x) = x^2
+$$
+We test continuity at $x^\star = 2$.
+Let us take a sequence converging to $2$:
+$$
+x_i = 3,\; 2.5,\; 2.25,\; \dots
+$$
+Then:
+$$
+f(x_i) = 9,\; 6.25,\; (2.25)^2,\; \dots
+$$
+We observe that:
+$$
+\lim_{i \to \infty} x_i = 2
+\quad \text{and} \quad
+\lim_{i \to \infty} f(x_i) = 4 = f(2)
+$$
+Hence, $f(x)=x^2$ is continuous at $x^\star=2$.
+In fact, we know that $x^2$ is continuous everywhere.
+
+---
+### Example 2 — Discontinuous Function  
+
+Let us define:
+$$
+f(x) =
+\begin{cases}
+-1 & x < 0 \\
+0 & x = 0 \\
+1 & x > 0
+\end{cases}
+$$
+We test continuity at $x^\star = 0$.
+#### Sequence 1 (approaching from the right)
+$$
+x_i = 1,\; \tfrac12,\; \tfrac14,\; \dots
+$$
+Then:
+$$
+f(x_i) = 1,\; 1,\; 1,\; \dots
+$$
+Thus,
+$$
+\lim_{i\to\infty} f(x_i) = 1
+$$
+#### Sequence 2 (approaching from the left)
+$$
+x_i = -1,\; -\tfrac12,\; -\tfrac14,\; \dots
+$$
+Then:
+$$
+f(x_i) = -1,\; -1,\; -1,\; \dots
+$$
+Thus,
+$$
+\lim_{i\to\infty} f(x_i) = -1
+$$
+Since the limits disagree and are not equal to $f(0)=0$, the function is **not continuous at 0**.
+
+---
+### Example 3 — Piecewise Function  
+
+Let us define:
+$$
+f(x) =
+\begin{cases}
+2x + 1 & x > 1 \\
+3 & x \le 1
+\end{cases}
+$$
+We observe that:
+- From the right at $x=1$: $2(1)+1=3$
+- From the left at $x=1$: value is $3$
+
+Since both agree with $f(1)=3$, we conclude that the function is continuous at $x=1$.
+
+---
+### Example 4 — $f(x)=\frac{1}{x}$  
+Let us consider:
+$$
+f(x) = \frac{1}{x}
+$$
+Take the sequence:
+$$
+x_i = 1,\; \tfrac12,\; \tfrac14,\; \dots
+$$
+Then:
+$$
+f(x_i) = 1,\; 2,\; 4,\; 8,\; \dots
+$$
+This diverges.
+Hence $f(x)$ is **not continuous at 0**.
+However, it is continuous on any domain that excludes 0.
+
+---
+### Example 5 — Oscillatory Discontinuity  
+
+Let us consider:
+$$
+f(x) = \cos\!\left(\frac{1}{x}\right)
+$$
+Using:
+$$
+x_i = 1,\; \tfrac12,\; \tfrac14,\; \dots
+$$
+we get:
+$$
+f(x_i) = \cos(1),\; \cos(2),\; \cos(4),\; \cos(8),\; \dots
+$$
+This sequence does not converge.
+Hence the function is not continuous at 0.
+
+---
+## Differentiability of Functions  
+
+### Definition — Differentiability at a Point  
+We say that $f : \mathbb{R} \to \mathbb{R}$ is **differentiable at $x^\star$** if the limit
+$$
+\lim_{x \to x^\star}
+\frac{f(x) - f(x^\star)}{x - x^\star}
+$$
+exists.
+If this limit exists, we denote it by:
+$$
+f'(x^\star)
+$$
+---
+### Key Implication  
+
+If $f$ is **not continuous** at $x^\star$, then $f$ is **not differentiable** at $x^\star$.
+However, the converse is false: a function can be continuous but not differentiable.
+
+---
+### Example — $f(x)=|x|$  
+Let:
+$$
+f(x) = |x|
+$$
+Consider:
+$$
+x_i = 1,\; \tfrac12,\; \tfrac14,\; \dots
+$$
+Then:
+$$
+\frac{f(x_i)-f(0)}{x_i}
+=
+\frac{x_i}{x_i}
+=
+1
+$$
+Now consider:
+$$
+x_i = -1,\; -\tfrac12,\; -\tfrac14,\; \dots
+$$
+Then:
+$$
+\frac{f(x_i)-f(0)}{x_i}
+=
+\frac{-x_i}{x_i}
+=
+-1
+$$
+Since the limits differ, the derivative does not exist at $0$.
+Thus $|x|$ is **continuous but not differentiable at 0**.
+
+---
+### Piecewise Example — Not Continuous  
+Let:
+$$
+f(x)=
+\begin{cases}
+4x+2 & x \ge 2 \\
+2x+8 & x < 2
+\end{cases}
+$$
+Left and right limits differ at $x=2$.
+Hence $f$ is not continuous and therefore not differentiable at $2$.
+
+---
+### Piecewise Example — Continuous but Not Differentiable  
+
+Let:
+$$
+f(x)=
+\begin{cases}
+4x+2 & x \ge 2 \\
+2x+6 & x < 2
+\end{cases}
+$$
+This function is continuous at $2$, but:
+$$
+\lim_{x\to2^+} 
+\frac{f(x)-f(2)}{x-2} = 4
+$$
+$$
+\lim_{x\to2^-}
+\frac{f(x)-f(2)}{x-2} = 2
+$$
+Since the limits differ, $f$ is not differentiable at $2$.
+
+---
+## Alternate Expression for the Derivative  
+
+We can rewrite the derivative as:
+$$
+f'(x^\star)
+=
+\lim_{h \to 0}
+\frac{f(x^\star + h) - f(x^\star)}{h}
+$$
+---
+## Geometric Interpretation  
+
+We interpret:
+$$
+\frac{f(x^\star + h) - f(x^\star)}{h}
+$$
+as the slope of the secant line between:
+$$
+(x^\star, f(x^\star))
+\quad \text{and} \quad
+(x^\star + h, f(x^\star + h))
+$$
+As $h \to 0$, the secant line approaches the tangent line.
+
+Thus:
+$$
+f'(x^\star)
+$$
+represents the **slope of the tangent line** to the curve at $x^\star$.
+
+---
+With this, we complete our recap of continuity and differentiability in one dimension.
+
+---
+`***********************************************************************************`
+
+---
