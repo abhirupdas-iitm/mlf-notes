@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Week 1.md",
+                "file": "Week 2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Week 1"
+              "title": "Week 2"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Week 1.md",
+                "file": "Week 2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Week 1"
+              "title": "Backlinks for Week 2"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Week 1.md",
+                "file": "Week 2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Week 1"
+              "title": "Outgoing links from Week 2"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Week 1.md",
+                "file": "Week 2.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Week 1"
+              "title": "Outline of Week 2"
             }
           }
         ]
@@ -185,7 +185,8 @@
   },
   "active": "e6f74070de8b054d",
   "lastOpenFiles": [
-    "Machine Learning Foundation.md",
-    "Week 1.md"
+    "Week 1.md",
+    "Week 2.md",
+    "Machine Learning Foundation.md"
   ]
 }
