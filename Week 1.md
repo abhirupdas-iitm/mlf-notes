@@ -483,3 +483,266 @@ $$
 `***********************************************************************************`
 
 ---
+## Lecture 3
+### Supervised Learning – Regression
+
+---
+## 1. Supervised Learning
+
+Supervised learning can be viewed as **curve fitting**.
+Given training data:
+$$
+\{(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)\}
+$$
+Where:
+- $x_i \in \mathbb{R}^d$
+- $y_i \in \mathcal{Y}$
+
+Goal:
+Find a model
+$$
+f : \mathbb{R}^d \rightarrow \mathcal{Y}
+$$
+such that:
+$$
+f(x_i) \text{ is close to } y_i
+$$
+---
+## 2. Notation
+
+- $\mathbb{R}$ = real numbers  
+- $\mathbb{R}_+$ = positive reals  
+- $\mathbb{R}^d$ = $d$-dimensional real vectors  
+
+Vector notation:
+
+- $x = (x_1, x_2, \dots, x_d)$  
+- $x_j$ = $j^{th}$ coordinate  
+- $\|x\|$ = Euclidean norm  
+
+$$
+\|x\|^2 = \sum_{j=1}^d x_j^2
+$$
+$$
+\|x\| = \sqrt{\sum_{j=1}^d x_j^2}
+$$
+
+Collection of vectors:
+$$
+x^1, x^2, \dots, x^n
+$$
+- $x^i_j$ = $j^{th}$ coordinate of $i^{th}$ vector  
+
+Indicator function:
+$$
+\mathbf{1}(\text{predicate}) =
+\begin{cases}
+1 & \text{if true} \\
+0 & \text{if false}
+\end{cases}
+$$
+Example:
+$$
+\mathbf{1}(2 \text{ is even}) = 1
+$$
+$$
+\mathbf{1}(2 \text{ is odd}) = 0
+$$
+---
+## 3. Regression
+
+Regression is used when:
+$$
+y_i \in \mathbb{R}
+$$
+Example:
+Predict house price from:
+- Rooms
+- Area
+- Distance to metro
+
+Training data:
+$$
+\{(x^1, y^1), (x^2, y^2), \dots, (x^n, y^n)\}
+$$
+Where:
+- $x^i \in \mathbb{R}^d$
+- $y^i \in \mathbb{R}$
+
+Model:
+$$
+f : \mathbb{R}^d \rightarrow \mathbb{R}
+$$
+---
+## 4. Loss Function (Squared Loss)
+
+Loss of model $f$:
+$$
+\mathcal{L}(f) =
+\frac{1}{n} \sum_{i=1}^{n}
+\left( f(x^i) - y^i \right)^2
+$$
+Properties:
+- Always non-negative
+- $\mathcal{L}(f) = 0$ if and only if $f(x^i) = y^i$ for all $i$
+
+Learning algorithm goal:
+$$
+\min_f \mathcal{L}(f)
+$$
+---
+## 5. Linear Parameterization
+
+Most common regression model:
+$$
+f(x) = w^T x + b
+$$
+Expanded form:
+$$
+f(x) = \sum_{j=1}^{d} w_j x_j + b
+$$
+Parameters:
+- $w = (w_1, w_2, \dots, w_d)$
+- $b$ = bias
+
+Example (House price):
+$$
+f(x) =
+w_1 \cdot \text{Rooms}
++
+w_2 \cdot \text{Area}
++
+w_3 \cdot \text{Distance}
++
+b
+$$
+Learning algorithm finds:
+$$
+w, b
+$$
+that minimize squared loss.
+
+---
+## 6. Regression Illustration 1 (1D Example)
+
+Assume $d = 1$.
+Training data:
+$$
+\begin{aligned}
+x &= [1, 2, 3, 6, 7] \\
+y &= [2.1, 3.9, 6.2, 11.5, 13.9]
+\end{aligned}
+$$
+Two candidate models:
+Model 1:
+$$
+f(x) = 2x
+$$
+Model 2:
+$$
+g(x) = x + 3
+$$
+Predictions:
+For $f$:
+$$
+[2, 4, 6, 12, 14]
+$$
+For $g$:
+$$
+[4, 5, 6, 9, 10]
+$$
+Loss of $f$:
+$$
+\frac{1}{5} \left[
+(2-2.1)^2
++
+(4-3.9)^2
++
+(6-6.2)^2
++
+(12-11.5)^2
++
+(14-13.9)^2
+\right]
+$$
+Loss of $g$:
+$$
+\frac{1}{5} \left[
+(4-2.1)^2
++
+(5-3.9)^2
++
+(6-6.2)^2
++
+(9-11.5)^2
++
+(10-13.9)^2
+\right]
+$$
+Clearly:
+$$
+\mathcal{L}(f) < \mathcal{L}(g)
+$$
+So $f$ is preferred.
+
+---
+## 7. Regression Illustration 2 (House Example)
+
+Data:
+
+| Rooms | Area | Distance | Price |
+| ----- | ---- | -------- | ----- |
+| 3     | 9    | 1.9      | 5.0   |
+| 2     | 7    | 2.1      | 3.2   |
+| 4     | 12   | 2.8      | 6.6   |
+| 5     | 16   | 0.9      | 9.8   |
+| 5     | 15   | 3.1      | 8.5   |
+| 4     | 11   | 1.6      | 6.9   |
+Two models:
+
+Model $f$:
+$$
+f(x) = 2 \cdot \text{Rooms}
+- 0.5 \cdot \text{Distance}
+$$
+Model $g$:
+$$
+g(x) =
+\text{Rooms}
++
+2 \cdot \text{Distance}
+$$
+Compute predictions for all training points.
+Then compute:
+$$
+\mathcal{L}(f)
+=
+\frac{1}{n}
+\sum_{i=1}^n (f(x^i) - y^i)^2
+$$
+$$
+\mathcal{L}(g)
+=
+\frac{1}{n}
+\sum_{i=1}^n (g(x^i) - y^i)^2
+$$
+We observe:
+$$
+\mathcal{L}(f) < \mathcal{L}(g)
+$$
+Hence $f$ is a better model for this dataset.
+
+---
+## Core Idea of Regression
+
+- We are fitting a function to data.
+- We choose a model family (e.g., linear).
+- We define a loss function (e.g., squared loss).
+- We find parameters that minimize loss.
+
+Supervised learning = curve fitting under a loss function.
+
+---
+`***********************************************************************************`
+
+---
