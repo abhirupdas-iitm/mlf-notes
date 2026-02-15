@@ -746,3 +746,242 @@ Supervised learning = curve fitting under a loss function.
 `***********************************************************************************`
 
 ---
+## Week 1 – Lecture 4
+### Supervised Learning – Classification
+
+---
+## 1. Classification Problem Setup
+
+In classification, we predict discrete labels.
+
+Example:
+Predict whether:
+$$
+\text{Rooms} > 3
+$$
+from:
+- Area
+- Price
+---
+### Training Data
+
+We are given:
+$$
+\{(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)\}
+$$
+Where:
+$$
+x_i \in \mathbb{R}^d
+$$
+$$
+y_i \in \{+1, -1\}
+$$
+The learning algorithm outputs:
+$$
+f : \mathbb{R}^d \rightarrow \{+1, -1\}
+$$
+---
+## 2. Classification Loss
+
+Ideal case:
+$$
+f(x_i) = y_i \quad \forall i
+$$
+In general, this may not hold.
+We define classification loss as:
+$$
+\mathcal{L}(f) = \frac{1}{n} \sum_{i=1}^{n} \mathbf{1}(f(x_i) \neq y_i)
+$$
+Where:
+$$
+\mathbf{1}(A) =
+\begin{cases}
+1 & \text{if } A \text{ is true} \\
+0 & \text{otherwise}
+\end{cases}
+$$
+This measures:
+> Fraction of misclassified training points.
+
+---
+## 3. Linear Classifier (Linear Separator)
+
+Most common parameterization:
+$$
+f(x) = \operatorname{sign}(w^\top x + b)
+$$
+Where:
+- $w \in \mathbb{R}^d$
+- $b \in \mathbb{R}$
+
+This defines a hyperplane:
+$$
+w^\top x + b = 0
+$$
+Points on one side → +1  
+Points on the other side → -1  
+
+---
+## 4. Classification Illustration 1
+
+### Dataset (d = 2)
+
+Training points:
+$$
+(0,0), (1,0), (0,1)
+$$
+Label:
+$$
++1
+$$
+and
+$$
+(4,4), (3,4), (4,3)
+$$
+Label:
+$$
+-1
+$$
+---
+### Model 1
+$$
+f(x) = \operatorname{sign}(2 - x_1)
+$$
+Evaluate on training data:
+
+All 6 correctly classified.
+Therefore:
+$$
+\mathcal{L}(f) = 0
+$$
+---
+### Model 2
+$$
+g(x) = \operatorname{sign}(x_1 - 2x_2)
+$$
+One point misclassified.
+Therefore:
+$$
+\mathcal{L}(g) = \frac{1}{6}
+$$
+Since:
+$$
+0 < \frac{1}{6}
+$$
+Learning algorithm prefers:
+$$
+f
+$$
+---
+## 5. Classification Illustration 2 (House Example)
+
+Encoding:
+$$
+\text{Rooms} \leq 3 \rightarrow -1
+$$
+$$
+\text{Rooms} > 3 \rightarrow +1
+$$
+Consider three models:
+
+---
+### Model f
+$$
+f(x) = \operatorname{sign}(\text{Area} - 10)
+$$
+Loss:
+$$
+\mathcal{L}(f) = 0
+$$
+---
+### Model g
+$$
+g(x) = \operatorname{sign}(\text{Price} - 6)
+$$
+Loss:
+$$
+\mathcal{L}(g) = 0
+$$
+---
+### Model h
+$$
+h(x) = \operatorname{sign}(\text{Price} - 9)
+$$
+Loss:
+$$
+\mathcal{L}(h) = \frac{3}{6}
+$$
+Thus:
+- f and g are perfect on training data.
+- h is not.
+---
+## 6. Important: Do NOT Evaluate on Training Data
+
+Suppose we define:
+$$
+f(x) =
+\begin{cases}
++1 & \text{if } x = (0,0) \\
++1 & \text{if } x = (1,0) \\
++1 & \text{if } x = (0,1) \\
+-1 & \text{otherwise}
+\end{cases}
+$$
+On training data:
+$$
+\mathcal{L}(f) = 0
+$$
+But this model is clearly useless.
+It memorizes training points.
+It will fail on new data.
+This is called **overfitting**.
+
+---
+## 7. Train / Test Split
+
+Learning process:
+1. Training data → learn model.
+2. Test data → evaluate model.
+
+Never evaluate on training data.
+Why?
+Because:
+Training loss underestimates real-world error.
+
+Goal of ML:
+Perform well on unseen data.
+
+---
+## 8. Validation Data (Model Selection)
+
+Learning algorithm finds best model **within a chosen family**.
+Example model family:
+$$
+f(x) = w_1 (\text{rooms}) + w_2 (\text{area}) + w_3 (\text{distance}) + b
+$$
+But why this family?
+Why not:
+$$
+f(x) = a \cdot \frac{\text{area}}{\text{rooms}} + b \cdot \text{distance}^2 + c
+$$
+Choosing the correct model class is called:
+### Model Selection
+
+Data split:
+- Training data → learn parameters
+- Validation data → choose model class
+- Test data → final evaluation
+---
+## Core Ideas of This Lecture
+
+- Classification predicts discrete labels.
+- Loss = fraction of misclassification.
+- Linear classifier: $\operatorname{sign}(w^\top x + b)$.
+- Never evaluate on training data.
+- Use test data for evaluation.
+- Use validation data for model selection.
+
+---
+`***********************************************************************************`
+
+---
