@@ -1105,3 +1105,288 @@ We recognize that linear approximation simplifies complicated functions into lin
 
 ---
 
+## Lecture 4 — Applications and Advanced Rules of Derivatives  
+
+---
+### 1. Higher Order Approximations  
+
+We have previously defined the **linear approximation** of a differentiable function $f : \mathbb{R} \to \mathbb{R}$ around a point $x^\star$ as  
+$$
+f(x) \approx f(x^\star) + f'(x^\star)(x - x^\star)
+$$
+We now observe that there is nothing fundamentally special about stopping at the first derivative. We can incorporate higher order derivatives to obtain better approximations.
+
+The **quadratic approximation** of $f$ around $x^\star$ is given by  
+$$
+f(x) \approx f(x^\star)
++ f'(x^\star)(x - x^\star)
++ \frac{1}{2} f''(x^\star)(x - x^\star)^2
+$$
+We emphasize that both approximations are valid when  
+$$
+x \approx x^\star
+$$
+The quadratic approximation is generally more accurate than the linear approximation, but it introduces additional computational complexity.
+
+---
+#### Example 1: Exactness for Quadratic Functions  
+
+Let us consider  
+$$
+f(x) = x^2
+$$
+We compute  
+$$
+f'(x) = 2x
+$$
+$$
+f''(x) = 2
+$$
+Using the quadratic approximation around an arbitrary $x^\star$, we obtain  
+$$
+x^2 \approx (x^\star)^2
++ 2x^\star (x - x^\star)
++ \frac{1}{2} \cdot 2 (x - x^\star)^2
+$$
+Simplifying,
+$$
+x^2 = (x^\star)^2 + 2x^\star(x - x^\star) + (x - x^\star)^2
+$$
+which exactly equals $x^2$.
+We conclude that for quadratic functions, the quadratic approximation recovers the function exactly.
+
+---
+#### Example 2: Quadratic Approximation of $e^x$ Around $0$
+
+We consider  
+$$
+f(x) = e^x
+$$
+We compute  
+$$
+f(0) = 1, \quad
+f'(x) = e^x, \quad
+f'(0) = 1, \quad
+f''(0) = 1
+$$
+The quadratic approximation around $0$ becomes  
+$$
+e^x \approx 1 + x + \frac{x^2}{2}
+\quad \text{for } x \approx 0
+$$
+We recognize this as the first three terms of the Taylor expansion of $e^x$.
+
+---
+#### Application: Approximating $(1.1)^7$
+
+We wish to approximate  
+$$
+(1.1)^7 = (1 + 0.1)^7
+$$
+Let  
+$$
+f(x) = (1 + x)^7
+$$
+We compute  
+$$
+f'(x) = 7(1 + x)^6
+$$
+$$
+f''(x) = 42(1 + x)^5
+$$
+At $x = 0$,
+$$
+f(0) = 1, \quad
+f'(0) = 7, \quad
+f''(0) = 42
+$$
+Using quadratic approximation at $x = 0.1$,
+$$
+f(0.1) \approx 1 + 7(0.1) + \frac{1}{2} \cdot 42 (0.1)^2
+$$
+$$
+= 1 + 0.7 + 21(0.01)
+$$
+$$
+= 1 + 0.7 + 0.21
+$$
+$$
+= 1.91
+$$
+We observe that this value is significantly closer to the true value than the linear approximation  
+$$
+1 + 7(0.1) = 1.7
+$$
+---
+#### 2. Product Rule via Linear Approximation  
+
+Let  
+$$
+f(x) = g(x) h(x)
+$$
+We approximate both $g$ and $h$ around $x = 0$:
+$$
+g(x) \approx g(0) + g'(0)x
+$$
+$$
+h(x) \approx h(0) + h'(0)x
+$$
+Multiplying,
+$$
+f(x) \approx (g(0) + g'(0)x)(h(0) + h'(0)x)
+$$
+Expanding,
+$$
+= g(0)h(0)
++ x[g'(0)h(0) + h'(0)g(0)]
++ x^2 g'(0)h'(0)
+$$
+Ignoring the quadratic term for linear approximation,
+$$
+f(x) \approx f(0) + x[g'(0)h(0) + h'(0)g(0)]
+$$
+By matching with  
+$$
+f(x) \approx f(0) + f'(0)x
+$$
+we obtain the **product rule**
+$$
+f'(0) = g'(0)h(0) + h'(0)g(0)
+$$
+Generalizing,
+$$
+f'(x) = g'(x)h(x) + g(x)h'(x)
+$$
+---
+
+#### 3. Chain Rule via Linear Approximation  
+
+Let  
+$$
+f(x) = g(h(x))
+$$
+We first approximate  
+$$
+h(x) \approx h(0) + h'(0)x
+$$
+Then,
+$$
+g(h(x)) \approx g(h(0)) + g'(h(0)) [h(x) - h(0)]
+$$
+Substituting the approximation of $h(x)$,
+$$
+f(x) \approx g(h(0)) + g'(h(0)) h'(0)x
+$$
+Matching with  
+$$
+f(x) \approx f(0) + f'(0)x
+$$
+we obtain the **chain rule**
+$$
+f'(0) = g'(h(0)) h'(0)
+$$
+In general,
+$$
+\frac{d}{dx} g(h(x)) = g'(h(x)) h'(x)
+$$
+---
+#### 4. Linear Approximation Examples  
+
+##### Example 1  
+Approximate  
+$$
+\frac{e^{3x}}{\sqrt{1+x}}
+$$
+around $x = 0$.
+We use  
+$$
+e^{3x} \approx 1 + 3x
+$$
+$$
+(1+x)^{-1/2} \approx 1 - \frac{x}{2}
+$$
+Multiplying,
+$$
+\frac{e^{3x}}{\sqrt{1+x}}
+\approx (1 + 3x)\left(1 - \frac{x}{2}\right)
+$$
+Ignoring quadratic terms,
+$$
+\approx 1 + \frac{5}{2} x
+\quad \text{for } x \approx 0
+$$
+---
+##### Example 2  
+Approximate  
+$$
+e^{\sqrt{1+x}}
+$$
+around $x = 1$.
+We compute  
+$$
+f(1) = e^{\sqrt{2}}
+$$
+$$
+f'(x) = e^{\sqrt{1+x}} \cdot \frac{1}{2\sqrt{1+x}}
+$$
+$$
+f'(1) = \frac{e^{\sqrt{2}}}{2\sqrt{2}}
+$$
+Thus the linear approximation is  
+$$
+e^{\sqrt{1+x}}
+\approx e^{\sqrt{2}}
++ \frac{e^{\sqrt{2}}}{2\sqrt{2}} (x - 1)
+\quad \text{for } x \approx 1
+$$
+---
+#### 5. Critical Points, Maxima, Minima, Saddle Points  
+
+The linear approximation of $f$ around $x^\star$ is  
+$$
+L_{x^\star}[f](x)
+=
+f(x^\star)
++
+f'(x^\star)(x - x^\star)
+$$
+If  
+$$
+f'(x^\star) = 0
+$$
+then  
+$$
+L_{x^\star}[f](x) = f(x^\star)
+$$
+which means the approximation is constant.
+We define  
+$$
+f'(x^\star) = 0
+\iff
+x^\star \text{ is a critical point of } f
+$$
+In one dimension, a critical point may correspond to:
+- a local minimum  
+- a local maximum  
+- a saddle point  
+These points are fundamental in machine learning because optimization problems reduce to finding points where  
+$$
+f'(x) = 0
+$$
+---
+#### Closing Remark  
+
+We conclude that linear approximation is the central computational tool underlying:
+- product rule  
+- chain rule  
+- Taylor approximations  
+- optimization  
+- critical point analysis  
+
+This completes the univariate calculus component. We next transition to multivariate calculus.
+
+---
+`***********************************************************************************`
+
+---
+
