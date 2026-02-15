@@ -995,3 +995,232 @@ We typically divide data as follows:
 `***********************************************************************************`
 
 ---
+## Lecture 5
+### Unsupervised Learning – Dimensionality Reduction
+
+---
+## 1. Introduction to Unsupervised Learning
+
+In the previous lectures, we studied supervised learning and analyzed the two central tasks: regression and classification.
+
+In this lecture, we begin the study of the unsupervised learning paradigm, focusing on its primary tasks:
+
+- Dimensionality Reduction  
+- Density Estimation  
+
+Unlike supervised learning, where we had clearly defined objectives and explicit loss functions tied to labeled data, unsupervised learning is inherently less structured.
+
+We no longer observe labeled pairs $(x_i, y_i)$. Instead, we are given only data points:
+$$
+\{x^1, x^2, \dots, x^n\}
+$$
+where
+$$
+x^i \in \mathbb{R}^d
+$$
+We view unsupervised learning as the task of **understanding data**.
+
+More concretely, we attempt to build models that:
+- Compress data  
+- Explain structure in data  
+- Group similar data points  
+---
+## 2. Motivation: Why Unsupervised Learning?
+
+We typically do not use unsupervised learning as an end goal.
+Instead, we use it as a preprocessing stage that supports other tasks or aids human interpretation.
+### Example: Tweet Grouping
+Suppose we collect one million tweets about a product.
+It is impractical to manually examine all tweets individually.
+Instead, we may wish to group these tweets into a small number of coherent clusters, say 10 groups.
+We can then interpret each group:
+- Users sharing personal experiences  
+- Promotional posts  
+- Brand collaborations  
+- Sponsored content  
+
+The unsupervised algorithm only performs grouping.
+The semantic interpretation of these groups is performed by humans.
+Thus, unsupervised learning extracts structure, and human reasoning assigns meaning.
+
+---
+## 3. Dimensionality Reduction
+
+We now study the first major unsupervised task: **Dimensionality Reduction**.
+### Goal
+
+We aim to compress high-dimensional data into a lower-dimensional representation while preserving essential information.
+
+For example:
+Suppose we measure gene expression levels for:
+- $10^6$ genes  
+- $10^6$ individuals  
+
+This produces a matrix of size:
+$$
+10^6 \times 10^6
+$$
+Storing or transmitting such data directly is impractical.
+Instead, we may wish to represent each individual using only 100 numbers.
+Dimensionality reduction enables this compression.
+We summarize its purpose as:
+
+> Compression and simplification.
+
+---
+## 4. Formal Setup
+
+We are given data:
+$$
+\{x^1, x^2, \dots, x^n\}
+$$
+where
+$$
+x^i \in \mathbb{R}^d
+$$
+We aim to learn two functions:
+### Encoder
+$$
+f : \mathbb{R}^d \rightarrow \mathbb{R}^{d'}
+$$
+where typically:
+$$
+d' \ll d
+$$
+The encoder compresses a $d$-dimensional vector into a $d'$-dimensional representation.
+
+---
+### Decoder
+$$
+g : \mathbb{R}^{d'} \rightarrow \mathbb{R}^d
+$$
+The decoder reconstructs the original vector from its compressed form.
+
+---
+### Objective
+
+We want:
+$$
+g(f(x^i)) \approx x^i
+$$
+for all training points.
+We measure reconstruction error using squared Euclidean norm:
+$$
+\left\| g(f(x^i)) - x^i \right\|^2
+$$
+The overall loss is:
+$$
+\mathcal{L}(f, g)
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+\left\| g(f(x^i)) - x^i \right\|^2
+$$
+Our goal is to find encoder-decoder pair $(f, g)$ that minimizes this loss.
+
+---
+## 5. Illustration: Simple Example
+
+Let:
+$$
+d = 2, \quad d' = 1, \quad n = 4
+$$
+Data points:
+$$
+x^1 = (1, 0.8)
+$$
+$$
+x^2 = (2, 2.2)
+$$
+$$
+x^3 = (3, 3.2)
+$$
+$$
+x^4 = (4, 3.8)
+$$
+---
+### Encoder-Decoder Pair 1
+
+Encoder:
+$$
+f(x) = x_1 - x_2
+$$
+Decoder:
+$$
+g(u) = (u, u)
+$$
+Encoder outputs:
+$$
+[0.2, -0.2, -0.2, 0.2]
+$$
+Decoder reconstructions:
+$$
+(0.2, 0.2),
+(-0.2, -0.2),
+(-0.2, -0.2),
+(0.2, 0.2)
+$$
+These reconstructions are far from original points.
+Thus, reconstruction error is large.
+This encoder-decoder pair performs poorly.
+
+---
+### Encoder-Decoder Pair 2
+
+Encoder:
+$$
+\tilde{f}(x) = \frac{x_1 + x_2}{2}
+$$
+Decoder:
+$$
+\tilde{g}(u) = (u, u)
+$$
+Encoder outputs:
+$$
+[0.9, 2.1, 3.1, 3.9]
+$$
+Decoder reconstructions:
+$$
+(0.9, 0.9),
+(2.1, 2.1),
+(3.1, 3.1),
+(3.9, 3.9)
+$$
+These reconstructions are much closer to the original data.
+Thus:
+$$
+\mathcal{L}(\tilde{f}, \tilde{g})
+<
+\mathcal{L}(f, g)
+$$
+The second pair performs better.
+
+---
+## 6. Conceptual Understanding
+
+Dimensionality reduction algorithms:
+- Choose encoder $f$
+- Choose decoder $g$
+- Minimize reconstruction loss
+
+In real applications, we do not restrict ourselves to two candidate pairs.
+Instead, we search over large (often infinite) families of functions to find optimal compression.
+
+## Core Ideas of Lecture 5
+
+- Unsupervised learning works without labels.
+- We aim to understand structure in data.
+- Dimensionality reduction compresses high-dimensional vectors.
+- We learn encoder-decoder pairs.
+- We minimize reconstruction error:
+$$
+\frac{1}{n}
+\sum_{i=1}^{n}
+\left\| g(f(x^i)) - x^i \right\|^2
+$$
+Dimensionality reduction is the foundation for many modern representation learning techniques.
+
+---
+`***********************************************************************************`
+
+---
