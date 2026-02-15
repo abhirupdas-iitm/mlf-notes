@@ -1,13 +1,13 @@
 ## Lecture 1
-### Introduction, Terminology and Setup
+### What is Machine Learning
 
 ---
 ## 1. What is Machine Learning?
 
 ### Definition
-Machine Learning (ML) is the study of computer algorithms that improve automatically through experience and by the use of data.
+We define Machine Learning (ML) as the study of computer algorithms that improve automatically through experience and the use of data.
 
-Formally, ML can be viewed as learning a function:
+Formally, we view ML as learning a function:
 $$
 f : \mathcal{X} \rightarrow \mathcal{Y}
 $$
@@ -17,12 +17,12 @@ Where:
 - $\mathcal{Y}$ = output space  
 - $f$ = unknown mapping rule  
 
-The goal of ML is to approximate $f$ using data.
+Our objective in ML is to approximate $f$ using data.
 
 ---
 ## 2. What is a Task?
 
-A **Task** is a process that converts input into output.
+We define a **Task** as a process that converts input into output.
 $$
 \text{Task}: x \rightarrow y
 $$
@@ -40,29 +40,28 @@ Where:
 ---
 ## 3. Task Hierarchy
 
-There are four abstraction levels.
+We organize tasks into four abstraction levels.
 ### Level 1: Manual Labour
 Input $\rightarrow$ Human $\rightarrow$ Output  
-Human directly computes:
+We directly compute:
 $$
 y = f(x)
 $$
 ---
-
 ### Level 2 & 3: Tool Usage / Programming
 
-Human explicitly writes:
+We explicitly write:
 $$
 y = f(x)
 $$
 Structure:
 Input $\rightarrow$ Software $\rightarrow$ Output  
-Here, the human knows $f$.
+In this setting, we fully know $f$.
 
 ---
 ### Level 4: Machine Learning
 
-Human does not explicitly write $f$.
+We do not explicitly specify $f$.
 
 Instead, we provide labeled data:
 
@@ -80,17 +79,16 @@ Data + Model Design $\rightarrow \hat{f}$
 Then:
 $x \rightarrow \hat{f}(x) \rightarrow y$
 
-**Key Idea:** The function is learned from data.
+**Key Idea:** We learn the function from data.
 
 ---
-
 ## 4. When Should We Use Machine Learning?
 
 ### Programming / Human Labour Fails When
 
-- Scale, speed, or cost is too high  
-- Cannot express rules mathematically  
-- Exact rule $f$ is unknown  
+- Scale, speed, or cost becomes too high  
+- We cannot express rules mathematically  
+- The exact rule $f$ is unknown  
 
 Formally, we cannot define:
 
@@ -102,7 +100,7 @@ $$
 ### Machine Learning Can Succeed If
 
 - There exists some function $f$  
-- We have sufficient data  
+- We possess sufficient data  
 - There is underlying structure  
 
 We assume:
@@ -132,8 +130,8 @@ f(x) =
 $$
 Conclusion:
 
-- Programming works  
-- ML not required  
+- Programming suffices  
+- ML is unnecessary  
 ---
 ## 6. Case Study: Face Detection
 
@@ -154,7 +152,7 @@ Instead, we collect labeled data:
 $$
 \{(x_i, y_i)\}_{i=1}^{n}
 $$
-And learn:
+And we learn:
 $$
 \hat{f}(x)
 $$
@@ -162,7 +160,7 @@ Classification setting:
 $$
 y \in \{0,1\}
 $$
-This is a binary classification problem.
+This constitutes a binary classification problem.
 
 ---
 ## 7. Case Study: Weather Prediction
@@ -176,15 +174,15 @@ y = f(x)
 $$
 But:
 
-- Humans do not know $f$  
-- Cannot code $f$  
-- Cannot compute $f$ manually  
+- We do not know $f$  
+- We cannot code $f$  
+- We cannot compute $f$ manually  
 
 We assume:
 $$
 \exists f
 $$
-And approximate:
+And we approximate:
 
 $$
 \hat{f}(x) \approx f(x)
@@ -195,7 +193,7 @@ $$
 ### Spam Classification
 
 Email $\rightarrow \{\text{Spam}, \text{Not Spam}\}$  
-Learn:
+We learn:
 $$
 \hat{f}(\text{email features})
 $$
@@ -203,7 +201,7 @@ $$
 ### Recommender Systems
 
 User History $\rightarrow$ Recommended Item  
-Predict:
+We predict:
 $$
 \hat{y} = \hat{f}(x)
 $$
@@ -212,13 +210,13 @@ $$
 
 Audio waveform $\rightarrow$ Text  
 Text $\rightarrow$ Command  
-Both are learned mappings.
+In both cases, we learn mappings from data.
 
 ---
 ### Robotics
 
 Environment State $\rightarrow$ Action  
-Learn policy:
+We learn a policy:
 $$
 \pi(s) = a
 $$
@@ -229,35 +227,36 @@ Where:
 ---
 ## 9. Core Mathematical Insight
 
-Machine Learning assumes:
+We assume:
 
 - There exists a function $f$  
-- We cannot explicitly write $f$  
-- Data contains information about $f$  
+- We cannot explicitly specify $f$  
+- Data encodes information about $f$  
 
-So we:
+Thus we:
 
 1. Define hypothesis space $\mathcal{H}$  
 2. Choose loss function $\mathcal{L}$  
 
-Learn:
+We learn:
 $$
 \hat{f} = \arg\min_{g \in \mathcal{H}} \mathcal{L}(g(x), y)
 $$
-This is the fundamental ML framework.
+This represents the fundamental ML framework.
 
 ---
 `***********************************************************************************`
 
 ---
+
 ## Lecture 2
 ### Data, Models and ML Tasks
 
 ---
 ## 1. What is Data?
 
-Data in machine learning is typically a collection of vectors.
-Formally, a dataset can be written as:
+In machine learning, we interpret data as a collection of vectors.
+Formally, we represent a dataset as:
 $$
 \mathcal{D} = \{x_1, x_2, \dots, x_n\}
 $$
@@ -266,14 +265,14 @@ Where:
 - $x_i \in \mathbb{R}^d$
 - $d$ = number of features (dimension)
 
-Each data point is a vector:
+We express each data point as:
 $$
 x_i = (x_{i1}, x_{i2}, \dots, x_{id})
 $$
 ---
 ### Example: Housing Data
 
-Suppose each house is represented as:
+We may represent each house as:
 $$
 x = (\text{\#rooms}, \text{area}, \text{distance to metro}, \text{price})
 $$
@@ -292,21 +291,22 @@ and so on.
 ---
 ### Metadata
 
-Metadata = information about the data.
-Example metadata:
+We define metadata as information about the data.
+For example:
 - Feature 1: Number of rooms  
 - Feature 2: Area (in 100 sq. ft.)  
 - Feature 3: Distance to metro (km)  
 - Feature 4: Price (in 10 lakhs)  
 
-Important:
-- Computers only need consistency.
-- Humans need metadata for interpretability.
+We note:
+
+- A computer requires only consistency in representation.
+- We require metadata for interpretability.
 
 ---
 ## 2. What is a Model?
 
-A model is a mathematical simplification of reality.
+We define a model as a mathematical simplification of reality.
 Formally:
 A model is a function:
 $$
@@ -328,28 +328,28 @@ $$
 - Moore’s Law (trend model)
 - Economic models (e.g., Cobb–Douglas)
 
-Key philosophical insight:
+The key philosophical insight is:
 
 > "All models are wrong, but some are useful."  
 > — George Box
 
-Models are approximations, not reality.
+We understand that models are approximations rather than exact reality.
 
 ---
 ## 3. Types of Models in Machine Learning
 
-Two major types:
+We distinguish two major types:
 
 - Predictive Models
 - Probabilistic Models
 ---
 ## 4. Predictive Models
 
-Predictive models map input to output:
+Predictive models define a mapping:
 $$
 x \rightarrow y
 $$
-They are used for prediction on unseen data.
+We use them to generate predictions on unseen data.
 
 Two major types:
 - Regression
@@ -357,13 +357,13 @@ Two major types:
 ---
 ### 4.1 Regression Model
 
-Used when output is real-valued.
+We use regression when the output is real-valued.
 $$
 y \in \mathbb{R}
 $$
-Example: Predict house price.
+Example: We predict house price.
 
-Model form:
+A simple model form:
 $$
 \text{Price} = a \cdot \text{Area} - \text{Distance}
 $$
@@ -376,22 +376,22 @@ Where:
 - $a, b, c$ = parameters
 - $x_1, x_2, x_3$ = features
 
-Regression predicts continuous values.
+Regression produces continuous outputs.
 
 ---
 ### 4.2 Classification Model
 
-Used when output is discrete.
+We use classification when the output is discrete.
 $$
 y \in \{0,1\}
 $$
-or more generally:
+More generally:
 $$
 y \in \{1,2,\dots,K\}
 $$
 Example:
 
-Predict whether house is within 2 km of metro.
+We predict whether a house lies within 2 km of the metro.
 Possible outputs:
 - Close
 - Far
@@ -403,13 +403,13 @@ $$
 \text{Far} & \text{otherwise}
 \end{cases}
 $$
-Classification predicts categories.
+Classification assigns category labels.
 
 ---
 ## 5. Probabilistic Models
 
 Probabilistic models evaluate likelihood.
-They do not directly predict a value.
+They do not directly output a deterministic value.
 They compute:
 $$
 P(x)
@@ -420,21 +420,21 @@ P(y \mid x)
 $$
 Examples:
 
-- What is the probability a randomly chosen person is at latitude-longitude $(25^\circ N, 30^\circ E)$?
-- What is the probability a tweet was generated by a specific person?
+- We compute the probability that a randomly chosen person lies at latitude-longitude $(25^\circ N, 30^\circ E)$.
+- We compute the probability that a tweet was generated by a specific individual.
 
 Probabilistic models score configurations of reality.
 
 ---
 ## 6. Learning Algorithms
 
-Learning Algorithms convert:
+Learning algorithms perform the transformation:
 $$
 \text{Data} \rightarrow \text{Model}
 $$
-They choose from a family of models with same structure but different parameters.
+They select from a family of models sharing structure but differing in parameters.
 
-Example model structure:
+Example structure:
 $$
 \text{Price} = a \cdot (\text{Area}) + b \cdot (\text{\#Rooms}) + c \cdot (\text{Distance})
 $$
@@ -442,7 +442,7 @@ Parameters:
 $$
 a, b, c
 $$
-The learning algorithm chooses the best parameters using data.
+The learning algorithm chooses parameter values that best fit the data.
 
 Formally:
 $$
@@ -455,12 +455,12 @@ Where:
 ---
 ## 7. Machine Learning Pipeline (Revisited)
 
-Human does not directly write the final model.
+We do not directly write the final model.
 Instead:
-1. Human specifies model structure.
-2. Learning algorithm uses data.
-3. Parameters are learned.
-4. Final model is produced.
+1. We specify the model structure.
+2. We provide data.
+3. The learning algorithm estimates parameters.
+4. We obtain the final model.
 
 Pipeline:
 $$
@@ -473,23 +473,24 @@ $$
 ---
 ## Core Idea of This Lecture
 
-- Data = collection of vectors
-- Model = mathematical simplification
-- Predictive models = regression & classification
-- Probabilistic models = likelihood evaluation
-- Learning algorithm = data to model converter
+- We interpret data as a collection of vectors.
+- We define a model as a mathematical abstraction.
+- We classify predictive models into regression and classification.
+- We understand probabilistic models as likelihood evaluators.
+- We view the learning algorithm as the mechanism that converts data into a model.
 
 ---
 `***********************************************************************************`
 
 ---
+
 ## Lecture 3
 ### Supervised Learning – Regression
 
 ---
 ## 1. Supervised Learning
 
-Supervised learning can be viewed as **curve fitting**.
+We interpret supervised learning as a form of curve fitting.
 Given training data:
 $$
 \{(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)\}
@@ -498,8 +499,7 @@ Where:
 - $x_i \in \mathbb{R}^d$
 - $y_i \in \mathcal{Y}$
 
-Goal:
-Find a model
+Our objective is to construct a model
 $$
 f : \mathbb{R}^d \rightarrow \mathcal{Y}
 $$
@@ -510,30 +510,34 @@ $$
 ---
 ## 2. Notation
 
-- $\mathbb{R}$ = real numbers  
-- $\mathbb{R}_+$ = positive reals  
-- $\mathbb{R}^d$ = $d$-dimensional real vectors  
+We use:
 
-Vector notation:
+- $\mathbb{R}$ to denote real numbers  
+- $\mathbb{R}_+$ to denote positive real numbers  
+- $\mathbb{R}^d$ to denote $d$-dimensional real vectors  
+
+For a vector:
 
 - $x = (x_1, x_2, \dots, x_d)$  
-- $x_j$ = $j^{th}$ coordinate  
-- $\|x\|$ = Euclidean norm  
+- $x_j$ denotes the $j^{th}$ coordinate  
+- $\|x\|$ denotes the Euclidean norm  
 
+We define:
 $$
-\|x\|^2 = \sum_{j=1}^d x_j^2
+\|x\|^2 = \sum_{j=1}^{d} x_j^2
 $$
 $$
-\|x\| = \sqrt{\sum_{j=1}^d x_j^2}
+\|x\| = \sqrt{\sum_{j=1}^{d} x_j^2}
 $$
 
-Collection of vectors:
+For a collection of vectors:
 $$
 x^1, x^2, \dots, x^n
 $$
-- $x^i_j$ = $j^{th}$ coordinate of $i^{th}$ vector  
+We interpret:
+- $x^i_j$ as the $j^{th}$ coordinate of the $i^{th}$ vector  
 
-Indicator function:
+We define the indicator function as:
 $$
 \mathbf{1}(\text{predicate}) =
 \begin{cases}
@@ -551,17 +555,17 @@ $$
 ---
 ## 3. Regression
 
-Regression is used when:
+We apply regression when:
 $$
 y_i \in \mathbb{R}
 $$
 Example:
-Predict house price from:
+We predict house price from:
 - Rooms
 - Area
 - Distance to metro
 
-Training data:
+The training data is:
 $$
 \{(x^1, y^1), (x^2, y^2), \dots, (x^n, y^n)\}
 $$
@@ -569,41 +573,43 @@ Where:
 - $x^i \in \mathbb{R}^d$
 - $y^i \in \mathbb{R}$
 
-Model:
+We construct a model:
 $$
 f : \mathbb{R}^d \rightarrow \mathbb{R}
 $$
 ---
 ## 4. Loss Function (Squared Loss)
 
-Loss of model $f$:
+We define the loss of a model $f$ as:
 $$
 \mathcal{L}(f) =
 \frac{1}{n} \sum_{i=1}^{n}
 \left( f(x^i) - y^i \right)^2
 $$
-Properties:
-- Always non-negative
-- $\mathcal{L}(f) = 0$ if and only if $f(x^i) = y^i$ for all $i$
+We observe:
 
-Learning algorithm goal:
+- The loss is always non-negative  
+- $\mathcal{L}(f) = 0$ if and only if $f(x^i) = y^i$ for all $i$  
+
+The learning algorithm seeks to:
 $$
 \min_f \mathcal{L}(f)
 $$
 ---
 ## 5. Linear Parameterization
 
-Most common regression model:
+A commonly used regression model is:
 $$
 f(x) = w^T x + b
 $$
-Expanded form:
+In expanded form:
 $$
 f(x) = \sum_{j=1}^{d} w_j x_j + b
 $$
-Parameters:
-- $w = (w_1, w_2, \dots, w_d)$
-- $b$ = bias
+The parameters are:
+
+- $w = (w_1, w_2, \dots, w_d)$  
+- $b$ = bias  
 
 Example (House price):
 $$
@@ -616,16 +622,16 @@ w_3 \cdot \text{Distance}
 +
 b
 $$
-Learning algorithm finds:
+The learning algorithm determines:
 $$
 w, b
 $$
-that minimize squared loss.
+that minimize the squared loss.
 
 ---
 ## 6. Regression Illustration 1 (1D Example)
 
-Assume $d = 1$.
+Let $d = 1$.
 Training data:
 $$
 \begin{aligned}
@@ -633,7 +639,8 @@ x &= [1, 2, 3, 6, 7] \\
 y &= [2.1, 3.9, 6.2, 11.5, 13.9]
 \end{aligned}
 $$
-Two candidate models:
+We consider two candidate models.
+
 Model 1:
 $$
 f(x) = 2x
@@ -643,6 +650,7 @@ $$
 g(x) = x + 3
 $$
 Predictions:
+
 For $f$:
 $$
 [2, 4, 6, 12, 14]
@@ -651,7 +659,7 @@ For $g$:
 $$
 [4, 5, 6, 9, 10]
 $$
-Loss of $f$:
+We compute the loss of $f$:
 $$
 \frac{1}{5} \left[
 (2-2.1)^2
@@ -665,7 +673,7 @@ $$
 (14-13.9)^2
 \right]
 $$
-Loss of $g$:
+We compute the loss of $g$:
 $$
 \frac{1}{5} \left[
 (4-2.1)^2
@@ -679,11 +687,11 @@ $$
 (10-13.9)^2
 \right]
 $$
-Clearly:
+We observe:
 $$
 \mathcal{L}(f) < \mathcal{L}(g)
 $$
-So $f$ is preferred.
+Thus we prefer $f$.
 
 ---
 ## 7. Regression Illustration 2 (House Example)
@@ -698,7 +706,7 @@ Data:
 | 5     | 16   | 0.9      | 9.8   |
 | 5     | 15   | 3.1      | 8.5   |
 | 4     | 11   | 1.6      | 6.9   |
-Two models:
+We consider two models.
 
 Model $f$:
 $$
@@ -712,8 +720,8 @@ g(x) =
 +
 2 \cdot \text{Distance}
 $$
-Compute predictions for all training points.
-Then compute:
+We evaluate predictions for all training points.
+Then we compute:
 $$
 \mathcal{L}(f)
 =
@@ -730,32 +738,33 @@ We observe:
 $$
 \mathcal{L}(f) < \mathcal{L}(g)
 $$
-Hence $f$ is a better model for this dataset.
+Hence we conclude that $f$ is the better model for this dataset.
 
 ---
 ## Core Idea of Regression
 
-- We are fitting a function to data.
-- We choose a model family (e.g., linear).
-- We define a loss function (e.g., squared loss).
-- We find parameters that minimize loss.
+- We fit a function to data.  
+- We select a model family (for example, linear models).  
+- We define a loss function (for example, squared loss).  
+- We determine parameters that minimize the loss.  
 
-Supervised learning = curve fitting under a loss function.
+We therefore interpret supervised learning as curve fitting under a specified loss function.
 
 ---
 `***********************************************************************************`
 
 ---
-## Week 1 – Lecture 4
+
+## Lecture 4
 ### Supervised Learning – Classification
 
 ---
 ## 1. Classification Problem Setup
 
-In classification, we predict discrete labels.
+In classification, we focus on predicting discrete labels.
 
 Example:
-Predict whether:
+We predict whether:
 $$
 \text{Rooms} > 3
 $$
@@ -776,19 +785,19 @@ $$
 $$
 y_i \in \{+1, -1\}
 $$
-The learning algorithm outputs:
+The learning algorithm produces:
 $$
 f : \mathbb{R}^d \rightarrow \{+1, -1\}
 $$
 ---
 ## 2. Classification Loss
 
-Ideal case:
+In the ideal situation:
 $$
 f(x_i) = y_i \quad \forall i
 $$
-In general, this may not hold.
-We define classification loss as:
+However, this condition may not always be satisfied.
+We define the classification loss as:
 $$
 \mathcal{L}(f) = \frac{1}{n} \sum_{i=1}^{n} \mathbf{1}(f(x_i) \neq y_i)
 $$
@@ -800,13 +809,13 @@ $$
 0 & \text{otherwise}
 \end{cases}
 $$
-This measures:
-> Fraction of misclassified training points.
+This quantity represents:
+> The fraction of misclassified training examples.
 
 ---
 ## 3. Linear Classifier (Linear Separator)
 
-Most common parameterization:
+A commonly used parameterization is:
 $$
 f(x) = \operatorname{sign}(w^\top x + b)
 $$
@@ -814,12 +823,12 @@ Where:
 - $w \in \mathbb{R}^d$
 - $b \in \mathbb{R}$
 
-This defines a hyperplane:
+This formulation defines a hyperplane:
 $$
 w^\top x + b = 0
 $$
-Points on one side → +1  
-Points on the other side → -1  
+Points on one side are assigned +1.  
+Points on the other side are assigned -1.  
 
 ---
 ## 4. Classification Illustration 1
@@ -847,10 +856,10 @@ $$
 $$
 f(x) = \operatorname{sign}(2 - x_1)
 $$
-Evaluate on training data:
+Evaluating this model on the training data:
 
-All 6 correctly classified.
-Therefore:
+All 6 points are correctly classified.
+Hence:
 $$
 \mathcal{L}(f) = 0
 $$
@@ -859,8 +868,8 @@ $$
 $$
 g(x) = \operatorname{sign}(x_1 - 2x_2)
 $$
-One point misclassified.
-Therefore:
+One point is incorrectly classified.
+Thus:
 $$
 \mathcal{L}(g) = \frac{1}{6}
 $$
@@ -868,21 +877,21 @@ Since:
 $$
 0 < \frac{1}{6}
 $$
-Learning algorithm prefers:
+We prefer:
 $$
 f
 $$
 ---
 ## 5. Classification Illustration 2 (House Example)
 
-Encoding:
+We encode:
 $$
 \text{Rooms} \leq 3 \rightarrow -1
 $$
 $$
 \text{Rooms} > 3 \rightarrow +1
 $$
-Consider three models:
+We examine three models:
 
 ---
 ### Model f
@@ -911,13 +920,13 @@ Loss:
 $$
 \mathcal{L}(h) = \frac{3}{6}
 $$
-Thus:
-- f and g are perfect on training data.
-- h is not.
+Therefore:
+- f and g perfectly classify the training data.
+- h does not.
 ---
 ## 6. Important: Do NOT Evaluate on Training Data
 
-Suppose we define:
+Consider the following model:
 $$
 f(x) =
 \begin{cases}
@@ -927,59 +936,60 @@ f(x) =
 -1 & \text{otherwise}
 \end{cases}
 $$
-On training data:
+On the training data:
 $$
 \mathcal{L}(f) = 0
 $$
-But this model is clearly useless.
-It memorizes training points.
-It will fail on new data.
-This is called **overfitting**.
+However, this model is clearly inadequate.
+It memorizes the training points.
+It will not generalize to unseen inputs.
+This phenomenon is known as **overfitting**.
 
 ---
 ## 7. Train / Test Split
 
-Learning process:
-1. Training data → learn model.
-2. Test data → evaluate model.
+The learning procedure is structured as follows:
+1. We use training data to learn the model.
+2. We use test data to evaluate the model.
 
-Never evaluate on training data.
+We must not evaluate performance on the training data.
 Why?
 Because:
-Training loss underestimates real-world error.
+Training loss provides an overly optimistic estimate of performance.
 
-Goal of ML:
-Perform well on unseen data.
+The true goal of machine learning is:
+To perform well on unseen data.
 
 ---
 ## 8. Validation Data (Model Selection)
 
-Learning algorithm finds best model **within a chosen family**.
+The learning algorithm identifies the best model **within a chosen family**.
 Example model family:
 $$
 f(x) = w_1 (\text{rooms}) + w_2 (\text{area}) + w_3 (\text{distance}) + b
 $$
-But why this family?
+But we must ask:
+Why select this family?
 Why not:
 $$
 f(x) = a \cdot \frac{\text{area}}{\text{rooms}} + b \cdot \text{distance}^2 + c
 $$
-Choosing the correct model class is called:
+The process of choosing the appropriate model class is called:
 ### Model Selection
 
-Data split:
+We typically divide data as follows:
 - Training data → learn parameters
 - Validation data → choose model class
 - Test data → final evaluation
 ---
 ## Core Ideas of This Lecture
 
-- Classification predicts discrete labels.
-- Loss = fraction of misclassification.
-- Linear classifier: $\operatorname{sign}(w^\top x + b)$.
-- Never evaluate on training data.
-- Use test data for evaluation.
-- Use validation data for model selection.
+- We use classification to predict discrete labels.
+- We measure performance using misclassification loss.
+- A linear classifier has the form $\operatorname{sign}(w^\top x + b)$.
+- We must not evaluate on training data.
+- We use test data for evaluation.
+- We use validation data for model selection.
 
 ---
 `***********************************************************************************`
