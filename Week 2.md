@@ -1386,3 +1386,228 @@ This completes the univariate calculus component. We next transition to multivar
 
 ---
 
+## Lecture 5 
+### Multivariate Calculus: Lines, Hyperplanes, Partial Derivatives, and Gradients  
+
+### 1. From Univariate to Multivariate Functions
+
+We now generalize our setting from univariate calculus to multivariate calculus.
+Previously, we studied functions of the form
+$$
+f : \mathbb{R} \to \mathbb{R}
+$$
+We now consider multivariate functions of the form
+$$
+f : \mathbb{R}^d \to \mathbb{R}
+$$
+Here:
+- The input is a $d$-dimensional vector.
+- The output remains a real number.
+- We continue to focus on differential calculus.
+Before studying derivatives in this setting, we first understand the geometry of $\mathbb{R}^d$.
+
+---
+### 2. Geometry in $\mathbb{R}^d$
+
+#### 2.1 Lines in $\mathbb{R}^d$
+
+A line in $\mathbb{R}^d$ is a subset of $\mathbb{R}^d$.
+#### Definition 1 — Line Through a Point Along a Direction
+Given:
+- A point $u \in \mathbb{R}^d$
+- A direction vector $v \in \mathbb{R}^d$
+
+We define the line through $u$ along $v$ as:
+$$
+\left\{ x \in \mathbb{R}^d \mid x = u + \alpha v, \; \alpha \in \mathbb{R} \right\}
+$$
+We vary $\alpha$ over all real numbers to trace the entire line.
+
+---
+### Definition 2 — Line Through Two Points
+
+Given two distinct points $u, u' \in \mathbb{R}^d$, we define the line through them as:
+$$
+\left\{ x \in \mathbb{R}^d \mid x = u + \alpha (u' - u), \; \alpha \in \mathbb{R} \right\}
+$$
+Equivalently,
+$$
+x = (1 - \alpha)u + \alpha u'
+$$
+We observe:
+- The line through $u$ and $u'$  
+- The line through $u$ along direction $u' - u$  
+- The line through $u'$ along direction $u - u'$  
+all define the same subset of $\mathbb{R}^d$.
+
+---
+### 2.2 Hyperplanes in $\mathbb{R}^d$
+
+A hyperplane in $\mathbb{R}^d$ is a $(d-1)$-dimensional subset of $\mathbb{R}^d$.
+#### Definition — Hyperplane Normal to a Vector
+Given:
+- A vector $w \in \mathbb{R}^d$
+- A scalar $b \in \mathbb{R}$
+
+We define the hyperplane as:
+$$
+\left\{ x \in \mathbb{R}^d \mid w^T x = b \right\}
+$$
+In expanded form:
+$$
+\left\{ x \in \mathbb{R}^d \mid \sum_{i=1}^{d} w_i x_i = b \right\}
+$$
+The vector $w$ is normal (perpendicular) to the hyperplane.
+
+---
+### 3. Points vs Vectors vs Tuples
+
+In $\mathbb{R}^d$, we represent:
+- Points (locations)
+- Vectors (directions)
+- Tuples (data representations)
+all using $d$-dimensional coordinate arrays.
+
+Geometrically:
+- A point represents a location.
+- A vector represents a direction and magnitude.
+Algebraically, both are elements of $\mathbb{R}^d$.
+Context determines interpretation.
+
+---
+### 4. Partial Derivatives
+
+Let us consider a function:
+$$
+f : \mathbb{R}^d \to \mathbb{R}
+$$
+Let $v \in \mathbb{R}^d$.
+
+---
+### 4.1 Definition of Partial Derivative
+
+The partial derivative with respect to the $i$-th coordinate is defined as:
+$$
+\frac{\partial f}{\partial x_i}(v)
+=
+\lim_{\alpha \to 0}
+\frac{f(v + \alpha e_i) - f(v)}{\alpha}
+$$
+where:
+- $e_i$ is the $i$-th coordinate vector.
+- $e_i$ has $1$ in the $i$-th position and $0$ elsewhere.
+
+This definition generalizes the univariate derivative.
+We vary only one coordinate and keep the others fixed.
+
+---
+### 4.2 Example
+
+Let:
+$$
+f(x_1, x_2) = x_1^2 + x_2^2
+$$
+Then:
+$$
+\frac{\partial f}{\partial x_1} = 2x_1
+$$
+$$
+\frac{\partial f}{\partial x_2} = 2x_2
+$$
+Evaluated at $v = (v_1, v_2)$:
+$$
+\frac{\partial f}{\partial x_1}(v) = 2v_1
+$$
+$$
+\frac{\partial f}{\partial x_2}(v) = 2v_2
+$$
+---
+### 5. Gradient
+
+We collect all partial derivatives into a single vector.
+#### 5.1 Derivative with Respect to a Vector
+
+We define:
+$$
+\frac{\partial f}{\partial x}(v)
+=
+\begin{bmatrix}
+\frac{\partial f}{\partial x_1}(v) &
+\frac{\partial f}{\partial x_2}(v) &
+\cdots &
+\frac{\partial f}{\partial x_d}(v)
+\end{bmatrix}
+$$
+This is a row vector.
+
+---
+### 5.2 Gradient
+
+The gradient is defined as:
+$$
+\nabla f(v)
+=
+\begin{bmatrix}
+\frac{\partial f}{\partial x_1}(v) \\
+\frac{\partial f}{\partial x_2}(v) \\
+\vdots \\
+\frac{\partial f}{\partial x_d}(v)
+\end{bmatrix}
+$$
+This is a column vector.
+The gradient is simply the transpose of the derivative row vector.
+
+---
+### 5.3 Example — Quadratic Function
+
+For:
+$$
+f(x_1, x_2) = x_1^2 + x_2^2
+$$
+We obtain:
+$$
+\nabla f(v)
+=
+\begin{bmatrix}
+2v_1 \\
+2v_2
+\end{bmatrix}
+$$
+---
+### 5.4 Example — Linear Function
+
+Let:
+$$
+f(x_1, x_2, x_3) = x_1 + 2x_2 + 3x_3
+$$
+Then:
+$$
+\nabla f(v)
+=
+\begin{bmatrix}
+1 \\
+2 \\
+3
+\end{bmatrix}
+$$
+The gradient is constant.
+We observe that linear functions have constant gradients.
+
+---
+### 6. Conceptual Interpretation
+
+We note:
+- A partial derivative measures variation along a coordinate direction.
+- The gradient collects all directional rates of change.
+- The gradient will later connect to optimization.
+- Critical points occur when:
+$$
+\nabla f(v) = 0
+$$
+These points are candidates for minima, maxima, or saddle points.
+We now have the foundational geometric and differential tools required for multivariate calculus, which we will use extensively in machine learning for optimization and modeling.
+
+---
+`***********************************************************************************`
+
+---
