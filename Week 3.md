@@ -673,3 +673,194 @@ This geometric idea forms the foundation of:
 
 ---
 
+## Lecture 4 
+### Least Squares and Projection onto a Subspace  
+
+### 1. Revisiting Least Squares
+
+We begin with an overdetermined system:
+$$
+\begin{aligned}
+2x &= b_1 \\
+3x &= b_2 \\
+4x &= b_3
+\end{aligned}
+$$
+We observe that this system is solvable **if and only if** the vector  
+$$
+b = \begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}
+$$
+lies on the line spanned by  
+$$
+a = \begin{bmatrix} 2 \\ 3 \\ 4 \end{bmatrix}
+$$
+If $b$ does not lie in $\text{span}(a)$, then the system is inconsistent.
+
+---
+### 2. Least Squares Formulation
+
+Since exact solvability may fail, we instead minimize the squared error:
+$$
+E(x) = (2x - b_1)^2 + (3x - b_2)^2 + (4x - b_3)^2
+$$
+We compute the derivative:
+$$
+\frac{dE}{dx} =
+2(2x - b_1) +
+3(3x - b_2) +
+4(4x - b_3)
+$$
+Setting derivative equal to zero:
+$$
+2(2x - b_1) + 3(3x - b_2) + 4(4x - b_3) = 0
+$$
+Solving, we obtain:
+$$
+\hat{x} =
+\frac{2b_1 + 3b_2 + 4b_3}
+{2^2 + 3^2 + 4^2}
+$$
+We observe that this equals:
+$$
+\hat{x} = \frac{a^T b}{a^T a}
+$$
+This is exactly the projection coefficient of $b$ onto $a$.
+Thus we conclude:
+
+> Minimizing squared error is equivalent to performing an orthogonal projection.
+
+---
+### 3. Projection onto a Subspace
+
+We now generalize.
+Let $A$ be an $m \times n$ matrix.
+We want to project $b$ onto the column space of $A$.
+We denote the projection by:
+$$
+p = A\hat{x}
+$$
+The error vector is:
+$$
+e = b - p = b - A\hat{x}
+$$
+By definition of orthogonal projection:
+$$
+e \perp \text{Col}(A)
+$$
+Since $e$ is orthogonal to every column of $A$, we must have:
+$$
+A^T e = 0
+$$
+Substituting:
+$$
+A^T (b - A\hat{x}) = 0
+$$
+This gives the **normal equations**:
+$$
+A^T A \hat{x} = A^T b
+$$
+This is the key equation.
+Even if $Ax = b$ is inconsistent, the normal equations always have a solution.
+
+---
+### 4. Projection Matrix
+
+If the columns of $A$ are linearly independent, then $A^T A$ is invertible.
+We solve:
+$$
+\hat{x} = (A^T A)^{-1} A^T b
+$$
+Thus the projection is:
+$$
+p = A (A^T A)^{-1} A^T b
+$$
+We define the projection matrix:
+$$
+P = A (A^T A)^{-1} A^T
+$$
+Then:
+$$
+p = Pb
+$$
+---
+### 5. Properties of Projection Matrix
+
+We verify:
+#### 1. Symmetry
+$$
+P^T = P
+$$
+Thus the projection matrix is symmetric.
+
+---
+#### 2. Idempotence
+$$
+P^2 = P
+$$
+This means projecting twice does nothing new.
+
+---
+#### 3. Characterization
+
+If a matrix satisfies:
+$$
+P^T = P
+\quad \text{and} \quad
+P^2 = P
+$$
+then $P$ is a projection matrix.
+
+---
+### 6. Special Cases
+
+#### Case 1: $b \in \text{Col}(A)$
+
+If $b = Ax$ for some $x$, then:
+$$
+Pb = b
+$$
+Projection does not change vectors already in the subspace.
+
+---
+#### Case 2: $b \in \text{Null}(A^T)$
+
+If:
+$$
+A^T b = 0
+$$
+then:
+$$
+Pb = 0
+$$
+---
+
+#### Case 3: $A$ is square and invertible
+
+Then $\text{Col}(A) = \mathbb{R}^n$.
+Hence:
+$$
+Pb = b
+$$
+Projection becomes the identity transformation.
+
+---
+### 7. Final Takeaway
+
+Minimizing:
+$$
+\|Ax - b\|^2
+$$
+is equivalent to solving:
+$$
+A^T A \hat{x} = A^T b
+$$
+which geometrically means:
+
+> We orthogonally project $b$ onto the column space of $A$.
+
+This is the geometric foundation of least squares.
+
+---
+`***********************************************************************************`
+
+---
