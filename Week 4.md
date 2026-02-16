@@ -829,3 +829,186 @@ Recursive growth becomes exponential growth governed by eigenvalues.
 `***********************************************************************************`
 
 ---
+
+## Lecture 4
+### Spectral Theorem for Real Symmetric Matrices
+
+### 1. Spectral Theorem Statement
+
+We consider a real symmetric matrix $A \in \mathbb{R}^{n \times n}$ satisfying
+$$
+A^T = A.
+$$
+The spectral theorem for the real case states the following:
+If $A$ is real symmetric, then:
+1. All eigenvalues of $A$ are real.
+2. Eigenvectors corresponding to distinct eigenvalues are linearly independent.
+3. $A$ is orthogonally diagonalizable.
+
+---
+### 2. Orthogonal Diagonalization
+
+We say that $A$ is orthogonally diagonalizable if there exists an orthogonal matrix $Q$ such that
+$$
+Q^T Q = I
+$$
+and
+$$
+A = Q \Lambda Q^T,
+$$
+where $\Lambda$ is a diagonal matrix containing the eigenvalues of $A$.
+Since $Q^T Q = I$, we have
+$$
+Q^{-1} = Q^T.
+$$
+Thus orthogonal diagonalization is a special case of diagonalization:
+$$
+A = Q \Lambda Q^{-1},
+$$
+with the additional constraint that $Q$ is orthogonal.
+
+---
+### 3. Important Observations
+
+We note that not every real matrix is diagonalizable.
+There exist real matrices that do not possess enough linearly independent eigenvectors.
+However, every real symmetric matrix:
+- Has only real eigenvalues.
+- Has a full set of orthonormal eigenvectors.
+- Is orthogonally diagonalizable.
+
+Thus symmetry is the crucial structural condition.
+
+---
+### 4. Example of Orthogonal Diagonalization
+
+We consider
+$$
+A =
+\begin{pmatrix}
+1 & -2 \\
+-2 & -2
+\end{pmatrix}.
+$$
+This matrix is real symmetric.
+#### Step 1: Eigenvalues
+
+We compute the characteristic polynomial:
+$$
+\det A - \lambda I
+=
+\begin{vmatrix}
+1 - \lambda & -2 \\
+-2 & -2 - \lambda
+\end{vmatrix}.
+$$
+Solving yields eigenvalues
+$$
+\lambda_1 = -3,
+\quad
+\lambda_2 = 2.
+$$
+---
+#### Step 2: Eigenvectors
+
+Corresponding eigenvectors are
+$$
+x_1 =
+\begin{pmatrix}
+1 \\
+2
+\end{pmatrix},
+\quad
+x_2 =
+\begin{pmatrix}
+-2 \\
+1
+\end{pmatrix}.
+$$
+---
+#### Step 3: Orthonormalization
+
+We normalize each eigenvector.
+Length of $x_1$:
+$$
+\|x_1\| = \sqrt{1^2 + 2^2} = \sqrt{5}.
+$$
+Length of $x_2$:
+$$
+\|x_2\| = \sqrt{(-2)^2 + 1^2} = \sqrt{5}.
+$$
+Thus orthonormal eigenvectors are
+$$
+q_1 =
+\frac{1}{\sqrt{5}}
+\begin{pmatrix}
+1 \\
+2
+\end{pmatrix},
+\quad
+q_2 =
+\frac{1}{\sqrt{5}}
+\begin{pmatrix}
+-2 \\
+1
+\end{pmatrix}.
+$$
+---
+#### Step 4: Construct Orthogonal Matrix
+
+We form
+$$
+Q =
+\begin{pmatrix}
+\frac{1}{\sqrt{5}} & \frac{-2}{\sqrt{5}} \\
+\frac{2}{\sqrt{5}} & \frac{1}{\sqrt{5}}
+\end{pmatrix}.
+$$
+We verify
+$$
+Q^T Q = I.
+$$
+---
+#### Step 5: Diagonal Matrix
+
+We define
+$$
+\Lambda =
+\begin{pmatrix}
+-3 & 0 \\
+0 & 2
+\end{pmatrix}.
+$$
+Then
+$$
+A = Q \Lambda Q^T.
+$$
+Thus $A$ is orthogonally diagonalized.
+
+---
+### 5. Conceptual Understanding
+
+Orthogonal diagonalization provides:
+1. A diagonal representation of $A$.
+2. Orthonormal eigenvectors.
+3. Stability and geometric clarity.
+
+If $A$ is real symmetric, we can always find an orthonormal basis of eigenvectors.
+
+---
+### 6. Key Takeaways
+
+- Real symmetric matrices have real eigenvalues.
+- Eigenvectors corresponding to distinct eigenvalues are linearly independent.
+- Real symmetric matrices are orthogonally diagonalizable.
+- Orthogonal diagonalization satisfies
+$$
+A = Q \Lambda Q^T.
+$$
+This result is the real case of the spectral theorem.
+In subsequent development, this theorem generalizes to Hermitian matrices in complex vector spaces.
+
+---
+`***********************************************************************************`
+
+---
