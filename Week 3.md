@@ -254,3 +254,257 @@ These four spaces completely describe the structure of a matrix and form the bac
 
 ---
 
+## Lecture 2 
+### Orthogonality and Orthogonal Subspaces  
+
+### 1. Motivation  
+
+In this lecture, we build the geometric foundation required to understand orthogonal projections and subsequently least squares problems.  
+
+We study:
+1. Length of a vector  
+2. Orthogonal vectors  
+3. Orthonormal vectors  
+4. Orthogonal subspaces  
+5. Orthogonality among the four fundamental subspaces  
+
+---
+### 2. Length of a Vector  
+
+Let  
+$$
+x =
+\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}
+$$
+Then  
+$$
+\|x\|^2 = 1^2 + 2^2 = 5
+$$
+In general, for  
+$$
+x =
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix}
+\in \mathbb{R}^n
+$$
+the Euclidean norm is  
+$$
+\|x\| = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2}
+$$
+Equivalently,
+$$
+\|x\|^2 = x^\top x
+$$
+---
+### 3. Orthogonal Vectors  
+
+Two vectors $x, y \in \mathbb{R}^n$ are **orthogonal** if  
+$$
+x^\top y = 0
+$$
+If  
+$$
+x =
+\begin{bmatrix}
+x_1 \\
+\vdots \\
+x_n
+\end{bmatrix},
+\quad
+y =
+\begin{bmatrix}
+y_1 \\
+\vdots \\
+y_n
+\end{bmatrix}
+$$
+then  
+$$
+x^\top y = \sum_{i=1}^n x_i y_i
+$$
+---
+### 3.1 Connection with Pythagoras  
+
+Orthogonality is equivalent to  
+$$
+\|x\|^2 + \|y\|^2 = \|x + y\|^2
+$$
+Expanding,
+$$
+\|x + y\|^2
+=
+(x + y)^\top (x + y)
+=
+x^\top x + y^\top y + x^\top y + y^\top x
+$$
+Since $y^\top x = x^\top y$, we obtain
+$$
+\|x + y\|^2
+=
+x^\top x + y^\top y + 2 x^\top y
+$$
+Thus orthogonality requires  
+$$
+x^\top y = 0
+$$
+---
+### 3.2 Remarks  
+
+1. The zero vector is orthogonal to every vector:
+   $$
+   0^\top x = 0
+   $$
+2. A mutually orthogonal nonzero set of vectors is linearly independent.
+If  
+$$
+c_1 v_1 + \cdots + c_k v_k = 0
+$$
+Taking inner product with $v_1$,
+$$
+v_1^\top (c_1 v_1 + \cdots + c_k v_k)
+=
+c_1 v_1^\top v_1
+$$
+Since $\|v_1\|^2 \neq 0$, we conclude $c_1 = 0$.  
+Repeating yields $c_i = 0$ for all $i$.
+
+---
+### 4. Orthonormal Vectors  
+
+Vectors $u$ and $v$ are **orthonormal** if  
+1. $u^\top v = 0$  
+2. $\|u\| = \|v\| = 1$
+
+Examples in $\mathbb{R}^2$:
+$$
+\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},
+\quad
+\begin{bmatrix}
+0 \\
+1
+\end{bmatrix}
+$$
+Another example:
+$$
+\begin{bmatrix}
+\cos \theta \\
+\sin \theta
+\end{bmatrix},
+\quad
+\begin{bmatrix}
+-\sin \theta \\
+\cos \theta
+\end{bmatrix}
+$$
+---
+### 5. Orthogonal Subspaces  
+
+Let $U, V \subseteq \mathbb{R}^n$ be subspaces.  
+We say $U$ and $V$ are orthogonal if  
+$$
+x^\top y = 0
+\quad
+\text{for all } x \in U, \; y \in V
+$$
+---
+### 6. Orthogonality and the Four Fundamental Subspaces  
+
+Let $A \in \mathbb{R}^{m \times n}$.
+
+### 6.1 Row Space and Null Space  
+
+**Claim:**
+$$
+\mathcal{R}(A) \perp \mathcal{N}(A)
+$$
+If $x \in \mathcal{N}(A)$, then  
+$$
+Ax = 0
+$$
+Writing rows explicitly,
+$$
+A =
+\begin{bmatrix}
+r_1 \\
+r_2 \\
+\vdots \\
+r_m
+\end{bmatrix}
+$$
+Then  
+$$
+Ax =
+\begin{bmatrix}
+r_1^\top x \\
+r_2^\top x \\
+\vdots \\
+r_m^\top x
+\end{bmatrix}
+=
+0
+$$
+Thus  
+$$
+r_i^\top x = 0 \quad \text{for all } i
+$$
+So every row is orthogonal to $x$, and therefore every linear combination of rows is orthogonal to $x$. Hence,
+$$
+\mathcal{R}(A) \perp \mathcal{N}(A)
+$$
+Equivalently,
+$$
+\mathcal{C}(A^\top) \perp \mathcal{N}(A)
+$$
+---
+### 6.2 Column Space and Left Null Space  
+
+Similarly,
+$$
+\mathcal{C}(A) \perp \mathcal{N}(A^\top)
+$$
+---
+### 7. Dimension Relationships  
+
+Let $\operatorname{rank}(A) = r$.
+Then:
+$$
+\dim \mathcal{C}(A) = r
+$$
+$$
+\dim \mathcal{N}(A) = n - r
+$$
+$$
+\dim \mathcal{C}(A^\top) = r
+$$
+$$
+\dim \mathcal{N}(A^\top) = m - r
+$$
+These relationships reflect orthogonal decompositions of $\mathbb{R}^n$ and $\mathbb{R}^m$.
+
+---
+### 8. Summary  
+
+In this lecture, we established:
+- The definition of vector length  
+- Orthogonality via inner product  
+- Orthonormal vectors  
+- Orthogonal subspaces  
+- $\mathcal{R}(A) \perp \mathcal{N}(A)$  
+- $\mathcal{C}(A) \perp \mathcal{N}(A^\top)$  
+
+These results form the geometric foundation for projections and least squares.
+
+---
+`***********************************************************************************`
+
+---
