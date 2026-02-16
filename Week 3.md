@@ -864,3 +864,193 @@ This is the geometric foundation of least squares.
 `***********************************************************************************`
 
 ---
+  
+## Lecture 5 
+### Example of Least Squares (Ordinary Least Squares)
+
+### 1. Problem Setup — Curve Fitting
+
+We consider a simple linear regression problem.
+Suppose we are given data points:
+$$
+(x_1, b_1), (x_2, b_2), \dots, (x_m, b_m)
+$$
+We want to fit a straight line of the form:
+$$
+b \approx \theta_1 x + \theta_2
+$$
+This is a linear model with slope $\theta_1$ and intercept $\theta_2$.
+
+---
+### 2. Matrix Formulation
+
+We rewrite the system as:
+$$
+A \theta = b
+$$
+where
+$$
+A =
+\begin{bmatrix}
+x_1 & 1 \\
+x_2 & 1 \\
+\vdots & \vdots \\
+x_m & 1
+\end{bmatrix},
+\quad
+\theta =
+\begin{bmatrix}
+\theta_1 \\
+\theta_2
+\end{bmatrix},
+\quad
+b =
+\begin{bmatrix}
+b_1 \\
+b_2 \\
+\vdots \\
+b_m
+\end{bmatrix}
+$$
+In general, this system may be inconsistent.
+
+---
+### 3. Least Squares Objective
+
+We minimize the squared error:
+$$
+\min_{\theta} \| b - A\theta \|^2
+$$
+Explicitly,
+$$
+\sum_{i=1}^{m} (b_i - \theta_1 x_i - \theta_2)^2
+$$
+The least squares solution satisfies the normal equations:
+$$
+A^T A \hat{\theta} = A^T b
+$$
+---
+### 4. Concrete Example
+
+Consider:
+$$
+A =
+\begin{bmatrix}
+-1 & 1 \\
+1 & 1 \\
+2 & 1
+\end{bmatrix},
+\quad
+b =
+\begin{bmatrix}
+1 \\
+1 \\
+3
+\end{bmatrix}
+$$
+We first check consistency by Gaussian elimination.
+After row reduction, the augmented system produces a contradiction, so the system is inconsistent.
+Thus, we solve the normal equations.
+
+---
+### 5. Compute Normal Equations
+
+Compute:
+$$
+A^T A =
+\begin{bmatrix}
+6 & 2 \\
+2 & 3
+\end{bmatrix}
+$$
+Compute:
+$$
+A^T b =
+\begin{bmatrix}
+6 \\
+5
+\end{bmatrix}
+$$
+Thus we solve:
+$$
+\begin{bmatrix}
+6 & 2 \\
+2 & 3
+\end{bmatrix}
+\begin{bmatrix}
+\hat{\theta}_1 \\
+\hat{\theta}_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+6 \\
+5
+\end{bmatrix}
+$$
+This gives:
+$$
+\hat{\theta}_1 = \frac{4}{7}, 
+\quad
+\hat{\theta}_2 = \frac{9}{7}
+$$
+---
+### 6. Final Least Squares Line
+
+The best-fit line is:
+$$
+b = \frac{4}{7}x + \frac{9}{7}
+$$
+---
+### 7. Projection Interpretation
+
+The projection is:
+$$
+P = A (A^T A)^{-1} A^T
+$$
+The projected vector is:
+$$
+p = A \hat{\theta}
+$$
+The residual is:
+$$
+e = b - p
+$$
+For this example:
+$$
+e =
+\begin{bmatrix}
+\frac{2}{7} \\
+-\frac{6}{7} \\
+\frac{4}{7}
+\end{bmatrix}
+$$
+We verify:
+$$
+A^T e = 0
+$$
+Thus the residual is orthogonal to the column space of $A$.
+
+---
+### 8. Key Insight
+
+Minimizing
+$$
+\| A\theta - b \|^2
+$$
+is equivalent to solving
+$$
+A^T A \hat{\theta} = A^T b
+$$
+which geometrically corresponds to projecting $b$ onto the column space of $A$.
+
+---
+### 9. Conceptual Summary
+- If $b \in \text{Col}(A)$, the system is exactly solvable.
+- If not, we project $b$ onto $\text{Col}(A)$.
+- The error vector $e$ lies in $\text{Null}(A^T)$.
+- Least squares is orthogonal projection.
+
+---
+`***********************************************************************************`
+
+---
