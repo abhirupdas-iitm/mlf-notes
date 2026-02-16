@@ -1611,3 +1611,271 @@ We now have the foundational geometric and differential tools required for multi
 `***********************************************************************************`
 
 ---
+
+## Lecture 6 
+### Gradient Interpretations and Higher-Order Approximations  
+
+### Multivariate Linear Approximation
+
+We now extend the idea of linear approximation from functions  
+$f : \mathbb{R} \to \mathbb{R}$  
+to functions  
+$f : \mathbb{R}^d \to \mathbb{R}$.
+In one dimension, we approximate around $x^\star$ as:
+$$
+f(x) \approx f(x^\star) + f'(x^\star)(x - x^\star)
+$$
+We now generalize this to higher dimensions.
+Let $v \in \mathbb{R}^d$ and let $x$ be close to $v$.
+We approximate:
+$$
+f(x) \approx f(v) + \nabla f(v)^\top (x - v)
+$$
+Expanding the gradient into components:
+$$
+f(x) \approx f(v) + \sum_{i=1}^{d} \frac{\partial f}{\partial x_i}(v) (x_i - v_i)
+$$
+We denote this approximation as:
+$$
+L_v[f](x) = f(v) + \nabla f(v)^\top (x - v)
+$$
+This approximation is valid when:
+$$
+x \approx v
+$$
+---
+### Derivation via Coordinate-wise Approximation (2D Case)
+
+Let $f : \mathbb{R}^2 \to \mathbb{R}$.
+We approximate first in the $x_1$ direction:
+$$
+f(y_1, v_2) - f(v_1, v_2) \approx 
+\frac{\partial f}{\partial x_1}(v)(y_1 - v_1)
+$$
+Then in the $x_2$ direction:
+$$
+f(v_1, y_2) - f(v_1, v_2) \approx 
+\frac{\partial f}{\partial x_2}(v)(y_2 - v_2)
+$$
+If both coordinates change simultaneously, we add contributions:
+$$
+f(y_1, y_2) \approx f(v_1, v_2)
++ \frac{\partial f}{\partial x_1}(v)(y_1 - v_1)
++ \frac{\partial f}{\partial x_2}(v)(y_2 - v_2)
+$$
+Which compactly becomes:
+$$
+f(y) \approx f(v) + \nabla f(v)^\top (y - v)
+$$
+---
+### Example — Linear Approximation of a Quadratic
+
+Let:
+$$
+f(x_1, x_2) = x_1^2 + x_2^2
+$$
+We approximate around:
+$$
+v = (6, 2)
+$$
+We compute:
+$$
+f(v) = 6^2 + 2^2 = 40
+$$
+Gradient:
+$$
+\nabla f(x) =
+\begin{bmatrix}
+2x_1 \\
+2x_2
+\end{bmatrix}
+$$
+So:
+$$
+\nabla f(v) =
+\begin{bmatrix}
+12 \\
+4
+\end{bmatrix}
+$$
+Linear approximation:
+$$
+L_v[f](x)
+= 40 + 
+\begin{bmatrix}
+12 & 4
+\end{bmatrix}
+\begin{bmatrix}
+x_1 - 6 \\
+x_2 - 2
+\end{bmatrix}
+$$
+Simplifying:
+$$
+L_v[f](x)
+= 40 + 12(x_1 - 6) + 4(x_2 - 2)
+$$
+$$
+= 12x_1 + 4x_2 - 40
+$$
+Valid when:
+$$
+(x_1, x_2) \approx (6,2)
+$$
+---
+### Tangent Plane Interpretation
+
+For $f : \mathbb{R}^d \to \mathbb{R}$, the graph lies in $\mathbb{R}^{d+1}$.
+The graph of $L_v[f]$ is a plane.
+That plane is tangent to the graph of $f$ at:
+$$
+(v, f(v))
+$$
+Thus:
+**The gradient determines the tangent plane.**
+
+---
+### Contour Interpretation
+
+Consider the level set:
+$$
+\{ x \in \mathbb{R}^d : f(x) = f(v) \}
+$$
+We show:
+$$
+\nabla f(v)
+$$
+is perpendicular to this contour.
+Proof via linear approximation:
+Level set of linear approximation:
+$$
+L_v[f](x) = f(v)
+$$
+Substitute:
+$$
+f(v) + \nabla f(v)^\top (x - v) = f(v)
+$$
+Which gives:
+$$
+\nabla f(v)^\top x = \nabla f(v)^\top v
+$$
+This is the equation of a hyperplane:
+$$
+w^\top x = b
+$$
+Thus:
+$$
+\nabla f(v)
+$$
+is normal to the contour.
+
+---
+### Directional Derivative
+
+Directional derivative of $f$ at $v$ along direction $u$:
+$$
+D_u f(v)
+=
+\lim_{\alpha \to 0}
+\frac{f(v + \alpha u) - f(v)}{\alpha}
+$$
+Using linear approximation:
+$$
+f(v + \alpha u)
+\approx
+f(v) + \nabla f(v)^\top (\alpha u)
+$$
+So:
+$$
+D_u f(v) = \nabla f(v)^\top u
+$$
+Thus:
+**Directional derivative equals gradient dotted with direction.**
+
+---
+### Cauchy–Schwarz Inequality
+
+For vectors $a,b \in \mathbb{R}^d$:
+$$
+- \|a\|\|b\| \le a^\top b \le \|a\|\|b\|
+$$
+Equality holds when:
+- $a = \alpha b$, $\alpha > 0$ (upper bound)
+- $a = \alpha b$, $\alpha < 0$ (lower bound)
+
+---
+### Direction of Steepest Ascent
+
+We seek unit vector $u$ that maximizes:
+$$
+D_u f(v) = \nabla f(v)^\top u
+$$
+Subject to:
+$$
+\|u\| = 1
+$$
+By Cauchy–Schwarz:
+Maximum occurs when:
+$$
+u = \frac{\nabla f(v)}{\|\nabla f(v)\|}
+$$
+Thus:
+**Gradient gives direction of steepest ascent.**
+Steepest descent direction:
+$$
+- \nabla f(v)
+$$
+---
+### Descent Directions
+
+Set of descent directions:
+$$
+\{ u \in \mathbb{R}^d : \nabla f(v)^\top u < 0 \}
+$$
+These directions reduce function value.
+
+---
+### Higher-Order Approximation
+
+Linear approximation:
+$$
+f(x) \approx f(v) + \nabla f(v)^\top (x - v)
+$$
+Quadratic approximation:
+$$
+f(x) \approx f(v)
++ \nabla f(v)^\top (x - v)
++ \frac{1}{2}
+(x - v)^\top
+\nabla^2 f(v)
+(x - v)
+$$
+Where:
+$$
+\nabla^2 f(v)
+$$
+is the Hessian matrix (a $d \times d$ matrix).
+
+---
+### Critical Points
+
+If $f$ is minimized at $v$, then:
+$$
+\nabla f(v) = 0
+$$
+Similarly for maxima.
+Points satisfying:
+$$
+\nabla f(v) = 0
+$$
+are called **critical points**.
+This condition is called the **first-order necessary condition for optimality**.
+Critical points may be:
+- Local minima  
+- Local maxima  
+- Saddle points  
+
+---
+`***********************************************************************************`
+
+---
