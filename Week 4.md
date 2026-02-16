@@ -1012,3 +1012,181 @@ In subsequent development, this theorem generalizes to Hermitian matrices in com
 `***********************************************************************************`
 
 ---
+
+## Lecture 5
+### Spectral Theorem and Orthogonal Diagonalization
+
+### 1. Spectral Theorem for Real Symmetric Matrices
+
+Let $A$ be a real symmetric $n \times n$ matrix.
+The spectral theorem states:
+1. All eigenvalues of $A$ are real.
+2. Eigenvectors corresponding to distinct eigenvalues are linearly independent.
+3. $A$ is orthogonally diagonalizable.
+
+---
+### 2. Orthogonal Diagonalization
+
+#### Definition
+
+A matrix $A$ is orthogonally diagonalizable if there exists an orthogonal matrix $Q$ such that
+$$
+A = Q \Lambda Q^T
+$$
+where
+$$
+Q^T Q = I
+$$
+and
+$$
+\Lambda =
+\begin{pmatrix}
+\lambda_1 &        &        \\
+          & \ddots &        \\
+          &        & \lambda_n
+\end{pmatrix}.
+$$
+Since $Q$ is orthogonal,
+$$
+Q^{-1} = Q^T.
+$$
+Thus orthogonal diagonalization is a special case of diagonalization:
+$$
+A = Q \Lambda Q^{-1},
+$$
+with the additional constraint
+$$
+Q^T Q = I.
+$$
+---
+### 3. Important Observations
+
+- Not every real matrix is diagonalizable.
+- Every real symmetric matrix is diagonalizable.
+- Moreover, it admits an orthogonal diagonalization.
+
+Example of a non diagonalizable matrix:
+$$
+A =
+\begin{pmatrix}
+0 & 1 \\
+0 & 0
+\end{pmatrix}.
+$$
+---
+### 4. Example of Orthogonal Diagonalization
+
+Consider
+$$
+A =
+\begin{pmatrix}
+1 & -2 \\
+-2 & -2
+\end{pmatrix}.
+$$
+#### Step 1: Eigenvalues
+
+The eigenvalues are
+$$
+\lambda_1 = -3, \quad \lambda_2 = 2.
+$$
+#### Step 2: Eigenvectors
+
+Corresponding eigenvectors:
+$$
+x_1 =
+\begin{pmatrix}
+1 \\
+2
+\end{pmatrix},
+\quad
+x_2 =
+\begin{pmatrix}
+-2 \\
+1
+\end{pmatrix}.
+$$
+---
+### 5. Normalization
+
+Compute norms:
+$$
+\|x_1\| = \sqrt{1^2 + 2^2} = \sqrt{5},
+$$
+$$
+\|x_2\| = \sqrt{(-2)^2 + 1^2} = \sqrt{5}.
+$$
+Normalized eigenvectors:
+$$
+q_1 = \frac{1}{\sqrt{5}}
+\begin{pmatrix}
+1 \\
+2
+\end{pmatrix},
+\quad
+q_2 = \frac{1}{\sqrt{5}}
+\begin{pmatrix}
+-2 \\
+1
+\end{pmatrix}.
+$$
+---
+### 6. Construct Orthogonal Matrix
+
+Form
+$$
+Q =
+\begin{pmatrix}
+\frac{1}{\sqrt{5}} & -\frac{2}{\sqrt{5}} \\
+\frac{2}{\sqrt{5}} & \frac{1}{\sqrt{5}}
+\end{pmatrix}.
+$$
+Verify orthogonality:
+$$
+Q^T Q = I.
+$$
+---
+### 7. Diagonal Matrix
+$$
+\Lambda =
+\begin{pmatrix}
+-3 & 0 \\
+0 & 2
+\end{pmatrix}.
+$$
+---
+### 8. Final Decomposition
+
+Compute
+$$
+Q \Lambda Q^T.
+$$
+This yields
+$$
+A =
+\begin{pmatrix}
+1 & -2 \\
+-2 & -2
+\end{pmatrix}.
+$$
+Thus,
+$$
+A = Q \Lambda Q^T.
+$$
+---
+### 9. Conceptual Summary
+
+For a real symmetric matrix:
+- Eigenvalues are real.
+- Eigenvectors corresponding to distinct eigenvalues are orthogonal.
+- After normalization, eigenvectors form an orthonormal basis.
+- The matrix can be written as
+$$
+A = Q \Lambda Q^T.
+$$
+This is orthogonal diagonalization and is a central consequence of the spectral theorem.
+
+---
+`***********************************************************************************`
+
+---
