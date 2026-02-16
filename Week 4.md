@@ -596,3 +596,236 @@ Therefore it is not diagonalizable.
 
 ---
 
+## Lecture 3
+### Fibonacci Sequence and Diagonalization
+
+### 1. Motivation
+
+We consider the Fibonacci sequence defined by the recurrence
+$$
+F_{k+2} = F_{k+1} + F_k
+$$
+with initial conditions
+$$
+F_0 = 0, \qquad F_1 = 1.
+$$
+Our objective is to compute large terms such as $F_{100}$ efficiently using linear algebra instead of brute force iteration.
+
+---
+### 2. Matrix Formulation of the Recurrence
+
+We define the state vector
+$$
+u_k =
+\begin{pmatrix}
+F_{k+1} \\
+F_k
+\end{pmatrix}.
+$$
+Then the recurrence becomes
+$$
+u_{k+1} = A u_k
+$$
+where
+$$
+A =
+\begin{pmatrix}
+1 & 1 \\
+1 & 0
+\end{pmatrix}.
+$$
+Indeed,
+$$
+\begin{pmatrix}
+F_{k+2} \\
+F_{k+1}
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 1 \\
+1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+F_{k+1} \\
+F_k
+\end{pmatrix}.
+$$
+Thus,
+$$
+u_k = A^k u_0,
+$$
+where
+$$
+u_0 =
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}.
+$$
+---
+### 3. General Diagonalization Strategy
+
+Suppose $A$ is an $n \times n$ matrix with $n$ linearly independent eigenvectors $x_1, \dots, x_n$ and corresponding eigenvalues $\lambda_1, \dots, \lambda_n$.
+
+If
+$$
+u_0 = c_1 x_1 + \dots + c_n x_n,
+$$
+then
+$$
+A u_0 = c_1 \lambda_1 x_1 + \dots + c_n \lambda_n x_n,
+$$
+and more generally,
+$$
+A^k u_0 = c_1 \lambda_1^k x_1 + \dots + c_n \lambda_n^k x_n.
+$$
+Diagonalization converts matrix powers into scalar powers.
+
+---
+### 4. Eigenvalues of the Fibonacci Matrix
+
+For
+$$
+A =
+\begin{pmatrix}
+1 & 1 \\
+1 & 0
+\end{pmatrix},
+$$
+we compute the characteristic polynomial:
+$$
+\det(A - \lambda I)
+=
+\begin{vmatrix}
+1 - \lambda & 1 \\
+1 & -\lambda
+\end{vmatrix}
+=
+\lambda^2 - \lambda - 1.
+$$
+Thus eigenvalues satisfy
+$$
+\lambda^2 - \lambda - 1 = 0.
+$$
+Hence,
+$$
+\lambda_1 = \frac{1 + \sqrt{5}}{2}, \qquad
+\lambda_2 = \frac{1 - \sqrt{5}}{2}.
+$$
+Since the eigenvalues are distinct, $A$ is diagonalizable.
+
+---
+### 5. Eigenvectors
+
+For each eigenvalue $\lambda$, a corresponding eigenvector is
+$$
+x =
+\begin{pmatrix}
+\lambda \\
+1
+\end{pmatrix}.
+$$
+Thus,
+$$
+x_1 =
+\begin{pmatrix}
+\lambda_1 \\
+1
+\end{pmatrix},
+\qquad
+x_2 =
+\begin{pmatrix}
+\lambda_2 \\
+1
+\end{pmatrix}.
+$$
+---
+### 6. Expressing the Initial Condition
+
+We write
+$$
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}
+=
+c_1 x_1 + c_2 x_2.
+$$
+Solving gives
+$$
+c_1 = \frac{1}{\sqrt{5}}, \qquad
+c_2 = -\frac{1}{\sqrt{5}}.
+$$
+---
+### 7. Closed Form Expression
+
+Using
+$$
+u_k = A^k u_0 = c_1 \lambda_1^k x_1 + c_2 \lambda_2^k x_2,
+$$
+we obtain
+$$
+F_k =
+\frac{1}{\sqrt{5}} \lambda_1^k
+-
+\frac{1}{\sqrt{5}} \lambda_2^k.
+$$
+Substituting eigenvalues:
+$$
+F_k =
+\frac{1}{\sqrt{5}}
+\left( \frac{1 + \sqrt{5}}{2} \right)^k
+-
+\frac{1}{\sqrt{5}}
+\left( \frac{1 - \sqrt{5}}{2} \right)^k.
+$$
+---
+### 8. Approximation for Large k
+
+Since
+$$
+\left| \frac{1 - \sqrt{5}}{2} \right| < 1,
+$$
+we have
+$$
+\left( \frac{1 - \sqrt{5}}{2} \right)^k \to 0
+$$
+as $k \to \infty$.
+Thus for large $k$,
+$$
+F_k \approx
+\frac{1}{\sqrt{5}}
+\left( \frac{1 + \sqrt{5}}{2} \right)^k.
+$$
+In particular,
+$$
+F_{100} \approx
+\frac{1}{\sqrt{5}}
+\left( \frac{1 + \sqrt{5}}{2} \right)^{100}.
+$$
+---
+### 9. Key Observations
+
+1. The Fibonacci recurrence is linear.
+2. Linear recurrences can be written as matrix systems.
+3. Diagonalization reduces matrix powers to scalar powers.
+4. Distinct eigenvalues guarantee diagonalizability.
+5. Large scale behavior is dominated by the largest eigenvalue.
+
+---
+### Final Takeaway
+
+Diagonalization solves linear recurrence relations of the form
+$$
+u_{k+1} = A u_k
+$$
+by writing
+$$
+A^k = S \Lambda^k S^{-1}.
+$$
+Recursive growth becomes exponential growth governed by eigenvalues.
+
+---
+`***********************************************************************************`
+
+---
