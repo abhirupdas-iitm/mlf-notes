@@ -2,7 +2,7 @@
 ### What is Machine Learning
 
 ---
-## 1. What is Machine Learning?
+### 1. What is Machine Learning?
 
 ### Definition
 We define Machine Learning (ML) as the study of computer algorithms that improve automatically through experience and the use of data.
@@ -20,7 +20,7 @@ Where:
 Our objective in ML is to approximate $f$ using data.
 
 ---
-## 2. What is a Task?
+### 2. What is a Task?
 
 We define a **Task** as a process that converts input into output.
 $$
@@ -38,7 +38,7 @@ Where:
 - Password verification: Password $\rightarrow$ Authentication  
 
 ---
-## 3. Task Hierarchy
+### 3. Task Hierarchy
 
 We organize tasks into four abstraction levels.
 ### Level 1: Manual Labour
@@ -62,18 +62,14 @@ In this setting, we fully know $f$.
 ### Level 4: Machine Learning
 
 We do not explicitly specify $f$.
-
 Instead, we provide labeled data:
-
 $$
 \{(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)\}
 $$
-
 The system learns an approximation:
 $$
 \hat{f}(x) \approx f(x)
 $$
-
 Structure:
 Data + Model Design $\rightarrow \hat{f}$  
 Then:
@@ -82,20 +78,18 @@ $x \rightarrow \hat{f}(x) \rightarrow y$
 **Key Idea:** We learn the function from data.
 
 ---
-## 4. When Should We Use Machine Learning?
+### 4. When Should We Use Machine Learning?
 
-### Programming / Human Labour Fails When
+#### Programming / Human Labour Fails When
 
 - Scale, speed, or cost becomes too high  
 - We cannot express rules mathematically  
 - The exact rule $f$ is unknown  
 
 Formally, we cannot define:
-
 $$
 y = f(x)
 $$
-
 ---
 ### Machine Learning Can Succeed If
 
@@ -116,7 +110,7 @@ Where:
 - $\mathcal{H}$ = hypothesis space  
 - $\mathcal{L}$ = loss function  
 ---
-## 5. Case Study: Password Verification
+### 5. Case Study: Password Verification
 
 Task:
 Password $\rightarrow$ Authentication  
@@ -133,7 +127,7 @@ Conclusion:
 - Programming suffices  
 - ML is unnecessary  
 ---
-## 6. Case Study: Face Detection
+### 6. Case Study: Face Detection
 
 Task:
 $$
@@ -163,7 +157,7 @@ $$
 This constitutes a binary classification problem.
 
 ---
-## 7. Case Study: Weather Prediction
+### 7. Case Study: Weather Prediction
 
 Task:
 
@@ -183,14 +177,13 @@ $$
 \exists f
 $$
 And we approximate:
-
 $$
 \hat{f}(x) \approx f(x)
 $$
 ---
-## 8. Real-World ML Applications
+### 8. Real-World ML Applications
 
-### Spam Classification
+#### Spam Classification
 
 Email $\rightarrow \{\text{Spam}, \text{Not Spam}\}$  
 We learn:
@@ -221,20 +214,17 @@ $$
 \pi(s) = a
 $$
 Where:
-
 - $s$ = state  
 - $a$ = action  
 ---
-## 9. Core Mathematical Insight
+### 9. Core Mathematical Insight
 
 We assume:
-
 - There exists a function $f$  
 - We cannot explicitly specify $f$  
 - Data encodes information about $f$  
 
 Thus we:
-
 1. Define hypothesis space $\mathcal{H}$  
 2. Choose loss function $\mathcal{L}$  
 
@@ -253,7 +243,7 @@ This represents the fundamental ML framework.
 ### Data, Models and ML Tasks
 
 ---
-## 1. What is Data?
+### 1. What is Data?
 
 In machine learning, we interpret data as a collection of vectors.
 Formally, we represent a dataset as:
@@ -304,7 +294,7 @@ We note:
 - We require metadata for interpretability.
 
 ---
-## 2. What is a Model?
+### 2. What is a Model?
 
 We define a model as a mathematical simplification of reality.
 Formally:
@@ -336,14 +326,14 @@ The key philosophical insight is:
 We understand that models are approximations rather than exact reality.
 
 ---
-## 3. Types of Models in Machine Learning
+### 3. Types of Models in Machine Learning
 
 We distinguish two major types:
 
 - Predictive Models
 - Probabilistic Models
 ---
-## 4. Predictive Models
+### 4. Predictive Models
 
 Predictive models define a mapping:
 $$
@@ -372,7 +362,6 @@ $$
 y = a \cdot x_1 + b \cdot x_2 + c \cdot x_3
 $$
 Where:
-
 - $a, b, c$ = parameters
 - $x_1, x_2, x_3$ = features
 
@@ -406,7 +395,7 @@ $$
 Classification assigns category labels.
 
 ---
-## 5. Probabilistic Models
+### 5. Probabilistic Models
 
 Probabilistic models evaluate likelihood.
 They do not directly output a deterministic value.
@@ -426,7 +415,7 @@ Examples:
 Probabilistic models score configurations of reality.
 
 ---
-## 6. Learning Algorithms
+### 6. Learning Algorithms
 
 Learning algorithms perform the transformation:
 $$
@@ -453,7 +442,7 @@ Where:
 - $\theta$ = model parameters
 - $\mathcal{L}$ = loss function
 ---
-## 7. Machine Learning Pipeline (Revisited)
+### 7. Machine Learning Pipeline (Revisited)
 
 We do not directly write the final model.
 Instead:
@@ -471,7 +460,7 @@ $$
 \text{Input} \rightarrow \text{Model} \rightarrow \text{Output}
 $$
 ---
-## Core Idea of This Lecture
+### Core Idea of This Lecture
 
 - We interpret data as a collection of vectors.
 - We define a model as a mathematical abstraction.
@@ -488,7 +477,7 @@ $$
 ### Supervised Learning – Regression
 
 ---
-## 1. Supervised Learning
+### 1. Supervised Learning
 
 We interpret supervised learning as a form of curve fitting.
 Given training data:
@@ -508,7 +497,7 @@ $$
 f(x_i) \text{ is close to } y_i
 $$
 ---
-## 2. Notation
+### 2. Notation
 
 We use:
 
@@ -553,7 +542,7 @@ $$
 \mathbf{1}(2 \text{ is odd}) = 0
 $$
 ---
-## 3. Regression
+### 3. Regression
 
 We apply regression when:
 $$
@@ -578,7 +567,7 @@ $$
 f : \mathbb{R}^d \rightarrow \mathbb{R}
 $$
 ---
-## 4. Loss Function (Squared Loss)
+### 4. Loss Function (Squared Loss)
 
 We define the loss of a model $f$ as:
 $$
@@ -596,7 +585,7 @@ $$
 \min_f \mathcal{L}(f)
 $$
 ---
-## 5. Linear Parameterization
+### 5. Linear Parameterization
 
 A commonly used regression model is:
 $$
@@ -607,7 +596,6 @@ $$
 f(x) = \sum_{j=1}^{d} w_j x_j + b
 $$
 The parameters are:
-
 - $w = (w_1, w_2, \dots, w_d)$  
 - $b$ = bias  
 
@@ -629,7 +617,7 @@ $$
 that minimize the squared loss.
 
 ---
-## 6. Regression Illustration 1 (1D Example)
+### 6. Regression Illustration 1 (1D Example)
 
 Let $d = 1$.
 Training data:
@@ -694,7 +682,7 @@ $$
 Thus we prefer $f$.
 
 ---
-## 7. Regression Illustration 2 (House Example)
+### 7. Regression Illustration 2 (House Example)
 
 Data:
 
@@ -741,7 +729,7 @@ $$
 Hence we conclude that $f$ is the better model for this dataset.
 
 ---
-## Core Idea of Regression
+### Core Idea of Regression
 
 - We fit a function to data.  
 - We select a model family (for example, linear models).  
@@ -759,7 +747,7 @@ We therefore interpret supervised learning as curve fitting under a specified lo
 ### Supervised Learning – Classification
 
 ---
-## 1. Classification Problem Setup
+### 1. Classification Problem Setup
 
 In classification, we focus on predicting discrete labels.
 
@@ -790,7 +778,7 @@ $$
 f : \mathbb{R}^d \rightarrow \{+1, -1\}
 $$
 ---
-## 2. Classification Loss
+### 2. Classification Loss
 
 In the ideal situation:
 $$
@@ -813,7 +801,7 @@ This quantity represents:
 > The fraction of misclassified training examples.
 
 ---
-## 3. Linear Classifier (Linear Separator)
+### 3. Linear Classifier (Linear Separator)
 
 A commonly used parameterization is:
 $$
@@ -831,9 +819,9 @@ Points on one side are assigned +1.
 Points on the other side are assigned -1.  
 
 ---
-## 4. Classification Illustration 1
+### 4. Classification Illustration 1
 
-### Dataset (d = 2)
+#### Dataset (d = 2)
 
 Training points:
 $$
@@ -852,7 +840,7 @@ $$
 -1
 $$
 ---
-### Model 1
+#### Model 1
 $$
 f(x) = \operatorname{sign}(2 - x_1)
 $$
@@ -864,7 +852,7 @@ $$
 \mathcal{L}(f) = 0
 $$
 ---
-### Model 2
+#### Model 2
 $$
 g(x) = \operatorname{sign}(x_1 - 2x_2)
 $$
@@ -882,7 +870,7 @@ $$
 f
 $$
 ---
-## 5. Classification Illustration 2 (House Example)
+### 5. Classification Illustration 2 (House Example)
 
 We encode:
 $$
@@ -894,7 +882,7 @@ $$
 We examine three models:
 
 ---
-### Model f
+#### Model f
 $$
 f(x) = \operatorname{sign}(\text{Area} - 10)
 $$
@@ -903,7 +891,7 @@ $$
 \mathcal{L}(f) = 0
 $$
 ---
-### Model g
+#### Model g
 $$
 g(x) = \operatorname{sign}(\text{Price} - 6)
 $$
@@ -912,7 +900,7 @@ $$
 \mathcal{L}(g) = 0
 $$
 ---
-### Model h
+#### Model h
 $$
 h(x) = \operatorname{sign}(\text{Price} - 9)
 $$
@@ -924,7 +912,7 @@ Therefore:
 - f and g perfectly classify the training data.
 - h does not.
 ---
-## 6. Important: Do NOT Evaluate on Training Data
+### 6. Important: Do NOT Evaluate on Training Data
 
 Consider the following model:
 $$
@@ -946,7 +934,7 @@ It will not generalize to unseen inputs.
 This phenomenon is known as **overfitting**.
 
 ---
-## 7. Train / Test Split
+### 7. Train / Test Split
 
 The learning procedure is structured as follows:
 1. We use training data to learn the model.
@@ -961,7 +949,7 @@ The true goal of machine learning is:
 To perform well on unseen data.
 
 ---
-## 8. Validation Data (Model Selection)
+### 8. Validation Data (Model Selection)
 
 The learning algorithm identifies the best model **within a chosen family**.
 Example model family:
@@ -975,14 +963,14 @@ $$
 f(x) = a \cdot \frac{\text{area}}{\text{rooms}} + b \cdot \text{distance}^2 + c
 $$
 The process of choosing the appropriate model class is called:
-### Model Selection
+#### Model Selection
 
 We typically divide data as follows:
 - Training data → learn parameters
 - Validation data → choose model class
 - Test data → final evaluation
 ---
-## Core Ideas of This Lecture
+### Core Ideas of This Lecture
 
 - We use classification to predict discrete labels.
 - We measure performance using misclassification loss.
@@ -999,7 +987,7 @@ We typically divide data as follows:
 ### Unsupervised Learning – Dimensionality Reduction
 
 ---
-## 1. Introduction to Unsupervised Learning
+### 1. Introduction to Unsupervised Learning
 
 In the previous lectures, we studied supervised learning and analyzed the two central tasks: regression and classification.
 
@@ -1025,11 +1013,11 @@ More concretely, we attempt to build models that:
 - Explain structure in data  
 - Group similar data points  
 ---
-## 2. Motivation: Why Unsupervised Learning?
+### 2. Motivation: Why Unsupervised Learning?
 
 We typically do not use unsupervised learning as an end goal.
 Instead, we use it as a preprocessing stage that supports other tasks or aids human interpretation.
-### Example: Tweet Grouping
+#### Example: Tweet Grouping
 Suppose we collect one million tweets about a product.
 It is impractical to manually examine all tweets individually.
 Instead, we may wish to group these tweets into a small number of coherent clusters, say 10 groups.
@@ -1044,7 +1032,7 @@ The semantic interpretation of these groups is performed by humans.
 Thus, unsupervised learning extracts structure, and human reasoning assigns meaning.
 
 ---
-## 3. Dimensionality Reduction
+### 3. Dimensionality Reduction
 
 We now study the first major unsupervised task: **Dimensionality Reduction**.
 ### Goal
@@ -1068,7 +1056,7 @@ We summarize its purpose as:
 > Compression and simplification.
 
 ---
-## 4. Formal Setup
+### 4. Formal Setup
 
 We are given data:
 $$
@@ -1079,7 +1067,7 @@ $$
 x^i \in \mathbb{R}^d
 $$
 We aim to learn two functions:
-### Encoder
+#### Encoder
 $$
 f : \mathbb{R}^d \rightarrow \mathbb{R}^{d'}
 $$
@@ -1090,14 +1078,14 @@ $$
 The encoder compresses a $d$-dimensional vector into a $d'$-dimensional representation.
 
 ---
-### Decoder
+#### Decoder
 $$
 g : \mathbb{R}^{d'} \rightarrow \mathbb{R}^d
 $$
 The decoder reconstructs the original vector from its compressed form.
 
 ---
-### Objective
+#### Objective
 
 We want:
 $$
@@ -1119,7 +1107,7 @@ $$
 Our goal is to find encoder-decoder pair $(f, g)$ that minimizes this loss.
 
 ---
-## 5. Illustration: Simple Example
+### 5. Illustration: Simple Example
 
 Let:
 $$
@@ -1139,7 +1127,7 @@ $$
 x^4 = (4, 3.8)
 $$
 ---
-### Encoder-Decoder Pair 1
+#### Encoder-Decoder Pair 1
 
 Encoder:
 $$
@@ -1165,7 +1153,7 @@ Thus, reconstruction error is large.
 This encoder-decoder pair performs poorly.
 
 ---
-### Encoder-Decoder Pair 2
+#### Encoder-Decoder Pair 2
 
 Encoder:
 $$
@@ -1196,7 +1184,7 @@ $$
 The second pair performs better.
 
 ---
-## 6. Conceptual Understanding
+### 6. Conceptual Understanding
 
 Dimensionality reduction algorithms:
 - Choose encoder $f$
@@ -1206,7 +1194,7 @@ Dimensionality reduction algorithms:
 In real applications, we do not restrict ourselves to two candidate pairs.
 Instead, we search over large (often infinite) families of functions to find optimal compression.
 
-## Core Ideas of Lecture 5
+### Core Ideas of Lecture 5
 
 - Unsupervised learning works without labels.
 - We aim to understand structure in data.
@@ -1225,12 +1213,11 @@ Dimensionality reduction is the foundation for many modern representation learni
 
 ---
 
-
 ## Lecture 6
 ### Unsupervised Learning – Density Estimation
 
 ---
-## 1. Density Estimation Overview
+### 1. Density Estimation Overview
 
 With dimensionality reduction completed, we now move to the second major unsupervised learning problem: **density estimation**.
 
@@ -1243,9 +1230,9 @@ For example, suppose we want to construct a model capable of generating tweets t
 A density estimation model enables exactly this: it assigns high probability to sentences that resemble the original source and low probability to unlikely sentences.
 
 ---
-## 2. Formal Setup
+### 2. Formal Setup
 
-### Data
+#### Data
 We are given:
 $$
 \{x^1, x^2, \dots, x^n\}
@@ -1257,7 +1244,7 @@ $$
 Each $x^i$ represents one data instance (e.g., a tweet represented as a vector).
 
 ---
-### Model
+#### Model
 
 The goal is to learn a probability mapping:
 $$
@@ -1274,7 +1261,7 @@ $$
 \sum_{x \in 26^{128}} P(x) = 1
 $$
 ---
-### Goal
+#### Goal
 
 We want:
 
@@ -1282,7 +1269,7 @@ We want:
 - $P(x)$ to be small otherwise
 
 ---
-## 3. Loss Function – Negative Log Likelihood
+### 3. Loss Function – Negative Log Likelihood
 
 We define the loss as:
 $$
@@ -1294,7 +1281,7 @@ $$
 $$
 This is called the **negative log likelihood**.
 
-### Interpretation
+#### Interpretation
 
 - If $P(x^i)$ is large, then $-\log P(x^i)$ is small.
 - If $P(x^i)$ is small, then $-\log P(x^i)$ is large.
@@ -1305,7 +1292,7 @@ $$
 \min_P \mathcal{L}(P)
 $$
 ---
-## 4. Illustration 1 (1D Example)
+### 4. Illustration 1 (1D Example)
 Let:
 $$
 d = 1
@@ -1343,7 +1330,7 @@ P_2(x) =
 \end{cases}
 $$
 ---
-#### Model $P_3$
+##### Model $P_3$
 $$
 P_3(x) =
 \begin{cases}
@@ -1352,7 +1339,7 @@ P_3(x) =
 \end{cases}
 $$
 ---
-### Evaluate Likelihoods
+#### Evaluate Likelihoods
 
 For data points:
 $$
@@ -1363,9 +1350,9 @@ $$
 - Under $P_3$: first two get $0$, last two get $\frac{1}{5}$
 
 ---
-### Compute Loss
+#### Compute Loss
 
-#### Loss of $P_1$
+##### Loss of $P_1$
 $$
 -\log\left(\frac{1}{10}\right)
 -
@@ -1376,7 +1363,7 @@ $$
 \log\left(\frac{1}{10}\right)
 $$
 ---
-#### Loss of $P_2$
+##### Loss of $P_2$
 $$
 -\log\left(\frac{1}{5}\right)
 -
@@ -1387,7 +1374,7 @@ $$
 \log\left(\frac{1}{5}\right)
 $$
 ---
-#### Loss of $P_3$
+##### Loss of $P_3$
 Since two probabilities are zero:
 $$
 -\log(0) = \infty
@@ -1398,7 +1385,7 @@ $$
 $$
 
 ---
-### Conclusion
+#### Conclusion
 We observe:
 $$
 \mathcal{L}(P_2) < \mathcal{L}(P_1) < \mathcal{L}(P_3)
@@ -1406,7 +1393,7 @@ $$
 Thus, $P_2$ is the best among these three models.
 
 ---
-## 5. Illustration 2 (2D Gaussian Mixture Intuition)
+### 5. Illustration 2 (2D Gaussian Mixture Intuition)
 
 Now suppose:
 $$
@@ -1428,7 +1415,7 @@ $$
 Therefore, $P_1$ is the better density model.
 
 ---
-## 6. Core Ideas of Density Estimation
+### 6. Core Ideas of Density Estimation
 
 - We are given unlabeled data.
 - We learn a probability distribution over the data space.
@@ -1437,7 +1424,7 @@ Therefore, $P_1$ is the better density model.
 - The learned model can generate or score new data.
 
 ---
-## 7. Wrap-up for Week 1
+### 7. Wrap-up for Week 1
 
 We have now covered the two major unsupervised learning problems:
 
