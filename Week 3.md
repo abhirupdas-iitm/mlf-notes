@@ -509,3 +509,167 @@ These results form the geometric foundation for projections and least squares.
 
 ---
 
+## Lecture 3 
+### Projections and Motivation from Inconsistent Systems
+
+### 1. Motivation for Projections
+
+We begin with a linear system:
+$$
+Ax = b
+$$
+If
+$$
+b \notin \mathcal{C}(A)
+$$
+then the system is **inconsistent**, meaning there exists no vector $x$ such that $Ax = b$.
+In such a situation, we seek the **best approximation** to $b$ within the column space of $A$.
+The geometric solution is:
+
+> We project $b$ onto $\mathcal{C}(A)$.
+
+This projected vector will be the closest vector in the column space to $b$.
+
+---
+### 2. Projection Onto a Line
+
+We first study the simplest case: projection onto a line.
+
+Let:
+$$
+a \in \mathbb{R}^n
+$$
+We want to project $b$ onto the line spanned by $a$.
+Let the projection be:
+$$
+p = \hat{x} a
+$$
+Define the error vector:
+$$
+e = b - p = b - \hat{x} a
+$$
+For orthogonal projection, we require:
+$$
+e \perp a
+$$
+Thus:
+$$
+a^T (b - \hat{x} a) = 0
+$$
+Expanding:
+$$
+a^T b - \hat{x} a^T a = 0
+$$
+Solving for $\hat{x}$:
+$$
+\hat{x} = \frac{a^T b}{a^T a}
+$$
+Therefore, the projection is:
+$$
+p = \frac{a^T b}{a^T a} a
+$$
+---
+### 3. Projection Matrix Form
+
+We rewrite:
+$$
+p = \left( \frac{a^T b}{a^T a} \right) a
+$$
+Rearranging:
+$$
+p = \left( \frac{a a^T}{a^T a} \right) b
+$$
+Define the **projection matrix**:
+$$
+P = \frac{a a^T}{a^T a}
+$$
+Then the projection of any vector $b$ onto the line spanned by $a$ is:
+$$
+p = Pb
+$$
+---
+### 4. Properties of the Projection Matrix
+
+#### 4.1 Symmetry
+$$
+P^T = P
+$$
+Projection matrices are symmetric.
+
+---
+#### 4.2 Idempotence
+$$
+P^2 = P
+$$
+Once a vector is projected, projecting again does not change it:
+$$
+P(Pb) = Pb
+$$
+---
+#### 4.3 Column Space
+$$
+\mathcal{C}(P) = \text{span}(a)
+$$
+---
+#### 4.4 Null Space
+$$
+\mathcal{N}(P) = \{ x \in \mathbb{R}^n \mid a^T x = 0 \}
+$$
+The null space is the subspace orthogonal to $a$.
+
+---
+#### 4.5 Rank
+
+Since projection is onto a 1-dimensional line:
+$$
+\text{rank}(P) = 1
+$$
+---
+### 5. Invariance Under Scaling
+
+If we replace $a$ by $\alpha a$:
+$$
+P = \frac{(\alpha a)(\alpha a)^T}{(\alpha a)^T(\alpha a)}
+$$
+The scalar cancels.
+Therefore:
+> The projection matrix depends only on the line, not the specific vector chosen.
+
+---
+### 6. Cauchy–Schwarz Inequality via Projection
+
+We know:
+$$
+\|e\|^2 = \|b - p\|^2 \ge 0
+$$
+Expanding gives:
+$$
+(b^T b)(a^T a) - (a^T b)^2 \ge 0
+$$
+Thus:
+$$
+|a^T b| \le \|a\| \|b\|
+$$
+This is the **Cauchy–Schwarz inequality**.
+
+---
+### 7. Connection to Least Squares
+
+When:
+$$
+Ax = b
+$$
+is inconsistent, meaning:
+$$
+b \notin \mathcal{C}(A),
+$$
+we compute the orthogonal projection of $b$ onto $\mathcal{C}(A)$.
+This geometric idea forms the foundation of:
+
+> Least squares solutions.
+
+---
+`***********************************************************************************`
+
+---
+
