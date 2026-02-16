@@ -3,7 +3,7 @@
 ### Sets, Logic, Metric Spaces and Visualization  
 
 ---
-## 1. Overview of This Week
+### 1. Overview of This Week
 
 In this week, we develop the mathematical tools that we will rely on throughout the course.  
 
@@ -17,57 +17,57 @@ We begin with foundational concepts:
 - Graphical visualization of functions  
 
 ---
-## 2. Basic Sets
+### 2. Basic Sets
 
 We repeatedly use the following fundamental sets.
-### Real Numbers
+#### Real Numbers
 $$
 \mathbb{R}
 $$
 We denote by $\mathbb{R}$ the set of all real numbers.
 
 ---
-### Positive Real Numbers (Including Zero)
+#### Positive Real Numbers (Including Zero)
 $$
 \mathbb{R}_+
 $$
 We define $\mathbb{R}_+$ as the set of non-negative real numbers, including $0$.
 
 ---
-### Integers
+#### Integers
 $$
 \mathbb{Z}
 $$
 We denote by $\mathbb{Z}$ the set of all integers.
 
 ---
-### Non-Negative Integers
+#### Non-Negative Integers
 $$
 \mathbb{Z}_+
 $$
 We define $\mathbb{Z}_+$ as the set of non-negative integers, including $0$.
 
 ---
-## 3. Intervals
+### 3. Intervals
 
-### Closed Interval
+#### Closed Interval
 $$
 [a,b] = \{ x \in \mathbb{R} \mid a \le x \le b \}
 $$
 We include both endpoints.
 
 ---
-### Open Interval
+#### Open Interval
 $$
 (a,b) = \{ x \in \mathbb{R} \mid a < x < b \}
 $$
 We exclude both endpoints.
 
 ---
-## 4. Cartesian Products
+### 4. Cartesian Products
 
 We form higher-dimensional sets using Cartesian products.
-### d-Dimensional Real Space
+#### d-Dimensional Real Space
 $$
 \mathbb{R}^d = \mathbb{R} \times \mathbb{R} \times \dots \times \mathbb{R}
 $$
@@ -76,17 +76,17 @@ $$
 (1, 2, 3)
 $$
 ---
-### d-Dimensional Box
+#### d-Dimensional Box
 $$
 [a,b]^d = \{ x \in \mathbb{R}^d \mid x_i \in [a,b] \text{ for all } i = 1, \dots, d \}
 $$
 Each coordinate lies within $[a,b]$.
 
 ---
-## 5. Metric Spaces
+### 5. Metric Spaces
 
 We define a metric space as a set equipped with a distance function.
-### Euclidean Distance in $\mathbb{R}^d$
+#### Euclidean Distance in $\mathbb{R}^d$
 $$
 d(x,y) = \|x - y\|
 $$
@@ -111,14 +111,13 @@ $$
 We include the boundary.
 
 ---
-## 6. Sets and Logic
+### 6. Sets and Logic
 
 Let $V$ denote a universe.
 We define:
 - Union: $A \cup B$  
 - Intersection: $A \cap B$  
 - Complement: $A^c = V \setminus A$  
-
 ---
 ### De Morgan’s Laws
 $$
@@ -128,7 +127,7 @@ $$
 (A \cap B)^c = A^c \cup B^c
 $$
 ---
-### Example
+#### Example
 
 Let:
 $$
@@ -148,7 +147,7 @@ $$
 A \cap B = [4,5]
 $$
 ---
-## 7. Logical Quantifiers
+### 7. Logical Quantifiers
 
 We use the following symbols:
 - $\forall$ : for all  
@@ -157,7 +156,7 @@ We use the following symbols:
 - $\Leftrightarrow$ : equivalent  
 
 ---
-## 8. Sequences
+### 8. Sequences
 
 A sequence is an ordered collection:
 $$
@@ -181,7 +180,7 @@ $$
 This means that eventually all points lie inside every $\epsilon$-ball around $x^*$.
 
 ---
-## 9. Vector Spaces
+### 9. Vector Spaces
 
 A vector space $V$ satisfies:
 If:
@@ -216,7 +215,7 @@ $$
 x^\top y = 0
 $$
 ---
-## 10. Functions
+### 10. Functions
 
 A function:
 $$
@@ -252,7 +251,7 @@ $$
 G_f \subset \mathbb{R}^{d+1}
 $$
 ---
-## 11. Contour Plots (2D Functions)
+### 11. Contour Plots (2D Functions)
 
 For:
 $$
@@ -283,7 +282,7 @@ $$
 Contours are circles.
 
 ---
-## Summary
+### Summary
 
 In this lecture, we introduced:
 - Core sets and interval notation  
@@ -301,7 +300,8 @@ These tools form the mathematical foundation required for the rest of the course
 
 ---
   
-## Lecture 2 — Univariate Calculus: Continuity and Differentiability  
+## Lecture 2 
+### Univariate Calculus: Continuity and Differentiability  
 
 ---
 ### Continuity of Functions  
@@ -309,7 +309,7 @@ In this lecture, we restrict ourselves to **real-valued one-dimensional function
 $$
 f : \mathbb{R} \to \mathbb{R}
 $$
-### Definition — Continuity at a Point  
+#### Definition — Continuity at a Point  
 We say that a function $f : \mathbb{R} \to \mathbb{R}$ is **continuous at a point** $x^\star \in \mathbb{R}$ if for **all sequences** $\{x_i\}_{i=1}^\infty$ converging to $x^\star$, we have:
 $$
 \lim_{i \to \infty} x_i = x^\star 
@@ -439,7 +439,7 @@ This sequence does not converge.
 Hence the function is not continuous at 0.
 
 ---
-## Differentiability of Functions  
+### Differentiability of Functions  
 
 #### Definition — Differentiability at a Point  
 
@@ -530,7 +530,7 @@ $$
 Since the limits differ, $f$ is not differentiable at $2$.
 
 ---
-## Alternate Expression for the Derivative  
+### Alternate Expression for the Derivative  
 
 We can rewrite the derivative as:
 $$
@@ -540,7 +540,7 @@ f'(x^\star)
 \frac{f(x^\star + h) - f(x^\star)}{h}
 $$
 ---
-## Geometric Interpretation  
+### Geometric Interpretation  
 
 We interpret:
 $$
@@ -558,8 +558,6 @@ $$
 f'(x^\star)
 $$
 represents the **slope of the tangent line** to the curve at $x^\star$.
-
----
 With this, we complete our recap of continuity and differentiability in one dimension.
 
 ---
@@ -567,9 +565,9 @@ With this, we complete our recap of continuity and differentiability in one dime
 
 ---
   
-## Lecture 2 — Univariate Calculus: Continuity and Differentiability  
+## Lecture 2 
+### Univariate Calculus: Continuity and Differentiability  
 
----
 ### Continuity of Functions  
 In this lecture, we restrict ourselves to **real-valued one-dimensional functions**:
 $$
@@ -705,9 +703,9 @@ This sequence does not converge.
 Hence the function is not continuous at 0.
 
 ---
-## Differentiability of Functions  
+### Differentiability of Functions  
 
-### Definition — Differentiability at a Point  
+#### Definition — Differentiability at a Point  
 We say that $f : \mathbb{R} \to \mathbb{R}$ is **differentiable at $x^\star$** if the limit
 $$
 \lim_{x \to x^\star}
@@ -793,7 +791,7 @@ $$
 Since the limits differ, $f$ is not differentiable at $2$.
 
 ---
-## Alternate Expression for the Derivative  
+### Alternate Expression for the Derivative  
 
 We can rewrite the derivative as:
 $$
@@ -803,7 +801,7 @@ f'(x^\star)
 \frac{f(x^\star + h) - f(x^\star)}{h}
 $$
 ---
-## Geometric Interpretation  
+### Geometric Interpretation  
 
 We interpret:
 $$
@@ -833,7 +831,6 @@ With this, we complete our recap of continuity and differentiability in one dime
 ## Lecture 3  
 ### Univariate Calculus – Derivatives and Linear Approximations  
 
----
 ### 1. Derivative of a Differentiable Function
 
 Let us consider a differentiable function  
@@ -1105,9 +1102,9 @@ We recognize that linear approximation simplifies complicated functions into lin
 
 ---
 
-## Lecture 4 — Applications and Advanced Rules of Derivatives  
+## Lecture 4 
+### Applications and Advanced Rules of Derivatives  
 
----
 ### 1. Higher Order Approximations  
 
 We have previously defined the **linear approximation** of a differentiable function $f : \mathbb{R} \to \mathbb{R}$ around a point $x^\star$ as  
@@ -1218,7 +1215,7 @@ $$
 1 + 7(0.1) = 1.7
 $$
 ---
-#### 2. Product Rule via Linear Approximation  
+### 2. Product Rule via Linear Approximation  
 
 Let  
 $$
@@ -1258,8 +1255,7 @@ $$
 f'(x) = g'(x)h(x) + g(x)h'(x)
 $$
 ---
-
-#### 3. Chain Rule via Linear Approximation  
+### 3. Chain Rule via Linear Approximation  
 
 Let  
 $$
@@ -1290,7 +1286,7 @@ $$
 \frac{d}{dx} g(h(x)) = g'(h(x)) h'(x)
 $$
 ---
-#### 4. Linear Approximation Examples  
+### 4. Linear Approximation Examples  
 
 ##### Example 1  
 Approximate  
@@ -1340,7 +1336,7 @@ e^{\sqrt{1+x}}
 \quad \text{for } x \approx 1
 $$
 ---
-#### 5. Critical Points, Maxima, Minima, Saddle Points  
+### 5. Critical Points, Maxima, Minima, Saddle Points  
 
 The linear approximation of $f$ around $x^\star$ is  
 $$

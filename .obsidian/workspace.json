@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Week 1.md",
+                "file": "Week 2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Week 1"
+              "title": "Week 2"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "847eb1ea2f3f59b5",
@@ -185,8 +186,8 @@
   },
   "active": "e6f74070de8b054d",
   "lastOpenFiles": [
-    "Week 2.md",
     "Week 1.md",
+    "Week 2.md",
     "Machine Learning Foundation.md"
   ]
 }
