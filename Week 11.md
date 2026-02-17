@@ -2655,3 +2655,197 @@ Properties:
 `***********************************************************************************`
 
 ---
+## Lecture 12
+### Transformed Random Variables
+Let $W$ and $X$ be continuous random variables with joint density $f_{WX}(w,x)$.
+Define new random variables
+$$
+Y = g(W,X)
+$$
+$$
+Z = h(W,X)
+$$
+We seek the joint density $f_{YZ}(y,z)$.
+
+---
+### Invertible Transformations
+
+The transformation is said to be invertible if there exist functions $q$ and $r$ such that
+$$
+W = q(y,z)
+$$
+$$
+X = r(y,z)
+$$
+That is, from $Y,Z$ we can uniquely recover $W,X$.
+If such functions do not exist, the transformation is not invertible.
+
+---
+### Change of Variables Formula
+
+For an invertible transformation,
+$$
+f_{YZ}(y,z)
+=
+f_{WX}(q(y,z), r(y,z))
+\left| \det J(y,z) \right|
+$$
+where the Jacobian matrix is
+$$
+J(y,z)
+=
+\begin{pmatrix}
+\frac{\partial q}{\partial y} & \frac{\partial q}{\partial z} \\
+\frac{\partial r}{\partial y} & \frac{\partial r}{\partial z}
+\end{pmatrix}
+$$
+and
+$$
+\det J
+=
+\frac{\partial q}{\partial y}
+\frac{\partial r}{\partial z}
+-
+\frac{\partial q}{\partial z}
+\frac{\partial r}{\partial y}
+$$
+The absolute value appears because densities scale by area.
+
+---
+### Example
+
+Assume
+$$
+W \sim \text{Uniform}(0,1)
+$$
+$$
+X \sim \text{Uniform}(0,1)
+$$
+with $W$ and $X$ independent.
+Define
+$$
+Y = W + X
+$$
+$$
+Z = W - X
+$$
+---
+### Inverse Transformation
+
+Solve for $W$ and $X$:
+$$
+W = \frac{Y + Z}{2}
+$$
+$$
+X = \frac{Y - Z}{2}
+$$
+Thus
+$$
+q(y,z) = \frac{y+z}{2}
+$$
+$$
+r(y,z) = \frac{y-z}{2}
+$$
+---
+### Jacobian
+
+Compute partial derivatives:
+$$
+\frac{\partial q}{\partial y} = \frac{1}{2}
+$$
+$$
+\frac{\partial q}{\partial z} = \frac{1}{2}
+$$
+$$
+\frac{\partial r}{\partial y} = \frac{1}{2}
+$$
+$$
+\frac{\partial r}{\partial z} = -\frac{1}{2}
+$$
+Hence
+$$
+J
+=
+\begin{pmatrix}
+\frac{1}{2} & \frac{1}{2} \\
+\frac{1}{2} & -\frac{1}{2}
+\end{pmatrix}
+$$
+Determinant:
+$$
+\det J
+=
+\frac{1}{2}\left(-\frac{1}{2}\right)
+-
+\frac{1}{2}\left(\frac{1}{2}\right)
+=
+-\frac{1}{2}
+$$
+Thus
+$$
+\left| \det J \right| = \frac{1}{2}
+$$
+---
+### Joint Density of $Y,Z$
+
+Since $W$ and $X$ are independent,
+$$
+f_{WX}(w,x) = f_W(w) f_X(x)
+$$
+Each equals 1 on $[0,1]$ and 0 otherwise.
+Thus
+$$
+f_{YZ}(y,z)
+=
+f_W\left(\frac{y+z}{2}\right)
+f_X\left(\frac{y-z}{2}\right)
+\cdot
+\frac{1}{2}
+$$
+---
+### Support
+
+The density is nonzero when
+$$
+0 \le \frac{y+z}{2} \le 1
+$$
+and
+$$
+0 \le \frac{y-z}{2} \le 1
+$$
+These inequalities define the region
+$$
+0 \le y \le 2
+$$
+$$
+- y \le z \le y
+$$
+$$
+y - 2 \le z \le 2 - y
+$$
+The intersection forms a diamond-shaped region with vertices
+$$
+(0,0), (1,1), (2,0), (1,-1)
+$$
+---
+### Final Density
+$$
+f_{YZ}(y,z)
+=
+\begin{cases}
+\frac{1}{2} & \text{inside the diamond region} \\
+0 & \text{otherwise}
+\end{cases}
+$$
+---
+### Observations
+
+- Even though $W$ and $X$ are independent, $Y$ and $Z$ are not.
+- The support is not rectangular.
+- Change of variables provides an exact density transformation rule.
+- The Jacobian determinant accounts for area distortion under transformation.
+
+---
+`***********************************************************************************`
+
+---
