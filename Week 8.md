@@ -334,3 +334,183 @@ Next step: developing algorithms to solve optimization problems.
 `***********************************************************************************`
 
 ---
+## Lecture 3
+### Solving an Unconstrained Optimization Problem Part 1
+
+### Unconstrained Optimization
+
+General unconstrained problem:
+$$
+\min_{x \in \mathbb{R}} f(x)
+$$
+No inequality or equality constraints.
+
+---
+### Simple Example
+$$
+\min_{x \in \mathbb{R}} (x - 5)^2
+$$
+#### Direct Reasoning
+- Function is nonnegative.
+- Value is zero at $x = 5$.
+
+Thus:
+$$
+x^\star = 5
+$$
+$$
+f(x^\star) = 0
+$$
+---
+### Derivative Based Approach
+
+Let:
+$$
+f(x) = (x - 5)^2
+$$
+Compute derivative:
+$$
+f'(x) = 2(x - 5)
+$$
+Set derivative to zero:
+$$
+f'(x) = 0
+$$
+$$
+2(x - 5) = 0
+$$
+$$
+x = 5
+$$
+This works for simple problems, but does not scale well.
+
+---
+### Harder Example
+$$
+\min_{x \in \mathbb{R}} 3x^6 + 2x^5 + 3x^3 + 5x^2 + 2
+$$
+Derivative:
+$$
+f'(x) = 18x^5 + 10x^4 + 9x^2 + 10x
+$$
+Setting:
+$$
+f'(x) = 0
+$$
+Leads to solving a degree 5 polynomial, which is not straightforward.
+Thus, need a systematic, iterative algorithm.
+
+---
+### Iterative Optimization Framework
+
+Start with:
+$$
+x_0 \in \mathbb{R}
+$$
+Iterative update:
+$$
+x_{t+1} = x_t + d
+$$
+where $d$ is a direction to move.
+Goal: choose $d$ so that the objective decreases.
+
+---
+### Understanding Direction for the Example
+
+Recall:
+$$
+f(x) = (x - 5)^2
+$$
+Derivative:
+$$
+f'(x) = 2(x - 5)
+$$
+#### Observations
+- If $x > 5$, then $f'(x) > 0$
+- If $x < 5$, then $f'(x) < 0$
+
+Desired movement:
+- If $x > 5$, move left
+- If $x < 5$, move right
+
+Thus:
+- If $x > 5$, want $d < 0$
+- If $x < 5$, want $d > 0$
+
+---
+### Choosing Direction
+
+Since:
+- $f'(x) > 0$ when $x > 5$
+- $f'(x) < 0$ when $x < 5$
+
+Opposite sign gives desired direction.
+Choose:
+$$
+d = - f'(x)
+$$
+Thus update rule becomes:
+$$
+x_{t+1} = x_t - f'(x_t)
+$$
+For this example:
+$$
+x_{t+1} = x_t - 2(x_t - 5)
+$$
+---
+### Example Iterations
+
+Let:
+$$
+x_0 = 10
+$$
+#### Step 1
+Compute direction:
+$$
+d_0 = - f'(x_0) = - 2(10 - 5) = -10
+$$
+Update:
+$$
+x_1 = 10 - 10 = 0
+$$
+---
+#### Step 2
+Compute direction at $x_1 = 0$:
+$$
+d_1 = - f'(0) = - 2(0 - 5) = 10
+$$
+Update:
+$$
+x_2 = 0 + 10 = 10
+$$
+---
+#### Step 3
+$$
+x_3 = 0
+$$
+Thus sequence oscillates:
+$$
+10 \rightarrow 0 \rightarrow 10 \rightarrow 0 \rightarrow \dots
+$$
+---
+### Key Observation
+
+The direction is correct, but the step size is too large.
+Problem is not:
+- Direction of movement
+
+Problem is:
+- Magnitude of movement
+
+We overshoot the minimum at $x = 5$.
+Findings from this example:
+1. Direction should depend on $x$
+2. Negative derivative gives correct direction
+3. Step size must be controlled
+
+This motivates introducing a scaling factor in the update rule.
+
+---
+`***********************************************************************************`
+
+---
