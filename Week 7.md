@@ -242,3 +242,185 @@ which leads to the eigenvalue formulation of PCA.
 `***********************************************************************************`
 
 ---
+## Lecture 2 
+### Principal Component Analysis Efficient Implementation
+
+### High Dimensional Setting
+Given dataset
+$$
+\{ x_1, x_2, \dots, x_n \}, \quad x_i \in \mathbb{R}^d
+$$
+Assume
+$$
+d \gg n
+$$
+Standard PCA requires eigen-decomposition of covariance matrix
+$$
+C = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})(x_i - \bar{x})^T
+$$
+where
+$$
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+$$
+Here,
+$$
+C \in \mathbb{R}^{d \times d}
+$$
+Computing eigenvalues of a $d \times d$ matrix is computationally expensive when $d$ is large.
+
+---
+### Rank Observation
+Each matrix
+$$
+(x_i - \bar{x})(x_i - \bar{x})^T
+$$
+is rank one.
+Thus,
+$$
+\operatorname{rank}(C) \le n
+$$
+Therefore,
+$$
+d - n
+$$
+eigenvalues of $C$ are zero.
+It is unnecessary to compute all $d$ eigenvectors.
+
+---
+### Matrix Reformulation
+
+Define matrix
+$$
+A =
+\begin{bmatrix}
+(x_1 - \bar{x})^T \\
+(x_2 - \bar{x})^T \\
+\vdots \\
+(x_n - \bar{x})^T
+\end{bmatrix}
+$$
+Then,
+$$
+C = \frac{1}{n} A^T A
+$$
+where
+$$
+A \in \mathbb{R}^{n \times d}
+$$
+---
+### Key Observation
+
+Instead of computing eigenvectors of
+$$
+\frac{1}{n} A^T A
+$$
+which is $d \times d$, compute eigenvectors of
+$$
+\frac{1}{n} A A^T
+$$
+which is $n \times n$.
+
+---
+### Eigenvalue Correspondence
+
+Let
+$$
+C u_i = \lambda_i u_i
+$$
+where
+$$
+C = \frac{1}{n} A^T A
+$$
+Then,
+$$
+\frac{1}{n} A^T A u_i = \lambda_i u_i
+$$
+Multiply both sides by $A$:
+$$
+\frac{1}{n} A A^T (A u_i) = \lambda_i (A u_i)
+$$
+Thus,
+$$
+\lambda_i
+$$
+is an eigenvalue of
+$$
+\frac{1}{n} A A^T
+$$
+---
+### Reverse Direction
+
+Let
+$$
+\frac{1}{n} A A^T v_i = \lambda_i v_i
+$$
+Multiply by $A^T$:
+$$
+\frac{1}{n} A^T A (A^T v_i) = \lambda_i (A^T v_i)
+$$
+Thus,
+$$
+A^T v_i
+$$
+is an eigenvector of
+$$
+C = \frac{1}{n} A^T A
+$$
+with eigenvalue $\lambda_i$.
+
+---
+### Efficient PCA Algorithm
+
+When $d \gg n$:
+1. Form matrix
+$$
+A \in \mathbb{R}^{n \times d}
+$$
+2. Compute eigenvalues and eigenvectors of
+$$
+\frac{1}{n} A A^T \in \mathbb{R}^{n \times n}
+$$
+3. Recover eigenvectors of covariance matrix using
+$$
+u_i = A^T v_i
+$$
+4. Normalize $u_i$
+
+---
+### Connection to SVD
+
+Since
+$$
+A = U \Sigma V^T
+$$
+then
+$$
+A^T A = V \Sigma^T \Sigma V^T
+$$
+and
+$$
+A A^T = U \Sigma \Sigma^T U^T
+$$
+Thus PCA is equivalent to performing SVD on $A$.
+
+---
+### Final Conclusion
+
+Instead of computing eigen-decomposition of
+$$
+C \in \mathbb{R}^{d \times d}
+$$
+one computes eigen-decomposition of
+$$
+\frac{1}{n} A A^T \in \mathbb{R}^{n \times n}
+$$
+This reduces computational cost when
+$$
+d \gg n
+$$
+and yields the same principal components.
+
+---
+`***********************************************************************************`
+
+---
