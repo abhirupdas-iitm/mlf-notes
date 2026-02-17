@@ -611,3 +611,201 @@ PCA algorithm:
 `***********************************************************************************`
 
 ---
+## Lecture 4
+### PCA in Higher Dimensions
+
+### Problem Setup
+
+Dataset:
+$$
+D = \{ x_1, x_2, \dots, x_n \}, \quad x_i \in \mathbb{R}^d
+$$
+Assume:
+$$
+d \gg n
+$$
+Feature dimension is much larger than number of data points.
+
+---
+### Standard PCA Requirement
+
+Mean:
+$$
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+$$
+Covariance matrix:
+$$
+C = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})(x_i - \bar{x})^T
+$$
+Dimension of $C$:
+$$
+C \in \mathbb{R}^{d \times d}
+$$
+Standard PCA requires computing eigenvalues and eigenvectors of $C$.
+When $d$ is very large, this is computationally expensive.
+
+---
+### Rank Observation
+
+Each matrix:
+$$
+(x_i - \bar{x})(x_i - \bar{x})^T
+$$
+is rank 1.
+Sum of $n$ rank 1 matrices has rank at most $n$.
+Thus:
+$$
+\operatorname{rank}(C) \le n
+$$
+Therefore:
+$$
+d - n
+$$
+eigenvalues of $C$ are zero.
+It is unnecessary to compute all $d$ eigenvectors.
+
+---
+### Matrix Reformulation
+
+Define matrix $A$ as:
+$$
+A =
+\begin{bmatrix}
+(x_1 - \bar{x})^T \\
+(x_2 - \bar{x})^T \\
+\vdots \\
+(x_n - \bar{x})^T
+\end{bmatrix}
+$$
+Then:
+$$
+C = \frac{1}{n} A^T A
+$$
+Here:
+- $A \in \mathbb{R}^{n \times d}$
+- $C \in \mathbb{R}^{d \times d}$
+
+---
+### Key Eigenvalue Relation
+
+Let $u_i$ be an eigenvector of $C$ with eigenvalue $\lambda_i > 0$:
+$$
+C u_i = \lambda_i u_i
+$$
+Since:
+$$
+C = \frac{1}{n} A^T A
+$$
+We have:
+$$
+\frac{1}{n} A^T A u_i = \lambda_i u_i
+$$
+Multiply both sides by $A$:
+$$
+\frac{1}{n} A A^T (A u_i) = \lambda_i (A u_i)
+$$
+Thus:
+$$
+\lambda_i
+$$
+is an eigenvalue of:
+$$
+\frac{1}{n} A A^T
+$$
+which is an $n \times n$ matrix.
+
+---
+### Reverse Direction
+
+Suppose $v_i$ is an eigenvector of:
+$$
+\frac{1}{n} A A^T
+$$
+so that:
+$$
+\frac{1}{n} A A^T v_i = \lambda_i v_i
+$$
+Multiply both sides by $A^T$:
+$$
+\frac{1}{n} A^T A (A^T v_i) = \lambda_i (A^T v_i)
+$$
+Thus:
+$$
+A^T v_i
+$$
+is an eigenvector of:
+$$
+C = \frac{1}{n} A^T A
+$$
+---
+### Core Result
+
+Instead of computing eigenvalues and eigenvectors of:
+$$
+C = \frac{1}{n} A^T A \quad \text{of size } d \times d
+$$
+it is sufficient to compute eigenvalues and eigenvectors of:
+$$
+\frac{1}{n} A A^T \quad \text{of size } n \times n
+$$
+Since:
+$$
+n \ll d
+$$
+this reduces computational cost significantly.
+
+---
+### Practical PCA Algorithm in High Dimensions
+
+1. Construct centered data matrix $A$.
+2. Compute $n \times n$ matrix:
+   $$
+   \frac{1}{n} A A^T
+   $$
+3. Compute its eigenvalues and eigenvectors.
+4. Recover eigenvectors of $C$ using:
+   $$
+   u_i = A^T v_i
+   $$
+5. Normalize resulting vectors.
+
+---
+### Connection to SVD
+
+Recall Singular Value Decomposition:
+$$
+A = U \Sigma V^T
+$$
+Then:
+$$
+A^T A = V \Sigma^2 V^T
+$$
+$$
+A A^T = U \Sigma^2 U^T
+$$
+Thus:
+- Eigenvectors of $A^T A$ are right singular vectors.
+- Eigenvectors of $A A^T$ are left singular vectors.
+- Eigenvalues correspond to squared singular values.
+
+Therefore:
+PCA in high dimensions can be implemented efficiently using SVD.
+
+---
+### Final Conclusion
+
+When:
+$$
+d \gg n
+$$
+PCA can be implemented efficiently by:
+- Working with $n \times n$ matrix instead of $d \times d$ matrix
+- Computing eigenvalues and eigenvectors of $\frac{1}{n} A A^T$
+- Recovering principal directions from these eigenvectors
+
+This avoids direct computation on large covariance matrices and yields identical PCA results.
+
+---
+`***********************************************************************************`
+
+---
