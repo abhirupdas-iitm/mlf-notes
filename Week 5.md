@@ -1124,3 +1124,288 @@ This is upper triangular.
 `***********************************************************************************`
 
 ---
+
+## Lecture 5
+### Spectral Theorem for Hermitian Matrices
+
+### 1. Spectral Theorem
+
+#### Theorem
+
+If $A \in C^{n \times n}$ is Hermitian, then $A$ is unitarily diagonalizable.
+That is, there exists a unitary matrix $U$ such that
+$$
+U^* A U = D
+$$
+where $D$ is a diagonal matrix with real entries.
+This implication is one directional:
+Hermitian implies unitarily diagonalizable.
+
+---
+### 2. Proof Using Schur Theorem
+
+From Schur theorem, for any complex matrix $A$, there exists a unitary matrix $U$ such that
+$$
+U^* A U = T
+$$
+where $T$ is upper triangular.
+Since $A$ is Hermitian,
+$$
+A^* = A
+$$
+Take conjugate transpose of both sides:
+$$
+T^* = U^* A^* U
+$$
+Using $A^* = A$,
+$$
+T^* = U^* A U
+$$
+Thus
+$$
+T^* = T
+$$
+Now observe:
+- $T$ is upper triangular.
+- $T^*$ is lower triangular.
+
+If an upper triangular matrix equals its conjugate transpose, then it must be diagonal.
+Therefore
+$$
+T \text{ is diagonal}
+$$
+Hence
+$$
+U^* A U = D
+$$
+where $D$ is diagonal.
+
+---
+#### Real Diagonal Entries
+
+Since
+$$
+T = T^*
+$$
+consider diagonal entries:
+$$
+T_{ii} = \overline{T_{ii}}
+$$
+Thus each diagonal entry is real.
+Therefore
+$$
+U^* A U = D
+$$
+where $D$ is diagonal with real entries.
+This completes the proof.
+
+---
+### 3. Example: Hermitian Matrix
+
+Consider
+$$
+A =
+\begin{pmatrix}
+2 & 1 - i \\
+1 + i & 3
+\end{pmatrix}
+$$
+Check:
+$$
+A^* = A
+$$
+---
+#### Characteristic Polynomial
+$$
+p \lambda = \det A - \lambda I
+$$
+$$
+= (\lambda - 1)(\lambda - 4)
+$$
+Eigenvalues:
+$$
+\lambda_1 = 1
+$$
+$$
+\lambda_2 = 4
+$$
+---
+#### Eigenvectors
+
+For $\lambda_1 = 1$:
+$$
+z_1 =
+\begin{pmatrix}
+-1 + i \\
+1
+\end{pmatrix}
+$$
+For $\lambda_2 = 4$:
+$$
+z_2 =
+\begin{pmatrix}
+1 - i \\
+2
+\end{pmatrix}
+$$
+Orthogonality:
+$$
+z_1^* z_2 = 0
+$$
+---
+#### Normalize
+
+Compute norms and define
+$$
+u_1 =
+\frac{1}{\sqrt{3}}
+\begin{pmatrix}
+-1 + i \\
+1
+\end{pmatrix}
+$$
+$$
+u_2 =
+\frac{1}{\sqrt{6}}
+\begin{pmatrix}
+1 - i \\
+2
+\end{pmatrix}
+$$
+Construct
+$$
+U = \{ u_1 \ u_2 \}
+$$
+Then
+$$
+U^* A U =
+\begin{pmatrix}
+1 & 0 \\
+0 & 4
+\end{pmatrix}
+$$
+---
+### 4. Corollary: Real Symmetric Case
+
+If $A$ is real symmetric, then $A$ is Hermitian.
+Thus there exists unitary $U$ such that
+$$
+U^* A U = D
+$$
+Since $A$ is real symmetric:
+- Eigenvalues are real.
+- Eigenvectors can be chosen real.
+
+Thus $U$ can be taken real.
+Hence
+$$
+U^T A U = D
+$$
+with
+$$
+U^T U = I
+$$
+Therefore a real symmetric matrix is orthogonally diagonalizable.
+This is the spectral theorem for real symmetric matrices.
+
+---
+### 5. Converse Is False
+
+Hermitian implies unitarily diagonalizable.
+But unitarily diagonalizable does not imply Hermitian.
+
+---
+#### Counterexample
+
+Consider
+$$
+A =
+\begin{pmatrix}
+0 & -1 \\
+1 & 0
+\end{pmatrix}
+$$
+Compute:
+$$
+A^* \ne A
+$$
+Thus $A$ is not Hermitian.
+
+---
+#### Eigenvalues
+
+Solve
+$$
+\det A - \lambda I = 0
+$$
+Eigenvalues:
+$$
+\lambda_1 = i
+$$
+$$
+\lambda_2 = -i
+$$
+Distinct eigenvalues imply diagonalizable.
+
+---
+#### Eigenvectors
+
+For $\lambda_1 = i$:
+$$
+z_1 =
+\begin{pmatrix}
+1 \\
+- i
+\end{pmatrix}
+$$
+For $\lambda_2 = -i$:
+$$
+z_2 =
+\begin{pmatrix}
+1 \\
+i
+\end{pmatrix}
+$$
+Normalize:
+$$
+u_1 =
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+- i
+\end{pmatrix}
+$$
+$$
+u_2 =
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+i
+\end{pmatrix}
+$$
+Let
+$$
+U = \{ u_1 \ u_2 \}
+$$
+Then
+$$
+U^* A U =
+\begin{pmatrix}
+i & 0 \\
+0 & -i
+\end{pmatrix}
+$$
+Thus $A$ is unitarily diagonalizable but not Hermitian.
+
+---
+### 6. Summary
+
+1. Every Hermitian matrix is unitarily diagonalizable.
+2. The diagonal entries are real eigenvalues.
+3. Real symmetric matrices are orthogonally diagonalizable.
+4. Converse does not hold: unitarily diagonalizable does not imply Hermitian.
+
+---
+`***********************************************************************************`
+
+---
