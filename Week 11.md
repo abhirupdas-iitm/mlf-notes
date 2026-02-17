@@ -2849,3 +2849,291 @@ $$
 `***********************************************************************************`
 
 ---
+## Lecture 13
+### Uniform Distribution
+#### Definition
+
+A continuous random variable $X$ is said to be uniformly distributed on the interval $a$ to $b$, written as
+$$
+X \sim \text{Uniform}(a,b),
+$$
+if its probability density function is
+$$
+f_X(x) =
+\begin{cases}
+\frac{1}{b-a}, & a \le x \le b, \\
+0, & \text{otherwise}.
+\end{cases}
+$$
+#### Expectation and Variance
+The mean of $X$ is
+$$
+E[X] = \frac{a+b}{2}.
+$$
+The variance of $X$ is
+$$
+\text{Var}(X) = \frac{(b-a)^2}{12}.
+$$
+---
+### Exponential Distribution
+
+#### Definition
+
+A continuous random variable $X$ is said to be exponentially distributed with parameter $\lambda > 0$, written as
+$$
+X \sim \text{Exp}(\lambda),
+$$
+if its probability density function is
+$$
+f_X(x) =
+\begin{cases}
+\lambda e^{-\lambda x}, & x \ge 0, \\
+0, & \text{otherwise}.
+\end{cases}
+$$
+#### Validity of Density
+Check normalization:
+$$
+\int_0^{\infty} \lambda e^{-\lambda x} \, dx
+=
+\lambda \left[ -\frac{1}{\lambda} e^{-\lambda x} \right]_0^{\infty}
+=
+\lambda \cdot \frac{1}{\lambda}
+=
+1.
+$$
+#### Cumulative Distribution Function
+For $x \ge 0$,
+$$
+F_X(x)
+=
+P(X \le x)
+=
+\int_0^x \lambda e^{-\lambda u} \, du
+=
+1 - e^{-\lambda x}.
+$$
+For $x < 0$,
+$$
+F_X(x) = 0.
+$$
+#### Memoryless Property
+For $a > b \ge 0$,
+$$
+P(X \ge a \mid X \ge b)
+=
+P(X \ge a-b).
+$$
+Proof:
+$$
+P(X \ge a \mid X \ge b)
+=
+\frac{P(X \ge a)}{P(X \ge b)}
+=
+\frac{e^{-\lambda a}}{e^{-\lambda b}}
+=
+e^{-\lambda (a-b)}
+=
+P(X \ge a-b).
+$$
+#### Expectation
+Compute
+$$
+E[X]
+=
+\int_0^{\infty} x \lambda e^{-\lambda x} \, dx.
+$$
+Using integration by parts,
+$$
+E[X] = \frac{1}{\lambda}.
+$$
+---
+### Minimum of Independent Exponentials
+
+Let
+$$
+X \sim \text{Exp}(\lambda),
+\quad
+Y \sim \text{Exp}(\tau),
+$$
+with $X$ and $Y$ independent.
+Define
+$$
+Z = \min(X,Y).
+$$
+CDF of $Z$:
+$$
+F_Z(z)
+=
+1 - P(X > z, Y > z)
+=
+1 - P(X > z)P(Y > z).
+$$
+Thus,
+$$
+F_Z(z)
+=
+1 - e^{-\lambda z} e^{-\tau z}
+=
+1 - e^{-(\lambda+\tau)z}.
+$$
+Therefore,
+$$
+Z \sim \text{Exp}(\lambda+\tau).
+$$
+
+Density:
+$$
+f_Z(z)
+=
+\begin{cases}
+(\lambda+\tau) e^{-(\lambda+\tau)z}, & z \ge 0, \\
+0, & \text{otherwise}.
+\end{cases}
+$$
+---
+### Normal Distribution
+
+#### Standard Normal
+A random variable $Z$ is said to follow a standard normal distribution if
+$$
+Z \sim N(0,1),
+$$
+with density
+$$
+f_Z(z)
+=
+\frac{1}{\sqrt{2\pi}}
+\exp\left(
+-\frac{z^2}{2}
+\right).
+$$
+#### Normalization
+
+Let
+$$
+A = \int_{-\infty}^{\infty} e^{-x^2/2} \, dx.
+$$
+Then
+$$
+A^2
+=
+\int_{-\infty}^{\infty}
+\int_{-\infty}^{\infty}
+e^{-(x^2+y^2)/2}
+\, dx \, dy.
+$$
+Switch to polar coordinates:
+$$
+x = r \cos\theta,
+\quad
+y = r \sin\theta,
+$$
+with Jacobian $r$.
+Thus,
+$$
+A^2
+=
+\int_0^{2\pi}
+\int_0^{\infty}
+e^{-r^2/2}
+r \, dr \, d\theta.
+$$
+Let $u = r^2/2$, so $du = r \, dr$:
+$$
+A^2
+=
+\int_0^{2\pi} d\theta
+\int_0^{\infty}
+e^{-u} \, du
+=
+2\pi.
+$$
+Hence,
+$$
+A = \sqrt{2\pi}.
+$$
+---
+### General Normal Distribution
+
+Let
+$$
+Z \sim N(0,1),
+$$
+and define
+$$
+X = \sigma Z + \mu.
+$$
+Then
+$$
+Z = \frac{X-\mu}{\sigma}.
+$$
+Using change of variables,
+$$
+f_X(x)
+=
+\frac{1}{\sigma}
+f_Z\left(
+\frac{x-\mu}{\sigma}
+\right).
+$$
+Thus,
+$$
+f_X(x)
+=
+\frac{1}{\sigma \sqrt{2\pi}}
+\exp\left(
+-\frac{1}{2}
+\frac{(x-\mu)^2}{\sigma^2}
+\right).
+$$
+We write
+$$
+X \sim N(\mu,\sigma^2).
+$$
+### Mean and Variance
+
+Using linearity of expectation,
+$$
+E[X]
+=
+E[\sigma Z + \mu]
+=
+\mu.
+$$
+Variance:
+$$
+\text{Var}(X)
+=
+\text{Var}(\sigma Z)
+=
+\sigma^2 \text{Var}(Z)
+=
+\sigma^2.
+$$
+---
+### Summary
+
+- $X \sim \text{Uniform}(a,b)$:
+ $$
+  f_X(x)=\frac{1}{b-a}, \quad E[X]=\frac{a+b}{2}, \quad \text{Var}(X)=\frac{(b-a)^2}{12}.
+  $$
+- $X \sim \text{Exp}(\lambda)$:
+  $$
+  f_X(x)=\lambda e^{-\lambda x}, \quad E[X]=\frac{1}{\lambda}.
+  $$
+- $X \sim N(\mu,\sigma^2)$:
+  $$
+  f_X(x)=\frac{1}{\sigma\sqrt{2\pi}}
+  \exp\left(
+  -\frac{(x-\mu)^2}{2\sigma^2}
+  \right),
+  \quad
+  E[X]=\mu,
+  \quad
+  \text{Var}(X)=\sigma^2.
+  $$
+---
+`***********************************************************************************`
+
+---
