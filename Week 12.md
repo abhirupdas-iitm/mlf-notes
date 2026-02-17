@@ -795,3 +795,283 @@ Thus ML for linear regression with Gaussian noise is equivalent to least squares
 `***********************************************************************************`
 
 ---
+## Lecture 3
+
+# Gaussian Mixture Models and Expectation Maximization
+
+## Motivation: Multi Modal Data
+
+Consider data generated from $K$ different groups. Each group produces observations following a Gaussian distribution with different parameters.
+
+Example in one dimension with $K = 3$:
+
+Component 1:
+Mean $-4$, variance $0.5$, weight $0.4$
+
+Component 2:
+Mean $0$, variance $1$, weight $0.3$
+
+Component 3:
+Mean $5$, variance $1$, weight $0.3$
+
+Observed data exhibits multiple peaks. A single Gaussian cannot model such multi modal behavior.
+
+## Definition: Gaussian Mixture Model
+
+Let $X \in \mathbb{R}^d$.
+
+A Gaussian Mixture Model with $K$ components has density
+
+$$
+f_X(x) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k)
+$$
+
+where
+
+$$
+\sum_{k=1}^{K} \pi_k = 1, \quad \pi_k \ge 0
+$$
+
+and
+
+$$
+\mathcal{N}(x \mid \mu_k, \Sigma_k)
+=
+\frac{1}{(2\pi)^{d/2} |\Sigma_k|^{1/2}}
+\exp
+\left(
+-\frac{1}{2}
+(x - \mu_k)^T
+\Sigma_k^{-1}
+(x - \mu_k)
+\right)
+$$
+
+### Parameters
+
+For each component $k$:
+
+Mixing weight $\pi_k$
+
+Mean $\mu_k \in \mathbb{R}^d$
+
+Covariance $\Sigma_k \in \mathbb{R}^{d \times d}$
+
+Total parameter set
+
+$$
+\theta = \{\pi_1,\dots,\pi_K, \mu_1,\dots,\mu_K, \Sigma_1,\dots,\Sigma_K\}
+$$
+
+## Important Observation: Label Non Identifiability
+
+Permutation of component indices does not change the density.
+
+If parameters are swapped between components, the mixture density remains identical.
+
+## Latent Variable Formulation
+
+Introduce hidden variable $Z$.
+
+Definition:
+
+$$
+P(Z = k) = \pi_k
+$$
+
+Conditional distribution:
+
+$$
+X \mid Z = k \sim \mathcal{N}(\mu_k, \Sigma_k)
+$$
+
+### Marginal Distribution
+
+Using marginalization:
+
+$$
+P(X) = \sum_{k=1}^{K} P(X, Z=k)
+$$
+
+$$
+= \sum_{k=1}^{K} P(X \mid Z=k) P(Z=k)
+$$
+
+$$
+= \sum_{k=1}^{K} \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k)
+$$
+
+Thus latent formulation is equivalent to mixture density.
+
+## Maximum Likelihood Estimation
+
+Given data
+
+$$
+\{x_1, x_2, \dots, x_N\}
+$$
+
+Likelihood:
+
+$$
+P(\text{Data} \mid \theta)
+=
+\prod_{n=1}^{N}
+\sum_{k=1}^{K}
+\pi_k
+\mathcal{N}(x_n \mid \mu_k, \Sigma_k)
+$$
+
+Negative log likelihood:
+
+$$
+\mathcal{L}(\theta)
+=
+- \sum_{n=1}^{N}
+\log
+\left(
+\sum_{k=1}^{K}
+\pi_k
+\mathcal{N}(x_n \mid \mu_k, \Sigma_k)
+\right)
+$$
+
+Direct maximization is difficult because of the summation inside the logarithm.
+
+## Chicken and Egg Problem
+
+If component assignments were known:
+
+Parameter estimation reduces to computing sample means and covariances per cluster.
+
+If parameters were known:
+
+Cluster assignments can be inferred probabilistically.
+
+But neither is known.
+
+This motivates the Expectation Maximization algorithm.
+
+## E Step: Cluster Responsibilities
+
+Compute posterior probability that point $x_n$ belongs to component $k$.
+
+Definition:
+
+$$
+\gamma_{nk}
+=
+P(Z=k \mid X=x_n)
+$$
+
+Using Bayes rule:
+
+$$
+\gamma_{nk}
+=
+\frac{
+\pi_k
+\mathcal{N}(x_n \mid \mu_k, \Sigma_k)
+}
+{
+\sum_{j=1}^{K}
+\pi_j
+\mathcal{N}(x_n \mid \mu_j, \Sigma_j)
+}
+$$
+
+Properties:
+
+$$
+\sum_{k=1}^{K} \gamma_{nk} = 1
+$$
+
+$\gamma_{nk}$ is called responsibility of component $k$ for data point $n$.
+
+## Effective Cluster Size
+
+Define
+
+$$
+N_k
+=
+\sum_{n=1}^{N}
+\gamma_{nk}
+$$
+
+Interpreted as soft number of points assigned to component $k$.
+
+## M Step: Parameter Updates
+
+Update means:
+
+$$
+\mu_k^{new}
+=
+\frac{1}{N_k}
+\sum_{n=1}^{N}
+\gamma_{nk} x_n
+$$
+
+Update covariances:
+
+$$
+\Sigma_k^{new}
+=
+\frac{1}{N_k}
+\sum_{n=1}^{N}
+\gamma_{nk}
+(x_n - \mu_k^{new})
+(x_n - \mu_k^{new})^T
+$$
+
+Update mixing weights:
+
+$$
+\pi_k^{new}
+=
+\frac{N_k}{N}
+$$
+
+## EM Algorithm Summary
+
+1. Initialize parameters $\pi_k, \mu_k, \Sigma_k$ randomly.
+
+2. E step:
+
+Compute $\gamma_{nk}$ for all $n,k$.
+
+3. M step:
+
+Update $\mu_k, \Sigma_k, \pi_k$ using responsibilities.
+
+4. Repeat E and M steps until convergence.
+
+## Conceptual Flow
+
+Latent variable model introduces hidden component index.
+
+Likelihood maximization is difficult due to log of sum structure.
+
+EM alternates between:
+
+Estimating hidden variables using current parameters.
+
+Estimating parameters using expected hidden variables.
+
+This procedure iteratively improves the likelihood.
+
+## Application: Clustering
+
+Gaussian mixture models provide probabilistic clustering.
+
+In high dimensional settings, visualization is impossible.
+
+EM based GMM remains a fundamental tool for unsupervised learning.
+
+Gaussian mixture models form a foundational building block in machine learning.
+
+---
+`***********************************************************************************`
+
+---
