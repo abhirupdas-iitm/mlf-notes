@@ -1287,3 +1287,243 @@ Hence uncorrelated does not imply independent.
 `***********************************************************************************`
 
 ---
+## Lecture 6
+### Standard Discrete Random Variables
+
+We summarize four standard discrete random variables:
+1. Bernoulli
+2. Binomial
+3. Poisson
+4. Geometric
+Each distribution is defined via its probability mass function, expectation, and variance.
+
+---
+### Bernoulli Distribution
+#### Definition
+A random variable $X$ is distributed as Bernoulli with parameter $p$ if
+$$
+P X = 1 = p
+$$
+$$
+P X = 0 = 1 - p
+$$
+Notation:
+$$
+X \sim Bernoulli p
+$$
+Parameter:
+$$
+0 \le p \le 1
+$$
+The parameter $p$ is called the bias.
+
+---
+### Expectation
+$$
+E X = 1 \cdot p + 0 \cdot 1 - p = p
+$$
+---
+### Variance
+
+Using
+$$
+Var X = E X^2 - E X^2
+$$
+Since $X^2 = X$ for $X \in \{0,1\}$,
+$$
+E X^2 = E X = p
+$$
+Thus,
+$$
+Var X = p - p^2 = p 1 - p
+$$
+---
+### Binomial Distribution
+
+#### Construction
+Let
+$$
+X_1, X_2, \dots, X_n
+$$
+be independent Bernoulli $p$ random variables.
+Define
+$$
+X = \sum_{i=1}^n X_i
+$$
+Then
+$$
+X \sim Binomial n p
+$$
+---
+### Probability Mass Function
+
+For $k = 0,1,\dots,n$,
+$$
+P X = k = \binom{n}{k} p^k 1 - p^{n-k}
+$$
+---
+### Validity
+$$
+\sum_{k=0}^n \binom{n}{k} p^k 1 - p^{n-k}
+= p + 1 - p^n
+= 1
+$$
+by the binomial theorem.
+
+---
+### Expectation
+
+Using linearity of expectation:
+$$
+E X = \sum_{i=1}^n E X_i = \sum_{i=1}^n p = n p
+$$
+---
+### Variance
+
+Since the $X_i$ are independent:
+$$
+Var X = \sum_{i=1}^n Var X_i
+$$
+Each
+$$
+Var X_i = p 1 - p
+$$
+Thus
+$$
+Var X = n p 1 - p
+$$
+---
+### Poisson Distribution
+
+#### Definition
+A random variable $X$ is Poisson with parameter $\lambda > 0$ if
+$$
+P X = k = e^{-\lambda} \frac{\lambda^k}{k!}
+$$
+for $k = 0,1,2,\dots$
+Notation:
+$$
+X \sim Poisson \lambda
+$$
+---
+#### Validity
+$$
+\sum_{k=0}^\infty e^{-\lambda} \frac{\lambda^k}{k!}
+= e^{-\lambda} \sum_{k=0}^\infty \frac{\lambda^k}{k!}
+= e^{-\lambda} e^\lambda
+= 1
+$$
+---
+#### Expectation
+$$
+E X = \sum_{k=0}^\infty k e^{-\lambda} \frac{\lambda^k}{k!}
+$$
+Rewrite:
+$$
+= e^{-\lambda} \sum_{k=1}^\infty k \frac{\lambda^k}{k!}
+$$
+Cancel $k$:
+$$
+= e^{-\lambda} \sum_{k=1}^\infty \frac{\lambda^k}{k-1!}
+$$
+Factor $\lambda$:
+$$
+= e^{-\lambda} \lambda \sum_{k=1}^\infty \frac{\lambda^{k-1}}{k-1!}
+$$
+Let $l = k-1$:
+$$
+= e^{-\lambda} \lambda \sum_{l=0}^\infty \frac{\lambda^l}{l!}
+= e^{-\lambda} \lambda e^\lambda
+= \lambda
+$$
+Thus,
+$$
+E X = \lambda
+$$
+Variance:
+$$
+Var X = \lambda
+$$
+---
+### Geometric Distribution
+#### Definition
+A random variable $X$ is geometric with parameter $p$ if
+$$
+P X = k = 1 - p^{k-1} p
+$$
+for $k = 1,2,3,\dots$
+
+Notation:
+$$
+X \sim Geometric p
+$$
+Support:
+$$
+k = 1,2,\dots
+$$
+---
+#### Validity
+$$
+\sum_{k=1}^\infty 1 - p^{k-1} p
+= p \sum_{k=1}^\infty 1 - p^{k-1}
+$$
+Geometric series:
+$$
+\sum_{k=1}^\infty 1 - p^{k-1}
+= \frac{1}{1 - 1 - p}
+= \frac{1}{p}
+$$
+Thus,
+$$
+p \cdot \frac{1}{p} = 1
+$$
+---
+#### Expectation
+$$
+E X = \sum_{k=1}^\infty k 1 - p^{k-1} p
+$$
+Rewrite:
+$$
+= p \sum_{k=1}^\infty k 1 - p^{k-1}
+$$
+Using differentiation of geometric series:
+$$
+\sum_{k=1}^\infty k 1 - p^{k-1} = \frac{1}{p^2}
+$$
+Thus,
+$$
+E X = p \cdot \frac{1}{p^2} = \frac{1}{p}
+$$
+---
+### Summary of Moments
+
+Bernoulli $p$:
+$$
+E X = p
+$$
+$$
+Var X = p 1 - p
+$$
+Binomial $n p$:
+$$
+E X = n p
+$$
+$$
+Var X = n p 1 - p
+$$
+Poisson $\lambda$:
+$$
+E X = \lambda
+$$
+$$
+Var X = \lambda
+$$
+Geometric $p$:
+$$
+E X = \frac{1}{p}
+$$
+
+---
+`***********************************************************************************`
+
+---
