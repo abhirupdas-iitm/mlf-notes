@@ -564,3 +564,239 @@ $$
 `***********************************************************************************`
 
 ---
+## Lecture 3 
+### Positive Definiteness and Quadratic Forms
+
+### 1. Motivation via Quadratic Functions
+Consider the quadratic function
+$$
+f(x,y) = 2x^2 + 4xy + y^2
+$$
+---
+### 2. Stationary Point
+
+A stationary point occurs when first derivatives vanish.
+Compute partial derivatives:
+$$
+\frac{\partial f}{\partial x} = 4x + 4y
+$$
+$$
+\frac{\partial f}{\partial y} = 4x + 2y
+$$
+At $(0,0)$:
+$$
+\frac{\partial f}{\partial x} = 0
+$$
+$$
+\frac{\partial f}{\partial y} = 0
+$$
+Thus $(0,0)$ is a stationary point.
+
+---
+### 3. Nature of Stationary Point
+
+Second derivatives:
+$$
+\frac{\partial^2 f}{\partial x^2} = 4
+$$
+$$
+\frac{\partial^2 f}{\partial x \partial y} = 4
+$$
+$$
+\frac{\partial^2 f}{\partial y^2} = 2
+$$
+The origin is a minimum for this function.
+
+---
+### 4. General Quadratic Form in Two Variables
+
+Consider
+$$
+f(x,y) = ax^2 + 2bxy + cy^2
+$$
+Observation:
+Every quadratic function has a stationary point at $(0,0)$.
+
+---
+### 5. Definition: Positive Definite Function
+
+A function $f$ is positive definite if
+$$
+f(0,0) = 0
+$$
+and
+$$
+f(x,y) > 0 \quad \text{for all } (x,y) \ne (0,0)
+$$
+---
+### 6. Necessary Conditions
+
+Evaluate at $(1,0)$:
+$$
+f(1,0) = a
+$$
+If $f$ is positive definite:
+$$
+a > 0
+$$
+Evaluate at $(0,1)$:
+$$
+f(0,1) = c
+$$
+Thus:
+$$
+c > 0
+$$
+---
+### 7. Completing the Square
+
+Rewrite
+$$
+ax^2 + 2bxy + cy^2
+$$
+as
+$$
+a \left(x + \frac{b}{a} y \right)^2 + \left(c - \frac{b^2}{a}\right) y^2
+$$
+For positive definiteness:
+1. $a > 0$
+2. $c - \frac{b^2}{a} > 0$
+
+Equivalent to:
+$$
+ac - b^2 > 0
+$$
+---
+### 8. Necessary and Sufficient Condition
+
+The quadratic form
+$$
+f(x,y) = ax^2 + 2bxy + cy^2
+$$
+is positive definite if and only if
+$$
+a > 0
+$$
+and
+$$
+ac - b^2 > 0
+$$
+---
+### 9. Other Cases
+
+If
+$$
+ac = b^2
+$$
+then $f$ is positive semidefinite.
+If
+$$
+ac < b^2
+$$
+then $(0,0)$ is a saddle point.
+
+---
+### 10. Matrix Representation
+
+Let
+$$
+v =
+\begin{pmatrix}
+x \\
+y
+\end{pmatrix}
+$$
+and
+$$
+A =
+\begin{pmatrix}
+a & b \\
+b & c
+\end{pmatrix}
+$$
+Then
+$$
+f(x,y) = v^T A v
+$$
+---
+### 11. General Quadratic Form
+
+For $v = (x_1, \dots, x_n)^T$ and matrix $A = (a_{ij})$,
+$$
+v^T A v = \sum_{i=1}^n \sum_{j=1}^n a_{ij} x_i x_j
+$$
+Explicitly,
+$$
+f(v) = a_{11}x_1^2 + 2a_{12}x_1x_2 + \dots + a_{nn}x_n^2
+$$
+At $v = 0$:
+$$
+f(v) = 0
+$$
+---
+### 12. Examples
+
+#### Example 1
+$$
+f(x,y) = 2x^2 + 4xy + y^2
+$$
+Here
+$$
+a = 2, \quad b = 2, \quad c = 1
+$$
+$$
+ac = 2, \quad b^2 = 4
+$$
+Since
+$$
+ac < b^2
+$$
+Origin is a saddle point.
+
+---
+#### Example 2
+$$
+f(x,y) = 2xy
+$$
+Matrix:
+$$
+A =
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+$$
+Saddle at origin.
+
+---
+#### Example 3
+$$
+f(x_1,x_2,x_3) =
+2x_1^2 - 2x_1x_2 + 2x_2^2
+- 2x_2x_3 + 2x_3^2
+$$
+Matrix form:
+$$
+A =
+\begin{pmatrix}
+2 & -1 & 0 \\
+-1 & 2 & -1 \\
+0 & -1 & 2
+\end{pmatrix}
+$$
+At origin the function has a minimum.
+
+---
+### 13. Connection to Linear Algebra
+
+Quadratic form:
+$$
+f(v) = v^T A v
+$$
+Positive definiteness of $f$ relates to properties of matrix $A$.
+This leads to the definition of positive definite matrices.
+
+---
+`***********************************************************************************`
+
+---
