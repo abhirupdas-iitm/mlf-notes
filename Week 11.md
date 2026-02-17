@@ -2180,3 +2180,203 @@ $$
 `***********************************************************************************`
 
 ---
+## Lecture 10
+### Multiple Continuous Random Variables
+### Joint Density Function
+
+Let $X$ and $Y$ be two continuous random variables defined on the same probability space.
+The joint probability density function is defined as
+$$
+f_{XY}(x,y) = \frac{P\big(X \in x \text{ to } x+dx,\; Y \in y \text{ to } y+dy\big)}{dx\,dy}
+$$
+This is a two dimensional density. Probability of a small rectangle is
+$$
+P\big(X \in x \text{ to } x+dx,\; Y \in y \text{ to } y+dy\big)
+= f_{XY}(x,y)\, dx\, dy
+$$
+Properties:
+1. Non negativity
+$$
+f_{XY}(x,y) \ge 0
+$$
+2. Total probability equals 1
+$$
+\int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+f_{XY}(x,y)\, dx\, dy = 1
+$$
+### Joint Cumulative Distribution Function
+
+The joint CDF is defined as
+$$
+F_{XY}(x,y) = P(X \le x,\; Y \le y)
+$$
+Properties:
+$$
+F_{XY}(-\infty,-\infty) = 0
+$$
+$$
+F_{XY}(\infty,\infty) = 1
+$$
+Monotonicity:
+If $x_1 \le x_2$ and $y_1 \le y_2$, then
+$$
+F_{XY}(x_1,y_1) \le F_{XY}(x_2,y_2)
+$$
+It is non decreasing in each argument.
+
+---
+### Example: Height and Weight
+
+Let
+- $X$ = height in meters
+- $Y$ = weight in kilograms
+
+Define joint density
+$$
+f_{XY}(x,y) =
+\begin{cases}
+0 & \text{if } x \notin 1 \text{ to } 2 \\
+0 & \text{if } y \notin 50x-20 \text{ to } 50x+20 \\
+c & \text{otherwise}
+\end{cases}
+$$
+Support is the parallelogram:
+- $1 \le x \le 2$
+- $50x - 20 \le y \le 50x + 20$
+
+To determine $c$, use normalization:
+$$
+\int_{1}^{2} \int_{50x-20}^{50x+20} c\, dy\, dx = 1
+$$
+Inner integral:
+$$
+\int_{50x-20}^{50x+20} dy = 40
+$$
+Thus
+$$
+\int_{1}^{2} 40c\, dx = 40c
+$$
+Hence
+$$
+40c = 1
+$$
+$$
+c = \frac{1}{40}
+$$
+---
+### Marginal Densities
+
+#### Marginal of $X$
+$$
+f_X(x) = \int_{-\infty}^{\infty} f_{XY}(x,y)\, dy
+$$
+For $x \in 1$ to $2$:
+$$
+f_X(x) = \int_{50x-20}^{50x+20} \frac{1}{40}\, dy
+$$
+$$
+= \frac{1}{40} \cdot 40 = 1
+$$
+Thus
+$$
+f_X(x) =
+\begin{cases}
+1 & x \in 1 \text{ to } 2 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+So $X$ is uniform on $1$ to $2$.
+
+---
+#### Marginal of $Y$
+$$
+f_Y(y) = \int_{-\infty}^{\infty} f_{XY}(x,y)\, dx
+$$
+Must consider cases based on $y$:
+- $y < 30$ : 0  
+- $30 \le y < 70$ : increasing support  
+- $70 \le y < 80$ : full overlap  
+- $80 \le y \le 120$ : decreasing support  
+- $y > 120$ : 0  
+
+Each case is obtained by solving
+$$
+50x - 20 \le y \le 50x + 20
+$$
+for $x$, then integrating $\frac{1}{40}$ over that interval.
+Sanity check:
+$$
+\int_{-\infty}^{\infty} f_Y(y)\, dy = 1
+$$
+---
+#### Conditional Densities
+
+##### Conditional of $Y$ given $X$
+Definition:
+$$
+f_{Y|X}(y|x) =
+\frac{f_{XY}(x,y)}{f_X(x)}
+$$
+For $x \in 1$ to $2$:
+Since $f_X(x) = 1$,
+$$
+f_{Y|X}(y|x) = f_{XY}(x,y)
+$$
+Thus
+$$
+f_{Y|X}(y|x) =
+\begin{cases}
+\frac{1}{40} & y \in 50x-20 \text{ to } 50x+20 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+So conditional on height $x$, weight is uniform on
+$$
+50x - 20 \text{ to } 50x + 20
+$$
+---
+#### Independence of Random Variables
+
+Random variables $X$ and $Y$ are independent if
+$$
+f_{XY}(x,y) = f_X(x)\, f_Y(y)
+$$
+Equivalent condition:
+For all functions $g$ and $h$,
+$$
+E\big[g(X)h(Y)\big] = E[g(X)]\, E[h(Y)]
+$$
+---
+#### Independence Check in Height Weight Example
+
+Consider point $(1.9, 70)$.
+From joint:
+$$
+f_{XY}(1.9,70) = 0
+$$
+But
+$$
+f_X(1.9) \ne 0
+$$
+$$
+f_Y(70) \ne 0
+$$
+Thus
+$$
+f_{XY}(x,y) \ne f_X(x) f_Y(y)
+$$
+Hence $X$ and $Y$ are not independent.
+
+---
+### Summary
+
+- Joint density generalizes one dimensional density to higher dimensions.
+- Marginals obtained by integrating out other variables.
+- Conditionals obtained via ratio of joint to marginal.
+- Independence characterized by factorization of joint density.
+- Continuous multi variable theory parallels discrete case with integrals replacing sums.
+
+---
+`***********************************************************************************`
+
+---
