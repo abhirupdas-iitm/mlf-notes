@@ -138,3 +138,199 @@ Together, these three pillars form the foundation upon which machine learning th
 `***********************************************************************************`
 
 ---
+## Lecture 2
+### Introduction to Optimization
+
+### The Three Pillars of Machine Learning
+
+Machine learning rests on three foundational mathematical pillars:
+1. Linear Algebra  
+2. Probability  
+3. Optimization  
+
+#### Role of Each Pillar
+- Linear Algebra: Models structure and relationships in data.
+- Probability: Models uncertainty and noise in data.
+- Optimization: Converts data and models into decisions.
+
+Optimization is the mathematical tool that enables selection of the best model, classifier, or representation according to a well-defined criterion.
+
+---
+### Why Optimization in Machine Learning
+
+In supervised learning, we seek the best classifier.
+Let:
+- Input data: labeled examples
+- Goal: classify new data points
+There are infinitely many possible classifiers. The notion of best must be formalized.
+
+#### Best as Minimization or Maximization
+- Best classifier = one with least loss
+- Best policy = one with maximum reward
+
+Thus, machine learning problems often reduce to:
+$$
+\text{minimize loss}
+$$
+or
+$$
+\text{maximize reward}
+$$
+Optimization formalizes these objectives.
+
+---
+### Motivating Example: Cow, Rope, Fence, Grass
+
+#### Setup
+
+Field modeled as a 2D plane.
+- Cow at position:
+$$
+(20, 30)
+$$
+- Rope length:
+$$
+10
+$$
+- Fence: vertical line passing through:
+$$
+(25, 0)
+$$
+- Grass at:
+$$
+(40, 40)
+$$
+---
+### Objective: Distance to Grass
+
+Let cow position be:
+$$
+x = (x_1, x_2)
+$$
+Distance to grass:
+$$
+d = \sqrt{(x_1 - 40)^2 + (x_2 - 40)^2}
+$$
+We minimize squared distance:
+$$
+(x_1 - 40)^2 + (x_2 - 40)^2
+$$
+---
+### Constraints
+
+#### Rope Constraint
+
+Cow must lie within radius 10 of (20, 30):
+$$
+(x_1 - 20)^2 + (x_2 - 30)^2 \le 100
+$$
+#### Fence Constraint
+
+Cow must lie on left side of fence:
+$$
+x_1 \le 25
+$$
+---
+### Complete Optimization Problem
+$$
+\min_{x_1, x_2}
+(x_1 - 40)^2 + (x_2 - 40)^2
+$$
+subject to
+$$
+(x_1 - 20)^2 + (x_2 - 30)^2 \le 100
+$$
+$$
+x_1 \le 25
+$$
+This is a constrained optimization problem.
+
+---
+### General Form of Optimization Problem
+
+Let:
+$$
+x \in \mathbb{R}^d
+$$
+#### Objective
+$$
+\min_{x \in \mathbb{R}^d} f(x)
+$$
+#### Inequality Constraints
+$$
+g_i(x) \le 0, \quad i = 1, \dots, k
+$$
+#### Equality Constraints
+$$
+h_j(x) = 0, \quad j = 1, \dots, \ell
+$$
+---
+### Terminology
+
+#### Objective Function
+Function being minimized or maximized:
+$$
+f(x)
+$$
+#### Variable or Parameter
+Optimization variable:
+$$
+x
+$$
+#### Inequality Constraints
+$$
+g_i(x) \le 0
+$$
+#### Equality Constraints
+$$
+h_j(x) = 0
+$$
+---
+### Standardization of Constraints
+
+Any inequality constraint of form:
+$$
+a(x) \le b
+$$
+can be written as:
+$$
+a(x) - b \le 0
+$$
+Any equality constraint:
+$$
+a(x) = b
+$$
+can be written as:
+$$
+a(x) - b = 0
+$$
+Thus the general form is without loss of generality.
+
+---
+### Maximization vs Minimization
+
+Maximization:
+$$
+\max_x f(x)
+$$
+Equivalent to:
+$$
+\min_x -f(x)
+$$
+Thus all optimization problems can be written in minimization form.
+
+---
+### Key Observations
+1. Optimization converts structure and uncertainty into decisions.
+2. Every machine learning algorithm ultimately solves an optimization problem.
+3. Optimization problems consist of:
+   - Objective
+   - Variables
+   - Constraints
+4. Both minimization and maximization reduce to minimization.
+Next step: developing algorithms to solve optimization problems.
+
+---
+`***********************************************************************************`
+
+---
