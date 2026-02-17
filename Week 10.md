@@ -889,3 +889,182 @@ These are called the **Karush-Kuhn-Tucker conditions**.
 `***********************************************************************************`
 
 ---
+## Lecture 5
+### Relevance of KKT Conditions in Machine Learning
+### Support Vector Machine Optimization
+
+Given a dataset
+$$
+\{ (x_i, y_i) \}_{i=1}^n
+$$
+where
+- $x_i \in \mathbb{R}^d$
+- $y_i \in \mathbb{R}$
+
+consider the optimization problem
+$$
+\min_{w} \frac{1}{2} \| w \|^2
+$$
+subject to
+$$
+y_i \, w^\top x_i \ge 1
+\quad \forall i
+$$
+---
+### Structure of the Optimization Problem
+
+#### Objective
+$$
+\frac{1}{2} \| w \|^2
+=
+\frac{1}{2} \sum_{j=1}^{d} w_j^2
+$$
+This is a quadratic function in $w$.
+Quadratic functions with positive definite Hessian are convex.
+Hence:
+- Objective is convex.
+---
+#### Constraints
+
+Each constraint
+$$
+y_i \, w^\top x_i \ge 1
+$$
+can be written as
+$$
+1 - y_i w^\top x_i \le 0
+$$
+This is linear in $w$.
+Linear functions are convex.
+Hence:
+- Constraints are convex.
+---
+### Convex Quadratic Program
+
+The SVM formulation is:
+- Quadratic objective
+- Linear constraints
+
+Therefore:
+- Convex optimization problem
+- Strong duality holds
+
+---
+### Consequence of Strong Duality
+
+Because:
+- Objective is convex
+- Constraints are convex
+
+Strong duality applies.
+Hence:
+$$
+\min_w \max_{\lambda \ge 0} L(w,\lambda)
+=
+\max_{\lambda \ge 0} \min_w L(w,\lambda)
+$$
+Thus:
+- Primal and dual optimal values coincide
+- Dual problem can be solved instead of primal
+---
+### Importance of Dual Formulation
+
+Solving the dual:
+- Often computationally easier
+- Enables kernel methods
+- Converts linear models into nonlinear models implicitly
+
+The KKT conditions:
+- Characterize optimality
+- Provide necessary and sufficient conditions in convex setting
+- Used directly in deriving SVM solution
+---
+### Summary of Optimization Framework
+
+#### Unconstrained Optimization
+If $f$ is convex:
+$$
+\nabla f(x^*) = 0
+\Rightarrow
+x^* \text{ is global minimum}
+$$
+Gradient descent converges to global optimum.
+
+---
+#### Constrained Optimization
+
+Given convex objective and convex constraints:
+- Convert to Lagrangian formulation
+- Derive primal and dual problems
+- Strong duality holds
+- KKT conditions characterize optimality
+---
+### KKT Conditions Recap
+
+For general problem
+$$
+\min_x f(x)
+$$
+subject to
+$$
+h_i(x) \le 0, \quad i = 1,\dots,m
+$$
+$$
+\ell_j(x) = 0, \quad j = 1,\dots,n
+$$
+Lagrangian:
+$$
+L(x,u,v)
+=
+f(x)
++
+\sum_{i=1}^m u_i h_i(x)
++
+\sum_{j=1}^n v_j \ell_j(x)
+$$
+Optimal $(x^*,u^*,v^*)$ satisfy:
+
+---
+#### 1. Stationarity
+$$
+\nabla f(x^*)
++
+\sum_{i=1}^m u_i^* \nabla h_i(x^*)
++
+\sum_{j=1}^n v_j^* \nabla \ell_j(x^*)
+=
+0
+$$
+---
+#### 2. Complementary Slackness
+$$
+u_i^* h_i(x^*) = 0
+$$
+---
+#### 3. Primal Feasibility
+$$
+h_i(x^*) \le 0
+$$
+$$
+\ell_j(x^*) = 0
+$$
+---
+#### 4. Dual Feasibility
+$$
+u_i^* \ge 0
+$$
+---
+### Final Takeaways
+
+1. Convexity simplifies optimization.
+2. Duality provides alternative formulations.
+3. KKT conditions characterize optimality.
+4. Linear regression illustrates unconstrained convex optimization.
+5. Support Vector Machines illustrate constrained convex optimization.
+6. Dual viewpoint enables powerful extensions such as kernel methods.
+This completes the optimization framework and its connection to machine learning.
+
+---
+`***********************************************************************************`
+
+---
