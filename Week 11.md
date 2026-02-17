@@ -1946,3 +1946,237 @@ $$
 `***********************************************************************************`
 
 ---
+## Lecture 9
+### Expectation of Continuous Random Variables
+### Definition
+
+Let $X : \Omega \to \mathbb{R}$ be a continuous random variable with density $f_X x$.
+The expectation of $X$ is defined as
+$$
+E X
+=
+\int_{-\infty}^{\infty} x f_X x \, dx
+$$
+This is the continuous analogue of
+$$
+E X = \sum_x x f_X x
+$$
+Interpretation:  
+Expectation is the center of mass of the density function.
+
+---
+### Properties of Expectation
+### Linearity
+
+For random variables $X$ and $Y$,
+$$
+E X + Y = E X + E Y
+$$
+#### Expectation of a Function
+If $Y = g X$, then
+$$
+E Y
+=
+\int_{-\infty}^{\infty} g x \, f_X x \, dx
+$$
+This avoids computing the density of $Y$.
+
+---
+### Example 1: Uniform Distribution
+
+Let $X$ be uniform on $a$ to $b$:
+$$
+f_X x
+=
+\begin{cases}
+\frac{1}{b-a} & a \le x \le b \\
+0 & \text{otherwise}
+\end{cases}
+$$
+#### Expectation
+$$
+E X
+=
+\int_a^b x \frac{1}{b-a} dx
+=
+\frac{1}{b-a} \frac{x^2}{2} \Big|_a^b
+$$
+$$
+=
+\frac{b^2 - a^2}{2(b-a)}
+=
+\frac{a+b}{2}
+$$
+---
+### Example 2: Triangular Density
+
+Let
+$$
+f_X x
+=
+\begin{cases}
+\frac{x}{2} & 0 \le x \le 2 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+#### Expectation
+$$
+E X
+=
+\int_0^2 x \frac{x}{2} dx
+=
+\frac{1}{2} \int_0^2 x^2 dx
+$$
+$$
+=
+\frac{1}{2} \frac{x^3}{3} \Big|_0^2
+=
+\frac{1}{2} \frac{8}{3}
+=
+\frac{4}{3}
+$$
+---
+### Variance
+#### Definition
+
+Variance is
+$$
+Var X
+=
+E X - E X ^2
+$$
+More commonly written as
+$$
+Var X
+=
+E X^2 - E X^2
+$$
+Variance measures spread around the mean.
+Standard deviation is
+$$
+\sqrt{Var X}
+$$
+---
+### Properties of Variance
+
+1. Non-negativity
+$$
+Var X \ge 0
+$$
+Equality holds iff $X$ is constant.
+
+2. Scaling
+$$
+Var aX = a^2 Var X
+$$
+3. Non-linearity
+In general,
+$$
+Var X + Y \ne Var X + Var Y
+$$
+---
+### Variance of Uniform Distribution
+
+Let $X$ be uniform on $a$ to $b$.
+
+We compute
+$$
+E X^2
+=
+\int_a^b x^2 \frac{1}{b-a} dx
+=
+\frac{1}{b-a} \frac{x^3}{3} \Big|_a^b
+$$
+$$
+=
+\frac{b^3 - a^3}{3(b-a)}
+=
+\frac{a^2 + ab + b^2}{3}
+$$
+We already know
+$$
+E X = \frac{a+b}{2}
+$$
+Thus
+$$
+Var X
+=
+\frac{a^2 + ab + b^2}{3}
+-
+\frac{(a+b)^2}{4}
+$$
+After simplification,
+$$
+Var X
+=
+\frac{(b-a)^2}{12}
+$$
+---
+### Conditional Expectation
+#### Definition
+
+Given event $A$,
+$$
+E X \mid A
+=
+\int_{-\infty}^{\infty}
+x f_{X|A} x dx
+$$
+---
+### Law of Total Expectation
+
+If $A$ and $A^c$ partition the sample space,
+$$
+E X
+=
+E X \mid A \, P A
++
+E X \mid A^c \, P A^c
+$$
+---
+### Example: Bus Waiting Time
+
+Arrival time uniform between 7:10 and 7:30.  
+Bus every 15 minutes.
+Let $X$ be waiting time.
+Define event
+$$
+A = \text{arrival before 7:15}
+$$
+Then
+$$
+P A = \frac{5}{20} = \frac{1}{4}
+$$
+#### Conditional Expectations
+If $A$ occurs, waiting time uniform on 0 to 5:
+$$
+E X \mid A = 2.5
+$$
+If $A^c$ occurs, waiting time uniform on 0 to 15:
+$$
+E X \mid A^c = 7.5
+$$
+#### Total Expectation
+$$
+E X
+=
+\frac{1}{4} \cdot 2.5
++
+\frac{3}{4} \cdot 7.5
+$$
+$$
+=
+6.25
+$$
+---
+### Key Observations
+
+1. Continuous expectation replaces sums by integrals.
+2. Variance measures spread and scales quadratically.
+3. Law of total expectation simplifies complex computations.
+4. Conditioning can dramatically simplify expectation calculations.
+
+---
+`***********************************************************************************`
+
+---
