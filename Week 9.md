@@ -1223,3 +1223,128 @@ These characterizations provide multiple tools to verify convexity in optimizati
 `***********************************************************************************`
 
 ---
+## Lecture 7
+### Local Minima and Global Minima of Convex Functions
+### Theorem
+
+Let $f : \mathbb{R}^d \to \mathbb{R}$ be a convex function.
+Then every local minimum of $f$ is also a global minimum.
+
+---
+### Definitions
+#### Local Minimum
+A point $x^*$ is a local minimum if there exists $\delta > 0$ such that
+for all $z$ satisfying
+$$
+\|z - x^*\| \le \delta
+$$
+we have
+$$
+f(x^*) \le f(z)
+$$
+Thus within a ball of radius $\delta$ around $x^*$, the function attains its smallest value at $x^*$.
+
+---
+### Global Minimum
+
+A point $z$ is a global minimum if
+for all $y \in \mathbb{R}^d$,
+$$
+f(z) \le f(y)
+$$
+A global minimum satisfies the local minimum condition for all $\delta > 0$.
+
+---
+### Proof of Theorem
+
+We prove by contradiction.
+Assume:
+$x^*$ is a local minimum but not a global minimum.
+Let $z$ be a global minimum.
+Since $x^*$ is not global,
+$$
+f(z) < f(x^*)
+$$
+---
+### Step 1: Use Local Minimum Property
+
+Since $x^*$ is a local minimum, there exists $\delta > 0$ such that
+for all $y$ satisfying
+$$
+\|y - x^*\| \le \delta
+$$
+we have
+$$
+f(x^*) \le f(y)
+$$
+---
+### Step 2: Move Toward Global Minimum
+
+Consider points on the line segment joining $x^*$ and $z$:
+$$
+y_\lambda = \lambda x^* + (1 - \lambda) z
+$$
+For sufficiently small $\lambda > 0$,
+$y_\lambda$ lies within the $\delta$ ball around $x^*$.
+Thus by local minimality,
+$$
+f(x^*) \le f(y_\lambda)
+$$
+---
+### Step 3: Use Convexity
+
+Since $f$ is convex,
+$$
+f(y_\lambda)
+\le
+\lambda f(x^*) + (1 - \lambda) f(z)
+$$
+Substitute into previous inequality:
+$$
+f(x^*)
+\le
+\lambda f(x^*) + (1 - \lambda) f(z)
+$$
+---
+### Step 4: Use Strict Inequality
+
+Since
+$$
+f(z) < f(x^*)
+$$
+we obtain
+$$
+\lambda f(x^*) + (1 - \lambda) f(z)
+<
+\lambda f(x^*) + (1 - \lambda) f(x^*)
+$$
+$$
+=
+f(x^*)
+$$
+Thus
+$$
+f(x^*)
+<
+f(x^*)
+$$
+---
+### Contradiction
+
+This is impossible.
+Therefore the assumption that $x^*$ is a local minimum but not global must be false.
+Hence every local minimum is a global minimum.
+
+---
+### Consequences
+
+If $f$ is convex:
+1. Any algorithm that finds a local minimum automatically finds a global minimum.
+2. Gradient descent, which guarantees convergence to a local minimum under suitable conditions, finds the global minimum for convex functions.
+3. Convexity removes the difficulty of multiple bad local minima.
+Convexity ensures that optimization is globally well behaved.
+
+---
+`***********************************************************************************`
+
+---
