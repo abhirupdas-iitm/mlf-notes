@@ -280,3 +280,305 @@ This forms the foundation for all subsequent concepts in probability and machine
 `***********************************************************************************`
 
 ---
+## Lecture 2
+### Conditioning, Independence and Bayes Rule
+### 1. Conditional Probability
+#### Definition
+Let $A, B \subseteq \Omega$ with $P(B) > 0$.
+The conditional probability of $A$ given $B$ is
+$$
+P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+$$
+Interpretation: Probability that $A$ occurs given that $B$ has occurred.
+
+---
+### 2. Conditional Probability Example: Double Dice Throw
+#### Setup
+$$
+\Omega = \{1,2,3,4,5,6\}^2
+$$
+$$
+P(A) = \frac{|A|}{36}
+$$
+---
+#### Example 1
+Find
+$$
+P(\text{sum} = 7 \mid \text{first} = 5)
+$$
+#### Numerator
+Event: first = 5 and sum = 7
+Only outcome:
+$$
+(5,2)
+$$
+$$
+P(\text{sum}=7 \cap \text{first}=5) = \frac{1}{36}
+$$
+#### Denominator
+First = 5:
+$$
+(5,1), (5,2), (5,3), (5,4), (5,5), (5,6)
+$$
+$$
+P(\text{first}=5) = \frac{6}{36}
+$$
+#### Result
+$$
+P(\text{sum}=7 \mid \text{first}=5)
+=
+\frac{1/36}{6/36}
+=
+\frac{1}{6}
+$$
+---
+#### Example 2
+
+Find
+$$
+P(\text{first}=5 \mid \text{sum}=8)
+$$
+#### Numerator
+First = 5 and sum = 8:
+$$
+(5,3)
+$$
+$$
+P = \frac{1}{36}
+$$
+#### Denominator
+Sum = 8:
+$$
+(2,6), (3,5), (4,4), (5,3), (6,2)
+$$
+$$
+P(\text{sum}=8) = \frac{5}{36}
+$$
+#### Result
+$$
+P(\text{first}=5 \mid \text{sum}=8)
+=
+\frac{1/36}{5/36}
+=
+\frac{1}{5}
+$$
+---
+### 3. Total Probability Law
+#### Definitions
+Events $B_1, B_2, \dots, B_n$ are:
+##### Mutually Exclusive
+$$
+B_i \cap B_j = \varnothing
+\quad \text{for } i \ne j
+$$
+##### Exhaustive
+$$
+B_1 \cup B_2 \cup \dots \cup B_n = \Omega
+$$
+---
+#### Total Probability Formula
+
+For any event $A$:
+$$
+P(A)
+=
+\sum_{i=1}^n P(A \cap B_i)
+$$
+Using conditioning:
+$$
+P(A)
+=
+\sum_{i=1}^n P(A \mid B_i) P(B_i)
+$$
+---
+### 4. Total Probability Example: Two Urn Experiment
+#### Setup
+Urn 1: 9 white, 1 black  
+Urn 2: 5 white, 5 black  
+
+Choose urn uniformly, then pick one ball.
+Define:
+- $A$: white ball picked  
+- $B_1$: urn 1 chosen  
+- $B_2$: urn 2 chosen  
+
+Since $B_1, B_2$ are mutually exclusive and exhaustive:
+$$
+P(A)
+=
+P(A \mid B_1) P(B_1)
++
+P(A \mid B_2) P(B_2)
+$$
+Compute:
+$$
+P(B_1) = P(B_2) = \frac{1}{2}
+$$
+$$
+P(A \mid B_1) = \frac{9}{10}
+$$
+$$
+P(A \mid B_2) = \frac{5}{10}
+$$
+Result:
+$$
+P(A)
+=
+\frac{9}{10} \cdot \frac{1}{2}
++
+\frac{5}{10} \cdot \frac{1}{2}
+$$
+---
+### 5. Independence
+#### Definition
+
+Events $A$ and $B$ are independent if
+$$
+P(A \cap B) = P(A) P(B)
+$$
+Equivalent form when $P(B) > 0$:
+$$
+P(A \mid B) = P(A)
+$$
+---
+#### Independence Example: Double Dice
+Let:
+- $A$: sum = 7  
+- $B$: first = 5  
+$$
+P(A \cap B) = \frac{1}{36}
+$$
+$$
+P(A) = \frac{6}{36}
+$$
+$$
+P(B) = \frac{6}{36}
+$$
+$$
+P(A) P(B) = \frac{6}{36} \cdot \frac{6}{36} = \frac{1}{36}
+$$
+Thus $A$ and $B$ are independent.
+---
+#### Non Independence Example
+
+Let:
+- $D$: sum = 4  
+$$
+P(B \cap D) = 0
+$$
+$$
+P(B) = \frac{1}{6}
+$$
+$$
+P(D) = \frac{3}{36}
+$$
+$$
+P(B)P(D) \ne 0
+$$
+Thus $B$ and $D$ are not independent.
+---
+### 6. Bayes Rule
+#### Derivation
+From definition:
+$$
+P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}
+$$
+Using total probability with $A$ and $A^c$:
+$$
+P(B)
+=
+P(B \mid A) P(A)
++
+P(B \mid A^c) P(A^c)
+$$
+Thus,
+$$
+P(A \mid B)
+=
+\frac{P(B \mid A) P(A)}
+{P(B \mid A) P(A) + P(B \mid A^c) P(A^c)}
+$$
+---
+### 7. Bayes Rule Example: Urn Problem
+
+Find:
+$$
+P(B_1 \mid A)
+$$
+Where:
+- $A$: white ball picked  
+- $B_1$: urn 1 chosen  
+
+Given:
+$$
+P(A \mid B_1) = \frac{9}{10}
+$$
+$$
+P(A \mid B_2) = \frac{5}{10}
+$$
+$$
+P(B_1) = P(B_2) = \frac{1}{2}
+$$
+Using Bayes rule:
+$$
+P(B_1 \mid A)
+=
+\frac{ \frac{9}{10} \cdot \frac{1}{2} }
+{ \frac{9}{10} \cdot \frac{1}{2} + \frac{5}{10} \cdot \frac{1}{2} }
+=
+\frac{9}{14}
+$$
+---
+### 8. Bayes Rule Example: COVID Testing
+
+Let:
+- $C$: person has COVID  
+- $T$: test positive  
+
+Given:
+$$
+P(C) = \frac{1}{100}
+$$
+$$
+P(T \mid C) = 0.9
+$$
+$$
+P(T^c \mid C^c) = 0.9
+$$
+Thus:
+$$
+P(T \mid C^c) = 0.1
+$$
+Apply Bayes rule:
+$$
+P(C \mid T)
+=
+\frac{0.9 \cdot \frac{1}{100}}
+{0.9 \cdot \frac{1}{100} + 0.1 \cdot \frac{99}{100}}
+$$
+Simplify:
+$$
+=
+\frac{0.9}
+{0.9 + 9.9}
+\approx 0.1
+$$
+Key Insight:
+$$
+P(C \mid T) \ne P(T \mid C)
+$$
+Even with a 90 percent accurate test, low prevalence leads to small posterior probability.
+
+---
+### Summary
+
+1. Conditional probability refines probability given information.
+2. Total probability decomposes events over partitions.
+3. Independence requires product rule.
+4. Bayes rule flips conditioning.
+5. Bayes rule is foundational for inference in machine learning.
+
+---
+`***********************************************************************************`
+
+---
