@@ -1754,3 +1754,195 @@ $$
 `***********************************************************************************`
 
 ---
+## Lecture 8
+### Conditional PDF
+### Probability Space Setup
+An experiment is given by the tuple  
+$\Omega, \mathcal{F}, P$  
+Let $X : \Omega \to \mathbb{R}$ be a continuous random variable.  
+Let $A \subseteq \Omega$ be an event with $P A > 0$.
+### Definition
+
+The conditional probability density function of $X$ given $A$ is
+$$
+f_{X|A} x
+=
+\frac{P X \in x \text{ to } x + dx \mid A}{dx}
+$$
+This is the density of $X$ after incorporating the information that $A$ has occurred.
+Using conditional probability,
+$$
+P X \in x \text{ to } x + dx \mid A
+=
+\frac{P X \in x \text{ to } x + dx \cap A}{P A}
+$$
+Hence,
+$$
+f_{X|A} x
+=
+\frac{f_X x}{P A}
+\quad
+\text{whenever } x \text{ satisfies } A
+$$
+and $0$ otherwise.
+
+---
+### Example: Conditional Density
+### Given Density
+Let
+$$
+f_X x
+=
+\begin{cases}
+\frac{x}{2} & 0 \le x \le 2 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+This is a valid density since
+$$
+\int_0^2 \frac{x}{2} dx
+=
+\frac{1}{2} \cdot \frac{x^2}{2} \Big|_0^2
+=
+1
+$$
+#### Event
+Let
+$$
+A = \{ X > 1 \}
+$$
+Compute
+$$
+P A
+=
+\int_1^2 \frac{x}{2} dx
+=
+\frac{x^2}{4} \Big|_1^2
+=
+1 - \frac{1}{4}
+=
+\frac{3}{4}
+$$
+#### Conditional Density
+For $x < 1$:
+$$
+f_{X|A} x = 0
+$$
+For $1 \le x \le 2$:
+$$
+f_{X|A} x
+=
+\frac{f_X x}{P A}
+=
+\frac{\frac{x}{2}}{\frac{3}{4}}
+=
+\frac{4x}{6}
+=
+\frac{2x}{3}
+$$
+For $x > 2$:
+$$
+f_{X|A} x = 0
+$$
+Thus,
+$$
+f_{X|A} x
+=
+\begin{cases}
+0 & x \le 1 \\
+\frac{2x}{3} & 1 \le x \le 2 \\
+0 & x > 2
+\end{cases}
+$$
+The shape remains linear on the interval but is rescaled so that
+$$
+\int_1^2 f_{X|A} x dx = 1
+$$
+---
+### Functions of Random Variables
+#### Definition
+If $X$ is a random variable and
+$$
+Y = g X
+$$
+then $Y$ is also a random variable.
+To find the density of $Y$,
+$$
+f_Y y
+=
+\frac{P Y \in y \text{ to } y + dy}{dy}
+$$
+---
+### Example 1: Linear Transformation
+#### Given
+
+Let $X$ be uniform on $-1$ to $1$:
+$$
+f_X x
+=
+\begin{cases}
+\frac{1}{2} & -1 \le x \le 1 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+Let
+$$
+Y = \frac{X}{2}
+$$
+#### Derivation
+$$
+f_Y y
+=
+\frac{P X \in 2y \text{ to } 2y + 2dy}{dy}
+$$
+If $2y$ lies outside $-1$ to $1$, density is zero.
+Thus $y$ must lie in $-\frac{1}{2}$ to $\frac{1}{2}$.
+Within this range,
+$$
+P X \in 2y \text{ to } 2y + 2dy
+=
+\frac{1}{2} \cdot 2dy
+$$
+Hence,
+$$
+f_Y y = 1
+\quad
+\text{for } -\frac{1}{2} \le y \le \frac{1}{2}
+$$
+So $Y$ is uniform on $-\frac{1}{2}$ to $\frac{1}{2}$.
+
+---
+### Example 2: Absolute Value Transformation
+
+Let
+$$
+Y = |X|
+$$
+with $X$ uniform on $-1$ to $1$.
+Since both $x$ and $-x$ map to the same $y$, density doubles on positive side.
+Thus,
+$$
+f_Y y
+=
+\begin{cases}
+1 & 0 \le y \le 1 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+Check normalization:
+$$
+\int_0^1 1 dy = 1
+$$
+---
+### Key Observations
+
+1. Conditional density rescales original density over restricted region.
+2. Density values can exceed $1$ as long as total integral equals $1$.
+3. Functions of random variables are themselves random variables.
+4. Linear scaling compresses or stretches support.
+5. Non one to one mappings such as absolute value combine contributions from multiple regions.
+
+---
+`***********************************************************************************`
+
+---
