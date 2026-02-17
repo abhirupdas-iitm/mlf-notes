@@ -582,3 +582,268 @@ Even with a 90 percent accurate test, low prevalence leads to small posterior pr
 `***********************************************************************************`
 
 ---
+## Lecture 3
+### Random Variables
+### Definition
+Given a probability space $(\Omega, \mathcal{F}, P)$, a random variable is a function
+$$
+X : \Omega \to \mathbb{R}
+$$
+If the range of $X$ is finite or countable, then $X$ is called a discrete random variable.
+Since in all previous examples $\Omega$ was finite, any function defined on $\Omega$ is a discrete random variable.
+
+---
+### Examples of Random Variables
+
+#### Example 1: Double Dice Throw Experiment
+Sample space:
+$$
+\Omega = \{ (a,b) : a,b \in \{1,2,3,4,5,6\} \}
+$$
+Define
+$$
+X(a,b) = a
+$$
+This random variable represents the first die result.
+
+---
+#### Example 2: Sum of Dice
+
+Define
+$$
+X(a,b) = a + b
+$$
+This random variable represents the sum of the faces.
+
+---
+#### Example 3: Double Coin Toss
+
+Sample space:
+$$
+\Omega = \{ HH, HT, TH, TT \}
+$$
+Define $X$ as the number of heads:
+$$
+X(HH) = 2
+$$
+$$
+X(HT) = 1
+$$
+$$
+X(TH) = 1
+$$
+$$
+X(TT) = 0
+$$
+---
+### Probability Mass Function
+
+For a discrete random variable $X$, the probability mass function is defined as
+$$
+f_X : \mathbb{R} \to [0,1]
+$$
+$$
+f_X(x) = P(X = x)
+$$
+More formally,
+$$
+f_X(x) = P(\{ \omega \in \Omega : X(\omega) = x \})
+$$
+#### Properties
+1. Non negativity:
+$$
+0 \le f_X(x) \le 1
+$$
+2. Total probability:
+$$
+\sum_{x \in \text{Range}(X)} f_X(x) = 1
+$$
+Proof:
+$$
+\sum_{x} f_X(x)
+=
+\sum_{x} P(\{ \omega : X(\omega)=x \})
+$$
+The sets $\{ \omega : X(\omega)=x \}$ are disjoint and their union equals $\Omega$, hence
+$$
+\sum_{x} f_X(x) = P(\Omega) = 1
+$$
+---
+### Cumulative Distribution Function
+
+The cumulative distribution function is defined as
+$$
+F_X(x) = P(X \le x)
+$$
+#### Properties
+1. 
+$$
+0 \le F_X(x) \le 1
+$$
+  2.
+$$
+F_X(-\infty) = 0
+$$
+  3.
+$$
+F_X(\infty) = 1
+$$
+---
+### Example: First Die Result
+
+Under counting probability:
+$$
+P(A) = \frac{|A|}{36}
+$$
+Random variable:
+$$
+X = \text{first die result}
+$$
+PMF:
+$$
+f_X(x) =
+\begin{cases}
+\frac{1}{6} & x \in \{1,2,3,4,5,6\} \\
+0 & \text{otherwise}
+\end{cases}
+$$
+CDF:
+For $x < 1$:
+$$
+F_X(x) = 0
+$$
+For $k \in \{1,\dots,6\}$:
+$$
+F_X(k) = \frac{k}{6}
+$$
+For $x \ge 6$:
+$$
+F_X(x) = 1
+$$
+---
+### Example: Number of Heads
+
+Double coin toss with
+$$
+P(A) = \frac{|A|}{4}
+$$
+Random variable: number of heads.
+PMF:
+$$
+P(X=0) = \frac{1}{4}
+$$
+$$
+P(X=1) = \frac{1}{2}
+$$
+$$
+P(X=2) = \frac{1}{4}
+$$
+CDF:
+$$
+F_X(0) = \frac{1}{4}
+$$
+$$
+F_X(1) = \frac{3}{4}
+$$
+$$
+F_X(2) = 1
+$$
+---
+### Example: Biased Dice
+
+Suppose faces 1 to 5 are equally likely and face 6 is twice as likely.
+Let
+$$
+P(X=1) = P(X=2) = P(X=3) = P(X=4) = P(X=5) = C
+$$
+$$
+P(X=6) = 2C
+$$
+Using normalization:
+$$
+5C + 2C = 1
+$$
+$$
+7C = 1
+$$
+$$
+C = \frac{1}{7}
+$$
+Hence,
+$$
+P(X=i) = \frac{1}{7}, \quad i=1,\dots,5
+$$
+$$
+P(X=6) = \frac{2}{7}
+$$
+---
+### Indicator Random Variables
+
+For an event $A$, define
+$$
+X(\omega) = \mathbf{1}_{A}(\omega)
+$$
+$$
+X(\omega) =
+\begin{cases}
+1 & \omega \in A \\
+0 & \text{otherwise}
+\end{cases}
+$$
+PMF:
+$$
+P(X=1) = P(A)
+$$
+$$
+P(X=0) = 1 - P(A)
+$$
+Example: Double coin toss.
+Let $A$ be the event two heads occur.
+Then
+$$
+P(X=1) = P(HH)
+$$
+$$
+P(X=0) = 1 - P(HH)
+$$
+---
+### Functions of Random Variables
+
+If $X$ is a random variable and $g : \mathbb{R} \to \mathbb{R}$, then
+$$
+Y = g(X)
+$$
+is also a random variable.
+Example:
+Double dice throw.
+$$
+X = \text{first die result}
+$$
+Define
+$$
+Y = |X - 2|
+$$
+Compute PMF:
+$$
+P(Y=0) = P(X=2) = \frac{1}{6}
+$$
+$$
+P(Y=1) = P(X=1 \text{ or } X=3) = \frac{2}{6}
+$$
+Similarly for other values.
+
+---
+### Summary
+
+A discrete random variable is a function from $\Omega$ to $\mathbb{R}$.
+Key tools:
+- Probability mass function
+- Cumulative distribution function
+- Indicator random variables
+- Functions of random variables
+These form the foundation for further analysis including expectation, variance and advanced probabilistic models.
+
+---
+`***********************************************************************************`
+
+---
