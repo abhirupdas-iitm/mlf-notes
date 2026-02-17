@@ -1251,3 +1251,189 @@ This is the Gradient Descent algorithm for unconstrained optimization.
 `***********************************************************************************`
 
 ---
+## Lecture 8
+### Taylor Series in Higher Dimensions and Geometry of Gradient Descent
+
+### Multivariate Taylor Series
+
+Let $f : \mathbb{R}^d \to \mathbb{R}$ and let $x \in \mathbb{R}^d$.
+We want to evaluate the function at a nearby point:
+$$
+x + \eta d
+$$
+where  
+- $\eta > 0$ is a small scalar step size  
+- $d \in \mathbb{R}^d$ is a direction vector  
+
+The multivariate Taylor expansion gives:
+$$
+f(x + \eta d)
+=
+f(x)
++
+\eta d^T \nabla f(x)
++
+\text{higher order terms}
+$$
+Neglecting higher order terms for small $\eta$:
+$$
+f(x + \eta d)
+\approx
+f(x)
++
+\eta d^T \nabla f(x)
+$$
+Thus,
+$$
+f(x + \eta d) - f(x)
+\approx
+\eta d^T \nabla f(x)
+$$
+---
+### Descent Condition
+
+We want the function value to decrease:
+$$
+f(x + \eta d) - f(x) < 0
+$$
+Using the Taylor approximation:
+$$
+\eta d^T \nabla f(x) < 0
+$$
+Since $\eta > 0$, this is equivalent to:
+$$
+d^T \nabla f(x) < 0
+$$
+#### Key Condition
+
+A direction $d$ is a descent direction if
+$$
+d^T \nabla f(x) < 0
+$$
+---
+### Special Choice: Negative Gradient
+
+Choose
+$$
+d = - \nabla f(x)
+$$
+Then
+$$
+d^T \nabla f(x)
+=
+- \nabla f(x)^T \nabla f(x)
+=
+- \| \nabla f(x) \|^2
+$$
+Since
+$$
+\| \nabla f(x) \|^2
+=
+\sum_{i=1}^{d}
+\left( \frac{\partial f}{\partial x_i} \right)^2
+\ge 0
+$$
+we get
+$$
+d^T \nabla f(x) \le 0
+$$
+Strictly negative whenever $\nabla f(x) \ne 0$.
+Therefore,
+$$
+d = -\nabla f(x)
+$$
+is always a descent direction.
+
+---
+### Geometry of Descent Directions
+
+Let $w = \nabla f(x)$.
+Consider the dot product condition:
+$$
+d^T w
+\begin{cases}
+> 0 & \text{ascent direction} \\
+= 0 & \text{orthogonal direction} \\
+< 0 & \text{descent direction}
+\end{cases}
+$$
+The vector $w$ partitions the space into:
+- A half-space where $d^T w > 0$
+- A hyperplane where $d^T w = 0$
+- A half-space where $d^T w < 0$
+
+All vectors in the half-space satisfying
+$$
+d^T \nabla f(x) < 0
+$$
+are descent directions.
+Thus, there are infinitely many descent directions.
+
+---
+### Steepest Descent Property
+
+Among all directions with fixed norm,
+$$
+\| d \| = 1
+$$
+the direction that minimizes
+$$
+d^T \nabla f(x)
+$$
+is
+$$
+d = - \frac{\nabla f(x)}{\| \nabla f(x) \|}
+$$
+Thus,
+$$
+-\nabla f(x)
+$$
+gives the maximum rate of decrease.
+Hence gradient descent is also called:
+### Steepest Descent Algorithm
+
+### Gradient Descent Update in $\mathbb{R}^d$
+
+For unconstrained optimization:
+$$
+\min_{x \in \mathbb{R}^d} f(x)
+$$
+the iterative update rule is:
+$$
+x_{t+1}
+=
+x_t
+-
+\eta_t
+\nabla f(x_t)
+$$
+where
+- $x_t \in \mathbb{R}^d$
+- $\nabla f(x_t) \in \mathbb{R}^d$
+- $\eta_t > 0$ is step size
+
+---
+### Important Observations
+1. $-\nabla f(x)$ is always a descent direction.
+2. It provides the steepest decrease for unit step.
+3. Gradient descent converges to a local minimum.
+4. In convex functions, local minimum equals global minimum.
+
+---
+### Transition to Constrained Optimization
+
+For constrained problems:
+$$
+\min f(x)
+$$
+subject to
+$$
+g(x) \le 0
+$$
+moving in the negative gradient direction may violate feasibility.
+This motivates development of constrained optimization techniques.
+
+---
+`***********************************************************************************`
+
+---
