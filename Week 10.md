@@ -275,3 +275,207 @@ These structural properties allow us to build complex convex functions from simp
 `***********************************************************************************`
 
 ---
+## Lecture 2
+### Applications of Optimization to Machine Learning
+### Linear Regression
+
+#### Dataset
+Training data consists of
+$$
+\{(x_i, y_i)\}_{i=1}^n
+$$
+where
+- $x_i \in \mathbb{R}^d$
+- $y_i \in \mathbb{R}$
+Goal: Learn a function
+$$
+h : \mathbb{R}^d \to \mathbb{R}
+$$
+such that for a new test point $x_{\text{test}}$,
+$$
+\hat y_{\text{test}} = h(x_{\text{test}})
+$$
+---
+### Linear Hypothesis Class
+
+In linear regression, we restrict $h$ to be linear:
+$$
+h(x) = w^\top x
+$$
+where $w \in \mathbb{R}^d$.
+Thus learning $h$ reduces to learning $w$.
+
+---
+### Performance Measure
+
+Define the sum of squared errors:
+$$
+f(w) = \sum_{i=1}^n (w^\top x_i - y_i)^2
+$$
+Often scaled as
+$$
+f(w) = \frac{1}{2} \sum_{i=1}^n (w^\top x_i - y_i)^2
+$$
+Optimization problem:
+$$
+\min_{w \in \mathbb{R}^d} f(w)
+=
+\min_{w \in \mathbb{R}^d}
+\frac{1}{2}
+\sum_{i=1}^n (w^\top x_i - y_i)^2
+$$
+---
+### Convexity of the Objective
+
+Write
+$$
+f(w) = \sum_{i=1}^n h_i(w)
+$$
+where
+$$
+h_i(w) = (w^\top x_i - y_i)^2
+$$
+Each $h_i(w)$ is a composition:
+- $g(w) = w^\top x_i - y_i$ which is linear in $w$
+- $\phi(z) = z^2$ which is convex
+Since composition of convex function with linear function is convex,
+$$
+h_i(w) \text{ is convex}
+$$
+Since sum of convex functions is convex,
+$$
+f(w) \text{ is convex}
+$$
+---
+### Matrix Formulation
+
+Define
+- $X \in \mathbb{R}^{n \times d}$ with rows $x_i^\top$
+- $w \in \mathbb{R}^d$
+- $y \in \mathbb{R}^n$
+
+Then
+$$
+f(w) =
+\frac{1}{2} \|Xw - y\|_2^2
+$$
+Equivalent quadratic form:
+$$
+f(w)
+=
+\frac{1}{2}
+(Xw - y)^\top (Xw - y)
+$$
+Expand:
+$$
+f(w)
+=
+\frac{1}{2}
+\left(
+w^\top X^\top X w
+-
+2 w^\top X^\top y
++
+y^\top y
+\right)
+$$
+---
+### Gradient Computation
+
+Compute gradient:
+$$
+\nabla f(w)
+=
+X^\top X w - X^\top y
+$$
+---
+### Optimality Condition
+
+Since $f$ is convex and differentiable,
+global minimum satisfies
+$$
+\nabla f(w^*) = 0
+$$
+Thus
+$$
+X^\top X w^* = X^\top y
+$$
+If $X^\top X$ is invertible:
+$$
+w^* = (X^\top X)^{-1} X^\top y
+$$
+If not invertible:
+$$
+w^* = (X^\top X)^\dagger X^\top y
+$$
+where $\dagger$ denotes pseudo inverse.
+This is the analytical solution.
+
+---
+### Computational Considerations
+
+Matrix inversion cost:
+$$
+O(d^3)
+$$
+When $d$ is large, this becomes computationally expensive.
+
+---
+### Gradient Descent Alternative
+
+Iterative update:
+$$
+w_{t+1}
+=
+w_t
+-
+\eta_t \nabla f(w_t)
+$$
+Using
+$$
+\nabla f(w_t)
+=
+X^\top X w_t - X^\top y
+$$
+No matrix inversion required.
+Convexity guarantees convergence to global optimum.
+
+---
+### Stochastic Gradient Descent
+
+Full gradient requires entire dataset.
+When $n$ is large:
+- Sample small subset of data uniformly at random.
+- Compute approximate gradient.
+- Update:
+$$
+w_{t+1}
+=
+w_t
+-
+\eta_t \tilde \nabla f(w_t)
+$$
+where $\tilde \nabla f$ is gradient using sampled data.
+Under suitable conditions,
+$$
+\frac{1}{T}
+\sum_{t=1}^T w_t
+\to
+w^*
+$$
+as $T \to \infty$.
+
+---
+### Key Takeaways
+
+1. Sum of squared errors is convex.
+2. Convexity guarantees global optimality via first order condition.
+3. Closed form solution exists.
+4. For large scale problems, gradient descent avoids expensive matrix inversion.
+5. Stochastic gradient descent scales to massive datasets.
+Convex optimization provides both theoretical guarantees and practical algorithms for machine learning.
+
+---
+`***********************************************************************************`
+
+---
