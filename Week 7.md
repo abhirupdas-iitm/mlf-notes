@@ -424,3 +424,190 @@ and yields the same principal components.
 `***********************************************************************************`
 
 ---
+## Lecture 3
+### Principal Component Analysis as Maximizing Variance
+
+### Projection onto a Line
+
+Let dataset
+$$
+D = \{ x_1, x_2, \dots, x_n \}, \quad x_i \in \mathbb{R}^d
+$$
+Mean of data:
+$$
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+$$
+Let $u$ be a unit vector:
+$$
+u^T u = 1
+$$
+Projection of $x_i$ onto direction $u$:
+$$
+\tilde{x}_i = (x_i^T u) u
+$$
+Mean projected value:
+$$
+(\bar{x}^T u) u
+$$
+---
+### Projected Variance
+
+Variance along direction $u$:
+$$
+\frac{1}{n} \sum_{i=1}^{n} (x_i^T u - \bar{x}^T u)^2
+$$
+Rewrite:
+$$
+\frac{1}{n} \sum_{i=1}^{n} \left( (x_i - \bar{x})^T u \right)^2
+$$
+This equals:
+$$
+\frac{1}{n} \sum_{i=1}^{n} u^T (x_i - \bar{x})(x_i - \bar{x})^T u
+$$
+Define covariance matrix:
+$$
+C = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})(x_i - \bar{x})^T
+$$
+Thus projected variance becomes:
+$$
+u^T C u
+$$
+---
+### Optimization Problem
+
+Goal:
+$$
+\max_{u} u^T C u
+$$
+subject to
+$$
+u^T u = 1
+$$
+Equivalently maximize Rayleigh quotient:
+$$
+\max_{u} \frac{u^T C u}{u^T u}
+$$
+---
+### Calculus Derivation
+
+Let
+$$
+u = (u^{(1)}, u^{(2)}, \dots, u^{(d)})
+$$
+Denominator derivative:
+$$
+\frac{\partial}{\partial u^{(i)}} (u^T u) = 2 u^{(i)}
+$$
+Numerator:
+$$
+u^T C u = \sum_{i=1}^{d} \sum_{j=1}^{d} C_{ij} u^{(i)} u^{(j)}
+$$
+Derivative:
+$$
+\frac{\partial}{\partial u^{(i)}} (u^T C u) = 2 \sum_{j=1}^{d} C_{ij} u^{(j)}
+$$
+Using quotient rule and setting derivative to zero:
+$$
+(u^T u) C u = (u^T C u) u
+$$
+Thus:
+$$
+C u = \lambda u
+$$
+where
+$$
+\lambda = \frac{u^T C u}{u^T u}
+$$
+---
+### Key Result
+
+Maximizer of
+$$
+\frac{u^T C u}{u^T u}
+$$
+is an eigenvector of $C$.
+Maximum value equals largest eigenvalue:
+$$
+\lambda_1
+$$
+Thus:
+First principal direction = eigenvector of $C$ corresponding to largest eigenvalue.
+Projected variance along that direction equals:
+$$
+\lambda_1
+$$
+---
+### Extension to m Dimensions
+
+For $m \ge 1$:
+Choose orthonormal vectors
+$$
+u_1, u_2, \dots, u_m
+$$
+Projected variance:
+$$
+\sum_{k=1}^{m} u_k^T C u_k
+$$
+Maximum achieved by selecting eigenvectors corresponding to top $m$ eigenvalues:
+$$
+\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_m
+$$
+These vectors are called principal directions.
+Projected coordinates are principal components.
+
+---
+### Example
+
+Data:
+$$
+x_1 = (-1, -1), \quad x_2 = (0, 0), \quad x_3 = (1, 1)
+$$
+Mean:
+$$
+\bar{x} = 0
+$$
+Covariance matrix eigenvalues:
+$$
+\lambda_1 = \frac{4}{3}, \quad \lambda_2 = 0
+$$
+Corresponding principal direction:
+$$
+u_1 = \frac{1}{\sqrt{2}} (1, 1)
+$$
+Projections:
+$$
+x_1^T u_1 = -\sqrt{2}
+$$
+$$
+x_2^T u_1 = 0
+$$
+$$
+x_3^T u_1 = \sqrt{2}
+$$
+Projected variance:
+$$
+\frac{1}{3} \left( (-\sqrt{2})^2 + 0 + (\sqrt{2})^2 \right)
+=
+\frac{4}{3}
+$$
+Thus:
+$$
+\text{Projected variance} = \lambda_1 = \frac{4}{3}
+$$
+---
+### Final Summary
+
+PCA has two equivalent interpretations:
+1. Minimize reconstruction error  
+2. Maximize projected variance  
+Both lead to selecting eigenvectors of covariance matrix corresponding to largest eigenvalues.
+PCA algorithm:
+3. Compute covariance matrix $C$  
+4. Compute eigenvalues and eigenvectors  
+5. Select top $m$ eigenvectors  
+6. Project data onto span of these eigenvectors  
+
+---
+`***********************************************************************************`
+
+---
