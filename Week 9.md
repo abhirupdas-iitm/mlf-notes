@@ -148,7 +148,7 @@ which characterizes constrained optimality.
 `***********************************************************************************`
 
 ---
-## Lecture 1
+## Lecture 3
 
 ### Relationship Between Gradients at Optimality
 
@@ -328,7 +328,7 @@ This condition provides the foundation for solving constrained optimization prob
 `***********************************************************************************`
 
 ---
-## Lecture 1
+## Lecture 3
 ### Method of Lagrange Multipliers
 
 Consider the equality constrained optimization problem
@@ -614,3 +614,208 @@ Projected gradient descent extends gradient descent to constrained optimization.
 `***********************************************************************************`
 
 ---
+## Lecture 4
+### Introduction to Convexity
+
+Optimization algorithms such as gradient descent typically converge to local minima.
+To guarantee global optimality, we restrict attention to special classes of functions and sets.
+These are based on the notion of convexity.
+
+---
+### Convex Sets
+#### Definition
+
+Let $S \subseteq \mathbb{R}^d$.
+The set $S$ is said to be convex if for all $x_1, x_2 \in S$ and for all $\lambda \in [0,1]$,
+$$
+\lambda x_1 + (1 - \lambda) x_2 \in S
+$$
+---
+### Interpretation
+
+For any two points in the set, the entire line segment joining them must lie inside the set.
+The point
+$$
+\lambda x_1 + (1 - \lambda) x_2
+$$
+is called a convex combination of $x_1$ and $x_2$.
+Special cases:
+If $\lambda = 1$,
+$$
+\lambda x_1 + (1 - \lambda) x_2 = x_1
+$$
+If $\lambda = 0$,
+$$
+\lambda x_1 + (1 - \lambda) x_2 = x_2
+$$
+If $\lambda = \frac{1}{2}$,
+$$
+\frac{1}{2} x_1 + \frac{1}{2} x_2
+$$
+is the midpoint of the segment joining $x_1$ and $x_2$.
+As $\lambda$ varies from $0$ to $1$, the point traces the entire line segment.
+
+---
+### Examples of Convex Sets
+
+#### 1. Line in $\mathbb{R}^2$
+
+Any line in $\mathbb{R}^2$ is convex.
+Given two points on the line, the segment joining them lies entirely on the line.
+
+---
+#### 2. Ellipse or Circle
+
+Any filled ellipse or circle is convex.
+For any two points inside the ellipse, the entire line segment lies inside the ellipse.
+
+---
+#### 3. Non Convex Set
+
+A set with an indentation or gap is not convex.
+If there exist $x_1, x_2 \in S$ such that the line segment between them exits the set, then $S$ is not convex.
+
+---
+### Convex Sets in One Dimension
+
+If $S \subseteq \mathbb{R}$, then convex sets are exactly intervals of the form
+$$
+[a,b]
+$$
+or
+$$
+(a,b)
+$$
+or infinite intervals such as
+$$
+(-\infty, b]
+$$
+Union of two disjoint intervals is not convex.
+If
+$$
+S = [a,b] \cup [c,d]
+$$
+with $b < c$, then $S$ is not convex.
+
+---
+### Hyperplanes
+
+#### Definition
+
+Given $w \in \mathbb{R}^d$ and scalar $b$, define
+$$
+S = \{ x \in \mathbb{R}^d : w^T x = b \}
+$$
+This set is called a hyperplane.
+
+---
+### Claim
+
+Hyperplanes are convex sets.
+
+---
+#### Proof
+
+Take any $x_1, x_2 \in S$.
+Then
+$$
+w^T x_1 = b
+$$
+$$
+w^T x_2 = b
+$$
+Consider any $\lambda \in [0,1]$.
+Compute:
+$$
+w^T \big( \lambda x_1 + (1 - \lambda) x_2 \big)
+$$
+Using linearity:
+$$
+= \lambda w^T x_1 + (1 - \lambda) w^T x_2
+$$
+Substitute values:
+$$
+= \lambda b + (1 - \lambda) b
+$$
+$$
+= b
+$$
+Therefore,
+$$
+\lambda x_1 + (1 - \lambda) x_2 \in S
+$$
+Hence $S$ is convex.
+
+---
+### Half Spaces
+
+#### Definition
+
+Given $w \in \mathbb{R}^d$ and scalar $b$, define
+$$
+S = \{ x \in \mathbb{R}^d : w^T x \le b \}
+$$
+This set is called a half space.
+
+---
+### Convexity of Half Spaces
+
+Take $x_1, x_2 \in S$.
+Then
+$$
+w^T x_1 \le b
+$$
+$$
+w^T x_2 \le b
+$$
+For $\lambda \in [0,1]$,
+$$
+w^T \big( \lambda x_1 + (1 - \lambda) x_2 \big)
+=
+\lambda w^T x_1 + (1 - \lambda) w^T x_2
+$$
+Since both terms are less than or equal to $b$,
+$$
+\le \lambda b + (1 - \lambda) b
+$$
+$$
+= b
+$$
+Therefore,
+$$
+\lambda x_1 + (1 - \lambda) x_2 \in S
+$$
+Hence half spaces are convex.
+
+---
+### Important Property
+#### Intersection of Convex Sets
+
+Let $S_1, S_2 \subseteq \mathbb{R}^d$ be convex.
+Define
+$$
+S = S_1 \cap S_2
+$$
+Take any $x_1, x_2 \in S$.
+Then
+$$
+x_1, x_2 \in S_1
+$$
+and
+$$
+x_1, x_2 \in S_2
+$$
+Since both sets are convex,
+$$
+\lambda x_1 + (1 - \lambda) x_2 \in S_1
+$$
+and
+$$
+\lambda x_1 + (1 - \lambda) x_2 \in S_2
+$$
+Thus,
+$$
+\lambda x_1 + (1 - \lambda) x_2 \in S
+$$
+Therefore, intersection of convex sets is convex.
+Convex sets play a fundamental role in optimization and machine learning, as many feasible regions are intersections of half spaces, and therefore convex.
