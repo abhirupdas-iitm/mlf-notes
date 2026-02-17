@@ -650,3 +650,242 @@ Next step: relate primal and dual solutions and understand when their optimal va
 `***********************************************************************************`
 
 ---
+## Lecture 4
+### Relation Between Primal and Dual Problem
+### Primal Problem
+
+Given the constrained optimization problem
+$$
+\min_{x \in \mathbb{R}^n} f(x)
+\quad \text{subject to} \quad
+h(x) \le 0
+$$
+define the Lagrangian
+$$
+L(x,\lambda) = f(x) + \lambda h(x), \quad \lambda \ge 0
+$$
+The primal formulation is
+$$
+\min_x \max_{\lambda \ge 0} L(x,\lambda)
+$$
+---
+### Dual Problem
+
+Define
+$$
+g(\lambda) = \min_x L(x,\lambda)
+$$
+The dual problem is
+$$
+\max_{\lambda \ge 0} g(\lambda)
+=
+\max_{\lambda \ge 0} \min_x L(x,\lambda)
+$$
+---
+### Auxiliary Function
+
+Define
+$$
+J(x) =
+\begin{cases}
+f(x) & \text{if } h(x) \le 0 \\
+\infty & \text{otherwise}
+\end{cases}
+$$
+For any fixed $\lambda \ge 0$,
+$$
+L(x,\lambda) \le J(x) \quad \forall x
+$$
+Hence,
+$$
+\min_x L(x,\lambda)
+\le
+\min_x J(x)
+$$
+But
+$$
+\min_x J(x) = f(x^*)
+$$
+where $x^*$ is the primal optimal solution.
+Taking maximum over $\lambda$:
+$$
+\max_{\lambda \ge 0} \min_x L(x,\lambda)
+\le
+f(x^*)
+$$
+---
+### Weak Duality
+
+Let $\lambda^*$ be dual optimal and $x^*$ primal optimal.
+Then
+$$
+g(\lambda^*)
+\le
+f(x^*)
+$$
+The value at dual optimum is less than or equal to value at primal optimum.
+This is called **weak duality**.
+
+---
+### Strong Duality
+
+If
+- $f$ is convex
+- $h$ is convex
+- regularity conditions hold
+
+then
+$$
+\min_x \max_{\lambda \ge 0} L(x,\lambda)
+=
+\max_{\lambda \ge 0} \min_x L(x,\lambda)
+$$
+Hence,
+$$
+f(x^*) = g(\lambda^*)
+$$
+This is called **strong duality**.
+
+---
+### Necessary Conditions Under Strong Duality
+
+Assume $f$ and $h$ are convex and strong duality holds.
+Let $x^*, \lambda^*$ be optimal solutions.
+
+---
+### Condition 1: Stationarity
+
+Since
+$$
+f(x^*)
+=
+\min_x \left( f(x) + \lambda^* h(x) \right)
+$$
+the gradient must vanish:
+$$
+\nabla f(x^*)
++
+\lambda^* \nabla h(x^*)
+=
+0
+$$
+---
+### Condition 2: Complementary Slackness
+
+From equality
+$$
+f(x^*)
+=
+f(x^*)
++
+\lambda^* h(x^*)
+$$
+we obtain
+$$
+\lambda^* h(x^*) = 0
+$$
+---
+### Condition 3: Primal Feasibility
+$$
+h(x^*) \le 0
+$$
+---
+### Condition 4: Dual Feasibility
+$$
+\lambda^* \ge 0
+$$
+---
+### KKT Conditions (Single Inequality Constraint)
+
+For convex $f,h$, $x^*,\lambda^*$ are optimal if and only if:
+1. Stationarity  
+   $$
+   \nabla f(x^*) + \lambda^* \nabla h(x^*) = 0
+   $$
+2. Complementary Slackness  
+   $$
+   \lambda^* h(x^*) = 0
+   $$
+3. Primal Feasibility  
+   $$
+   h(x^*) \le 0
+   $$
+4. Dual Feasibility  
+   $$
+   \lambda^* \ge 0
+   $$
+
+---
+### General KKT Conditions
+
+Consider
+$$
+\min_x f(x)
+$$
+subject to
+$$
+h_i(x) \le 0, \quad i = 1,\dots,m
+$$
+$$
+\ell_j(x) = 0, \quad j = 1,\dots,n
+$$
+---
+### Lagrangian
+
+Introduce multipliers
+- $u_i \ge 0$ for inequality constraints
+- $v_j$ for equality constraints
+$$
+L(x,u,v)
+=
+f(x)
++
+\sum_{i=1}^m u_i h_i(x)
++
+\sum_{j=1}^n v_j \ell_j(x)
+$$
+---
+### KKT Conditions (General Case)
+
+#### 1. Stationarity
+$$
+\nabla f(x^*)
++
+\sum_{i=1}^m u_i^* \nabla h_i(x^*)
++
+\sum_{j=1}^n v_j^* \nabla \ell_j(x^*)
+=
+0
+$$
+---
+#### 2. Complementary Slackness
+$$
+u_i^* h_i(x^*) = 0
+\quad \forall i
+$$
+---
+#### 3. Primal Feasibility
+$$
+h_i(x^*) \le 0
+$$
+$$
+\ell_j(x^*) = 0
+$$
+---
+#### 4. Dual Feasibility
+$$
+u_i^* \ge 0
+$$
+---
+### Interpretation
+
+For convex problems:
+- These conditions are **necessary and sufficient**
+- Any $(x^*,u^*,v^*)$ satisfying KKT conditions is a global optimum
+
+These are called the **Karush-Kuhn-Tucker conditions**.
+
+---
+`***********************************************************************************`
+
+---
