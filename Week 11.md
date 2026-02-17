@@ -1047,3 +1047,243 @@ $$
 `***********************************************************************************`
 
 ---
+## Lecture 5
+### Multiple Random Variables, Independence and Covariance
+
+### Joint Distributions
+
+Let $X, Y : \Omega \to \mathbb{R}$ be two random variables.
+#### Joint Probability Mass Function
+The joint PMF is defined as
+$$
+f_{XY}(x,y) = \mathbb{P}(X = x, Y = y)
+$$
+In event notation,
+$$
+f_{XY}(x,y) =
+\mathbb{P}\Big(
+\{ \omega \in \Omega : X(\omega) = x \}
+\cap
+\{ \omega \in \Omega : Y(\omega) = y \}
+\Big)
+$$
+#### Joint Cumulative Distribution Function
+$$
+F_{XY}(x,y) = \mathbb{P}(X \le x, Y \le y)
+$$
+#### Normalization Property
+$$
+\sum_{x,y} f_{XY}(x,y) = 1
+$$
+This holds since the sets
+$$
+\{ \omega : X(\omega)=x, Y(\omega)=y \}
+$$
+are disjoint and their union equals $\Omega$.
+
+---
+### Marginal Distributions
+
+The marginal PMFs are obtained by summing out the other variable.
+#### Marginal of $X$
+$$
+f_X(x) = \mathbb{P}(X = x)
+$$
+$$
+f_X(x) = \sum_{y} f_{XY}(x,y)
+$$
+#### Marginal of $Y$
+$$
+f_Y(y) = \sum_{x} f_{XY}(x,y)
+$$
+---
+### Conditional Distributions
+
+#### Conditional PMF of $X$ given $Y=y$
+$$
+f_{X|Y}(x|y) = \mathbb{P}(X = x \mid Y = y)
+$$
+Using conditional probability,
+$$
+f_{X|Y}(x|y)
+=
+\frac{f_{XY}(x,y)}{f_Y(y)}
+$$
+Similarly,
+$$
+f_{Y|X}(y|x)
+=
+\frac{f_{XY}(x,y)}{f_X(x)}
+$$
+For any fixed $y$,
+$$
+\sum_x f_{X|Y}(x|y) = 1
+$$
+---
+### Independence of Random Variables
+
+#### Definition via Joint Distribution
+Random variables $X$ and $Y$ are independent if
+$$
+f_{XY}(x,y) = f_X(x) f_Y(y)
+$$
+for all $x,y$.
+#### Equivalent Event-Based Definition
+For all constants $a,b$,
+$$
+\{X=a\} \text{ and } \{Y=b\}
+$$
+are independent events.
+
+#### Equivalent Expectation-Based Definition
+For all functions $g,h$,
+$$
+\mathbb{E}[g(X)h(Y)]
+=
+\mathbb{E}[g(X)] \mathbb{E}[h(Y)]
+$$
+#### Proof of Expectation Form
+$$
+\mathbb{E}[g(X)h(Y)]
+=
+\sum_{x,y} f_{XY}(x,y) g(x) h(y)
+$$
+If $X,Y$ are independent,
+$$
+=
+\sum_{x,y} f_X(x) f_Y(y) g(x) h(y)
+$$
+Rearranging,
+$$
+=
+\left( \sum_x f_X(x) g(x) \right)
+\left( \sum_y f_Y(y) h(y) \right)
+$$
+$$
+=
+\mathbb{E}[g(X)] \mathbb{E}[h(Y)]
+$$
+---
+### Sum of Independent Random Variables
+
+Let $Z = X + Y$.
+Then
+$$
+f_Z(z) = \mathbb{P}(Z=z)
+$$
+$$
+=
+\sum_x \mathbb{P}(X=x, Y=z-x)
+$$
+$$
+=
+\sum_x f_{XY}(x, z-x)
+$$
+If $X,Y$ are independent,
+$$
+f_Z(z)
+=
+\sum_x f_X(x) f_Y(z-x)
+$$
+This operation is called convolution.
+
+---
+### Conditional Expectation with Respect to a Random Variable
+
+We have already defined
+$$
+\mathbb{E}[X \mid A]
+$$
+for event $A$.
+For random variable $Y$, we define
+$$
+\mathbb{E}[X \mid Y]
+$$
+as a function of $Y$.
+Example:
+Let $X$ be the sum of two dice and $Y$ be the first die.
+Then
+$$
+\mathbb{E}[X \mid Y]
+=
+Y + 3.5
+$$
+Thus conditional expectation is itself a random variable.
+
+---
+### Covariance
+
+Let $X,Y : \Omega \to \mathbb{R}$.
+#### Definition
+$$
+\operatorname{Cov}(X,Y)
+=
+\mathbb{E}\Big[ (X - \mathbb{E}X)(Y - \mathbb{E}Y) \Big]
+$$
+Special case:
+$$
+\operatorname{Cov}(X,X) = \operatorname{Var}(X)
+$$
+#### Algebraic Simplification
+Expanding,
+$$
+(X-\mathbb{E}X)(Y-\mathbb{E}Y)
+=
+XY - (\mathbb{E}X)Y - X(\mathbb{E}Y) + \mathbb{E}X \mathbb{E}Y
+$$
+Taking expectation,
+$$
+\operatorname{Cov}(X,Y)
+=
+\mathbb{E}[XY]
+-
+\mathbb{E}X \mathbb{E}Y
+$$
+#### Independence Implies Zero Covariance
+If $X,Y$ are independent,
+$$
+\mathbb{E}[XY]
+=
+\mathbb{E}X \mathbb{E}Y
+$$
+Hence,
+$$
+\operatorname{Cov}(X,Y)=0
+$$
+Thus independent random variables are uncorrelated.
+
+---
+### Uncorrelated Does Not Imply Independent
+
+Two random variables may satisfy
+$$
+\operatorname{Cov}(X,Y)=0
+$$
+but still fail
+$$
+f_{XY}(x,y) = f_X(x) f_Y(y)
+$$
+Hence uncorrelated does not imply independent.
+
+---
+### Interpretation of Covariance
+
+- Positive covariance: variables increase or decrease together.
+- Negative covariance: one increases while the other decreases.
+- Zero covariance: no linear relationship.
+---
+### Summary
+
+1. Joint PMF generalizes single-variable PMF.
+2. Marginals obtained by summation.
+3. Conditionals obtained via ratio of joint to marginal.
+4. Independence characterized by factorization of joint.
+5. Sum of independent variables uses convolution.
+6. Conditional expectation is a function of the conditioning variable.
+7. Covariance measures linear dependence.
+8. Independence implies zero covariance, but not vice versa.
+
+---
+`***********************************************************************************`
+
+---
