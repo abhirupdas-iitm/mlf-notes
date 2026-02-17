@@ -148,3 +148,183 @@ which characterizes constrained optimality.
 `***********************************************************************************`
 
 ---
+## Lecture 1
+
+### Relationship Between Gradients at Optimality
+
+Consider the constrained problem
+$$
+\min_x f(x)
+$$
+subject to
+$$
+g(x) \le 0
+$$
+Let $x^*$ be a feasible point:
+$$
+g(x^*) \le 0
+$$
+We seek a necessary condition relating
+$$
+\nabla f(x^*) \quad \text{and} \quad \nabla g(x^*)
+$$
+such that no descent direction is feasible.
+
+---
+### Case 1: Gradients Point in Same Direction
+
+Assume
+$$
+\nabla f(x^*) \parallel \nabla g(x^*)
+$$
+Descent directions satisfy
+$$
+d^T \nabla f(x^*) < 0
+$$
+Feasible directions satisfy
+$$
+d^T \nabla g(x^*) < 0
+$$
+If the gradients are parallel, then any direction satisfying
+$$
+d^T \nabla f(x^*) < 0
+$$
+automatically satisfies
+$$
+d^T \nabla g(x^*) < 0
+$$
+Thus every descent direction is feasible.
+Therefore, there exists a whole half space of directions that both decrease $f$ and preserve feasibility.
+Conclusion:
+$x^*$ cannot be optimal.
+
+---
+### Case 2: Gradients Anti Parallel
+
+Assume
+$$
+\nabla f(x^*) \quad \text{and} \quad \nabla g(x^*)
+$$
+point in opposite directions.
+Descent directions satisfy
+$$
+d^T \nabla f(x^*) < 0
+$$
+Feasible directions satisfy
+$$
+d^T \nabla g(x^*) < 0
+$$
+Since the gradients are anti parallel, the descent half space of $f$ lies on one side, while feasible directions lie on the opposite side.
+Thus no direction $d$ can satisfy both
+$$
+d^T \nabla f(x^*) < 0
+$$
+and
+$$
+d^T \nabla g(x^*) < 0
+$$
+Therefore no descent direction is feasible.
+
+---
+### Necessary Condition for Inequality Constraint
+
+The above geometric argument implies:
+There exists a scalar $\lambda > 0$ such that
+$$
+\nabla f(x^*) = - \lambda \nabla g(x^*)
+$$
+This ensures anti parallel alignment.
+This is a necessary condition for optimality for
+$$
+\min_x f(x) \quad \text{subject to} \quad g(x) \le 0
+$$
+The scalar $\lambda$ is called the Lagrange multiplier.
+
+---
+### Equality Constraint Case
+
+Consider
+$$
+\min_x f(x)
+$$
+subject to
+$$
+g(x) = 0
+$$
+---
+### Feasible Directions
+
+Using Taylor expansion,
+$$
+g(x^* + \eta d) \approx g(x^*) + \eta d^T \nabla g(x^*)
+$$
+Since $g(x^*) = 0$, feasibility requires
+$$
+d^T \nabla g(x^*) = 0
+$$
+Thus feasible directions lie on the hyperplane perpendicular to $\nabla g(x^*)$.
+
+---
+### Descent Directions
+
+Descent directions satisfy
+$$
+d^T \nabla f(x^*) < 0
+$$
+---
+### Optimal Configuration
+
+For optimality, no direction must satisfy both
+$$
+d^T \nabla f(x^*) < 0
+$$
+and
+$$
+d^T \nabla g(x^*) = 0
+$$
+This occurs when $\nabla f(x^*)$ is orthogonal to the feasible hyperplane, i.e.,
+$$
+\nabla f(x^*) \parallel \nabla g(x^*)
+$$
+or
+$$
+\nabla f(x^*) \text{ is anti parallel to } \nabla g(x^*)
+$$
+Thus,
+there exists scalar $\lambda$ such that
+$$
+\nabla f(x^*) = - \lambda \nabla g(x^*)
+$$
+where $\lambda$ is any real scalar.
+
+---
+### Comparison
+
+#### Inequality Constraint
+$$
+\nabla f(x^*) = - \lambda \nabla g(x^*)
+$$
+with
+$$
+\lambda > 0
+$$
+---
+#### Equality Constraint
+$$
+\nabla f(x^*) = - \lambda \nabla g(x^*)
+$$
+with
+$$
+\lambda \in \mathbb{R}
+$$
+---
+### Key Observation
+
+For constrained optimality, the gradient of the objective must lie in the span of the gradient of the constraint.
+The scalar $\lambda$ is called the Lagrange multiplier.
+This condition provides the foundation for solving constrained optimization problems using the method of Lagrange multipliers.
+
+---
+`***********************************************************************************`
+
+---
