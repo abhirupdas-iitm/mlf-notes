@@ -328,3 +328,289 @@ This condition provides the foundation for solving constrained optimization prob
 `***********************************************************************************`
 
 ---
+## Lecture 1
+### Method of Lagrange Multipliers
+
+Consider the equality constrained optimization problem
+$$
+\min_x f(x)
+$$
+subject to
+$$
+g(x) = 0
+$$
+---
+### Necessary Conditions for Optimality
+
+If $x^*$ is optimal, then:
+#### 1. Feasibility
+$$
+g(x^*) = 0
+$$
+#### 2. Gradient Alignment
+There exists scalar $\lambda$ such that
+$$
+\nabla f(x^*) = - \lambda \nabla g(x^*)
+$$
+For equality constraints,
+$$
+\lambda \in \mathbb{R}
+$$
+The scalar $\lambda$ is called the Lagrange multiplier.
+
+---
+### Example
+
+Let
+$$
+f(x_1, x_2) = x_1^2 + 2x_2 + 4x_2^2
+$$
+Constraint:
+$$
+g(x_1, x_2) = x_1^2 + x_2^2 - 1
+$$
+Thus feasible points lie on the unit circle:
+$$
+x_1^2 + x_2^2 = 1
+$$
+---
+### Step 1: Compute Gradients
+
+Gradient of $f$:
+$$
+\nabla f(x_1, x_2) =
+\begin{pmatrix}
+2x_1 \\
+2 + 8x_2
+\end{pmatrix}
+$$
+Gradient of $g$:
+$$
+\nabla g(x_1, x_2) =
+\begin{pmatrix}
+2x_1 \\
+2x_2
+\end{pmatrix}
+$$
+---
+### Step 2: Apply Lagrange Condition
+
+We impose
+$$
+\nabla f = - \lambda \nabla g
+$$
+This gives the system
+$$
+\begin{pmatrix}
+2x_1 \\
+2 + 8x_2
+\end{pmatrix}
+=
+- \lambda
+\begin{pmatrix}
+2x_1 \\
+2x_2
+\end{pmatrix}
+$$
+Which yields componentwise equations:
+$$
+2x_1 = - \lambda 2x_1
+$$
+$$
+2 + 8x_2 = - \lambda 2x_2
+$$
+---
+### Step 3: Solve System
+
+#### Equation 1
+$$
+2x_1 + 2\lambda x_1 = 0
+$$
+$$
+2x_1(1 + \lambda) = 0
+$$
+Thus either
+Case A:
+$$
+\lambda = -1
+$$
+or
+Case B:
+$$
+x_1 = 0
+$$
+---
+### Case A: $\lambda = -1$
+
+Substitute into Equation 2:
+$$
+2 + 8x_2 = -(-1)2x_2
+$$
+$$
+2 + 8x_2 = 2x_2
+$$
+$$
+2 + 6x_2 = 0
+$$
+$$
+x_2 = -\frac{1}{3}
+$$
+Feasibility condition:
+$$
+x_1^2 + x_2^2 = 1
+$$
+$$
+x_1^2 + \frac{1}{9} = 1
+$$
+$$
+x_1^2 = \frac{8}{9}
+$$
+$$
+x_1 = \pm \frac{\sqrt{8}}{3}
+$$
+Thus two candidate points:
+$$
+\left(\frac{\sqrt{8}}{3}, -\frac{1}{3}\right)
+$$
+$$
+\left(-\frac{\sqrt{8}}{3}, -\frac{1}{3}\right)
+$$
+---
+### Case B: $x_1 = 0$
+
+Feasibility:
+$$
+x_2^2 = 1
+$$
+$$
+x_2 = \pm 1
+$$
+Thus two candidate points:
+$$
+(0,1)
+$$
+$$
+(0,-1)
+$$
+---
+### Step 4: Evaluate Objective Function
+
+Recall
+$$
+f(x_1, x_2) = x_1^2 + 2x_2 + 4x_2^2
+$$
+#### At $(0,1)$
+$$
+f = 0 + 2 + 4 = 6
+$$
+#### At $(0,-1)$
+$$
+f = 0 - 2 + 4 = 2
+$$
+#### At $\left(\pm \frac{\sqrt{8}}{3}, -\frac{1}{3}\right)$
+$$
+x_1^2 = \frac{8}{9}
+$$
+$$
+x_2 = -\frac{1}{3}
+$$
+$$
+x_2^2 = \frac{1}{9}
+$$
+$$
+f = \frac{8}{9} - \frac{2}{3} + \frac{4}{9}
+$$
+$$
+= \frac{12}{9} - \frac{2}{3}
+$$
+$$
+= \frac{4}{3} - \frac{2}{3}
+$$
+$$
+= \frac{2}{3}
+$$
+---
+### Conclusion
+
+Function values:
+$$
+6, \quad 2, \quad \frac{2}{3}, \quad \frac{2}{3}
+$$
+Minimum value:
+$$
+\frac{2}{3}
+$$
+Minimizers:
+$$
+\left(\frac{\sqrt{8}}{3}, -\frac{1}{3}\right)
+$$
+$$
+\left(-\frac{\sqrt{8}}{3}, -\frac{1}{3}\right)
+$$
+Maximum value:
+$$
+6
+$$
+at
+$$
+(0,1)
+$$
+---
+### Projected Gradient Descent
+
+When analytic solution is not feasible, use iterative methods.
+
+---
+### Standard Gradient Descent
+
+Initialize:
+$$
+x_0
+$$
+Iterate:
+$$
+x_{t+1} = x_t - \eta \nabla f(x_t)
+$$
+This may leave the feasible region.
+
+---
+### Projection Operator
+
+Let feasible set
+$$
+S = \{ y : g(y) \le 0 \}
+$$
+Define projection operator:
+$$
+\Pi_S(x) = \arg\min_{y \in S} \| x - y \|^2
+$$
+Projection finds the closest feasible point.
+
+---
+### Projected Gradient Descent Algorithm
+
+Initialization:
+$$
+x_0
+$$
+For $t = 0,1,\dots,T$:
+Gradient step:
+$$
+z_t = x_t - \eta \nabla f(x_t)
+$$
+Projection step:
+$$
+x_{t+1} = \Pi_S(z_t)
+$$
+---
+### Key Observations
+1. Every iterate remains feasible.
+2. Requires efficient computation of projection.
+3. If feasible set is convex, convergence to optimal solution can be guaranteed under suitable conditions.
+4. Convex objective functions improve convergence guarantees.
+Projected gradient descent extends gradient descent to constrained optimization.
+
+---
+`***********************************************************************************`
+
+---
