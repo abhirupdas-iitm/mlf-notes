@@ -819,3 +819,248 @@ $$
 $$
 Therefore, intersection of convex sets is convex.
 Convex sets play a fundamental role in optimization and machine learning, as many feasible regions are intersections of half spaces, and therefore convex.
+
+---
+`***********************************************************************************`
+
+---
+## Lecture 5
+### Properties of Convex Sets
+### Intersection of Convex Sets
+
+Let $S_1, S_2 \subseteq \mathbb{R}^d$ be convex sets.
+Define
+$$
+S_{12} = S_1 \cap S_2
+$$
+Then
+$$
+S_{12} = \{ x \in \mathbb{R}^d : x \in S_1 \text{ and } x \in S_2 \}
+$$
+---
+### Claim
+
+Intersection of convex sets is convex.
+
+---
+### Proof
+
+Take arbitrary $x_1, x_2 \in S_{12}$.
+Then
+$$
+x_1, x_2 \in S_1
+$$
+and
+$$
+x_1, x_2 \in S_2
+$$
+Since $S_1$ is convex, for any $\lambda \in [0,1]$,
+$$
+\lambda x_1 + (1 - \lambda) x_2 \in S_1
+$$
+Since $S_2$ is convex, for any $\lambda \in [0,1]$,
+$$
+\lambda x_1 + (1 - \lambda) x_2 \in S_2
+$$
+Therefore,
+$$
+\lambda x_1 + (1 - \lambda) x_2 \in S_1 \cap S_2
+$$
+Hence $S_{12}$ is convex.
+
+---
+### Application: Solution Set of Linear Systems
+
+Consider
+$$
+S = \{ x \in \mathbb{R}^d : Ax = b \}
+$$
+where
+$$
+A \in \mathbb{R}^{m \times d}, \quad b \in \mathbb{R}^m
+$$
+Write $A$ row wise:
+$$
+A =
+\begin{pmatrix}
+a_1^T \\
+a_2^T \\
+\vdots \\
+a_m^T
+\end{pmatrix}
+$$
+Then
+$$
+Ax = b
+$$
+is equivalent to the system
+$$
+a_1^T x = b_1
+$$
+$$
+a_2^T x = b_2
+$$
+$$
+\vdots
+$$
+$$
+a_m^T x = b_m
+$$
+Thus,
+$$
+S = \bigcap_{i=1}^m \{ x : a_i^T x = b_i \}
+$$
+Each set
+$$
+\{ x : a_i^T x = b_i \}
+$$
+is a hyperplane and hence convex.
+Since intersection of convex sets is convex,
+$$
+S
+$$
+is convex.
+
+---
+### Convex Combinations
+
+Let
+$$
+S = \{ x_1, x_2, \dots, x_n \} \subseteq \mathbb{R}^d
+$$
+A point $z \in \mathbb{R}^d$ is called a convex combination of points in $S$ if there exist scalars
+$$
+\lambda_1, \lambda_2, \dots, \lambda_n
+$$
+such that
+$$
+\lambda_i \ge 0
+$$
+and
+$$
+\sum_{i=1}^n \lambda_i = 1
+$$
+and
+$$
+z = \sum_{i=1}^n \lambda_i x_i
+$$
+---
+### Convex Hull
+
+#### Definition
+
+The convex hull of $S$ is defined as
+$$
+\text{ch}(S) =
+\left\{
+\sum_{i=1}^n \lambda_i x_i :
+\lambda_i \ge 0,
+\sum_{i=1}^n \lambda_i = 1
+\right\}
+$$
+Thus, convex hull is the set of all convex combinations of points in $S$.
+
+---
+### Geometric Interpretation
+
+For finite points in $\mathbb{R}^2$, the convex hull is the smallest polygon containing all the points.
+It consists of all points that can be written as convex combinations of the original points.
+
+---
+### Convexity of Convex Hull
+
+Claim:
+$$
+\text{ch}(S)
+$$
+is convex.
+
+Proof outline:
+Take two convex combinations:
+$$
+z_1 = \sum_{i=1}^n \lambda_i x_i
+$$
+$$
+z_2 = \sum_{i=1}^n \mu_i x_i
+$$
+Let $\theta \in [0,1]$.
+Then
+$$
+\theta z_1 + (1 - \theta) z_2
+=
+\sum_{i=1}^n \big( \theta \lambda_i + (1 - \theta) \mu_i \big) x_i
+$$
+Coefficients satisfy
+$$
+\theta \lambda_i + (1 - \theta) \mu_i \ge 0
+$$
+and
+$$
+\sum_{i=1}^n \big( \theta \lambda_i + (1 - \theta) \mu_i \big) = 1
+$$
+Hence it is also a convex combination.
+Therefore convex hull is convex.
+
+---
+### Alternate Definition of Convex Hull
+
+The convex hull of $S$ can also be defined as
+the intersection of all convex sets that contain $S$.
+Formally,
+$$
+\text{ch}(S)
+=
+\bigcap
+\{ C : C \text{ convex and } S \subseteq C \}
+$$
+Since intersection of convex sets is convex,
+this definition also yields a convex set.
+
+---
+### Euclidean Balls
+
+Define Euclidean ball in $\mathbb{R}^d$:
+$$
+B = \{ x \in \mathbb{R}^d : \|x\|_2 \le \theta \}
+$$
+where
+$$
+\|x\|_2 =
+\sqrt{\sum_{i=1}^d x_i^2}
+$$
+---
+### Convexity of Euclidean Ball
+
+Take $x_1, x_2 \in B$.
+Then
+$$
+\|x_1\|_2 \le \theta
+$$
+$$
+\|x_2\|_2 \le \theta
+$$
+For $\lambda \in [0,1]$,
+by triangle inequality and homogeneity,
+$$
+\|\lambda x_1 + (1 - \lambda) x_2\|_2
+\le
+\lambda \|x_1\|_2 + (1 - \lambda) \|x_2\|_2
+$$
+$$
+\le
+\lambda \theta + (1 - \lambda) \theta
+$$
+$$
+= \theta
+$$
+Thus
+$$
+\lambda x_1 + (1 - \lambda) x_2 \in B
+$$
+Therefore Euclidean balls are convex.
+Convex sets, convex combinations, convex hulls, and intersections form foundational tools for optimization and machine learning.
+
+---
+`***********************************************************************************`
+
+---
