@@ -1064,3 +1064,162 @@ Convex sets, convex combinations, convex hulls, and intersections form foundatio
 `***********************************************************************************`
 
 ---
+## Lecture 6
+### Convex Functions
+
+Let $f : \mathbb{R}^d \to \mathbb{R}$.
+Assume the domain of $f$ is a convex set.
+We present four equivalent definitions of convex functions.
+
+---
+### Definition 1: Epigraph Definition
+#### Epigraph
+
+The epigraph of $f$ is defined as
+$$
+\text{epi}(f) =
+\left\{
+(x, z) \in \mathbb{R}^{d+1} :
+z \ge f(x)
+\right\}
+$$
+Thus the epigraph consists of all points lying on or above the graph of $f$.
+
+---
+### Convexity via Epigraph
+
+The function $f$ is convex if and only if
+$$
+\text{epi}(f)
+$$
+is a convex set in $\mathbb{R}^{d+1}$.
+
+---
+### Definition 2: Jensen Inequality Form
+
+A function $f : \mathbb{R}^d \to \mathbb{R}$ is convex if and only if
+for all $x_1, x_2 \in \mathbb{R}^d$ and all $\lambda \in [0,1]$,
+$$
+f\big( \lambda x_1 + (1 - \lambda) x_2 \big)
+\le
+\lambda f(x_1) + (1 - \lambda) f(x_2)
+$$
+---
+### Geometric Interpretation
+
+For any two points on the graph,
+the function value at the convex combination of inputs
+lies below the straight line joining the function values.
+Thus the graph of a convex function lies below all secant lines.
+
+---
+### Definition 3: First Order Condition
+
+Assume $f$ is differentiable.
+Then $f$ is convex if and only if
+for all $x, y \in \mathbb{R}^d$,
+$$
+f(y)
+\ge
+f(x)
++
+(y - x)^T \nabla f(x)
+$$
+---
+### Interpretation
+
+The linear approximation of $f$ at point $x$
+$$
+f(x) + (y - x)^T \nabla f(x)
+$$
+is a global under-estimator of the function.
+Thus every tangent hyperplane lies below the function.
+
+---
+### Relation to Taylor Expansion
+
+Using first order Taylor expansion,
+$$
+f(x + \epsilon d)
+=
+f(x)
++
+\epsilon d^T \nabla f(x)
++
+\text{higher order terms}
+$$
+Convexity implies
+$$
+f(y)
+\ge
+f(x)
++
+(y - x)^T \nabla f(x)
+$$
+for all $y$,
+without requiring $\epsilon$ to be small.
+
+---
+### Definition 4: Second Order Condition
+
+Assume $f$ is twice differentiable.
+Define the Hessian matrix
+$$
+H(x)
+=
+\nabla^2 f(x)
+\in
+\mathbb{R}^{d \times d}
+$$
+with entries
+$$
+H_{ij}(x)
+=
+\frac{\partial^2 f}{\partial x_i \partial x_j}
+$$
+---
+### Convexity via Hessian
+
+The function $f$ is convex if and only if
+$$
+H(x)
+$$
+is positive semi definite for all $x$,
+that is,
+all eigenvalues of $H(x)$ are greater than or equal to zero.
+
+---
+### Example
+Let
+$$
+f(x) = x^2
+$$
+Then
+$$
+f'(x) = 2x
+$$
+$$
+f''(x) = 2
+$$
+Since
+$$
+f''(x) > 0
+$$
+for all $x$,
+$f$ is convex.
+
+---
+### Summary
+
+A function $f : \mathbb{R}^d \to \mathbb{R}$ is convex if any one of the following equivalent conditions holds:
+1. Its epigraph is a convex set.
+2. It satisfies the Jensen inequality.
+3. Its tangent hyperplanes globally underestimate it.
+4. Its Hessian is positive semi definite.
+
+These characterizations provide multiple tools to verify convexity in optimization and machine learning.
+
+---
+`***********************************************************************************`
+
+---
