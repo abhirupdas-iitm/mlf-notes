@@ -826,4 +826,301 @@ This is the spectral theorem in the real case.
 `***********************************************************************************`
 
 ---
+## Lecture 4
+### Schur Theorem and Upper Triangularization
 
+### 1. Recap of Definitions
+
+#### Conjugate Transpose
+
+For $A \in C^{n \times n}$,
+$$
+A^* = \bar{A}^T
+$$
+---
+#### Hermitian Matrix
+
+$A$ is Hermitian if
+$$
+A^* = A
+$$
+---
+#### Unitary Matrix
+
+$U$ is unitary if
+$$
+U^* U = I
+$$
+Equivalently,
+$$
+U^{-1} = U^*
+$$
+---
+#### Unitary Diagonalization
+
+A matrix $A$ is unitarily diagonalizable if there exists a unitary matrix $U$ such that
+$$
+A = U \Lambda U^*
+$$
+where $\Lambda$ is diagonal.
+
+---
+### 2. Goal
+
+Prove that Hermitian matrices are unitarily diagonalizable.
+#### Strategy
+
+1. Prove that any $n \times n$ complex matrix is unitarily similar to an upper triangular matrix.
+2. Use this result to prove Hermitian matrices are unitarily diagonalizable.
+
+---
+### 3. Schur Theorem
+
+#### Theorem
+
+For any $A \in C^{n \times n}$, there exists a unitary matrix $U$ such that
+$$
+A = U T U^*
+$$
+where $T$ is upper triangular.
+Equivalently,
+$$
+U^* A U = T
+$$
+---
+### 4. Proof for $n = 3$
+
+Let $A \in C^{3 \times 3}$.
+#### Step 1: Choose Eigenvalue
+Let
+$$
+p \lambda
+$$
+be the characteristic polynomial of $A$.
+Let $\lambda_1$ be a root.
+Let $z_1$ be corresponding eigenvector:
+$$
+A z_1 = \lambda_1 z_1
+$$
+---
+#### Step 2: Extend to Orthonormal Basis
+
+Extend $z_1$ to a basis and apply Gram Schmidt to obtain orthonormal basis:
+$$
+\{ z_1, u, v \}
+$$
+Construct
+$$
+U_1 = \{ z_1 \ u \ v \}
+$$
+Then $U_1$ is unitary.
+
+---
+#### Step 3: Compute $U_1^* A U_1$
+
+Since
+$$
+A z_1 = \lambda_1 z_1
+$$
+we obtain
+$$
+U_1^* A U_1 =
+\begin{pmatrix}
+\lambda_1 & * & * \\
+0 & & \\
+0 & & B
+\end{pmatrix}
+$$
+where $B$ is $2 \times 2$.
+Reason:
+$$
+z_1^* A z_1 = \lambda_1
+$$
+and orthogonality implies lower entries of first column are zero.
+
+---
+#### Step 4: Apply Procedure to $B$
+
+Let $\lambda_2$ be eigenvalue of $B$.
+Construct unitary $P$ such that
+$$
+P^* B P =
+\begin{pmatrix}
+\lambda_2 & * \\
+0 & \lambda_3
+\end{pmatrix}
+$$
+---
+#### Step 5: Embed $P$ into $3 \times 3$
+
+Define
+$$
+U_2 =
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & & \\
+0 & & P
+\end{pmatrix}
+$$
+Then $U_2$ is unitary.
+
+---
+#### Step 6: Combine Transformations
+
+Compute
+$$
+U_2^* U_1^* A U_1 U_2
+$$
+This equals an upper triangular matrix $T$.
+Let
+$$
+U = U_1 U_2
+$$
+Then $U$ is unitary and
+$$
+U^* A U = T
+$$
+Thus
+$$
+A = U T U^*
+$$
+---
+### 5. General Case
+
+The same procedure extends inductively to any $n$.
+At each step:
+1. Extract one eigenvalue.
+2. Reduce dimension by 1.
+3. Continue recursively.
+
+Thus any complex matrix is unitarily similar to an upper triangular matrix.
+
+---
+### 6. Example
+
+Consider
+$$
+A =
+\begin{pmatrix}
+5 & 8 & 16 \\
+5 & 0 & 9 \\
+-3 & -5 & -10
+\end{pmatrix}
+$$
+---
+#### Step 1: Characteristic Polynomial
+
+Eigenvalues:
+$$
+\lambda_1 = 1
+$$
+$$
+\lambda_2 = -3
+$$
+with $-3$ repeated.
+
+---
+#### Step 2: Eigenvector for $\lambda_1$
+
+One eigenvector:
+$$
+z_1 =
+\begin{pmatrix}
+-2 \\
+-1 \\
+1
+\end{pmatrix}
+$$
+---
+#### Step 3: Construct Orthonormal Basis
+
+After Gram Schmidt, obtain
+$$
+U_1 =
+\begin{pmatrix}
+-2 / \sqrt{6} & 1 / \sqrt{3} & 0 \\
+-1 / \sqrt{6} & -1 / \sqrt{3} & 1 / \sqrt{2} \\
+1 / \sqrt{6} & 1 / \sqrt{3} & 1 / \sqrt{2}
+\end{pmatrix}
+$$
+---
+#### Step 4: Compute $U_1^T A U_1$
+
+Result:
+$$
+U_1^T A U_1 =
+\begin{pmatrix}
+1 & -8 \sqrt{2} & -12 \sqrt{3} \\
+0 & -3 & 0 \\
+0 & \sqrt{6} & -3
+\end{pmatrix}
+$$
+Extract
+$$
+B =
+\begin{pmatrix}
+-3 & 0 \\
+\sqrt{6} & -3
+\end{pmatrix}
+$$
+---
+#### Step 5: Diagonalize $B$ to Upper Triangular Form
+
+Choose permutation matrix
+$$
+P =
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+$$
+Then
+$$
+P^T B P =
+\begin{pmatrix}
+-3 & \sqrt{6} \\
+0 & -3
+\end{pmatrix}
+$$
+---
+#### Step 6: Construct $U_2$
+
+Embed $P$:
+$$
+U_2 =
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 0 & 1 \\
+0 & 1 & 0
+\end{pmatrix}
+$$
+---
+#### Step 7: Final Result
+
+Let
+$$
+U = U_1 U_2
+$$
+Then
+$$
+U^T A U =
+\begin{pmatrix}
+1 & -8 \sqrt{2} & -12 \sqrt{3} \\
+0 & -3 & \sqrt{6} \\
+0 & 0 & -3
+\end{pmatrix}
+$$
+This is upper triangular.
+
+---
+### 7. Key Observations
+
+1. Any complex matrix can be unitarily upper triangularised.
+2. Repeated eigenvalues may prevent diagonalization.
+3. Distinct eigenvalues guarantee diagonal form.
+4. This theorem enables diagonalization of Hermitian matrices in the next step.
+
+---
+`***********************************************************************************`
+
+---
