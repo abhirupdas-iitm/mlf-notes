@@ -664,3 +664,167 @@ This completes the construction of a principled step size schedule for gradient 
 `***********************************************************************************`
 
 ---
+## Lecture 5
+### Gradient Descent and Local Minima  
+
+### Unconstrained Optimization Setup  
+
+We consider the unconstrained minimization problem  
+$$
+\min_{x \in \mathbb{R}} f(x)
+$$  
+where  
+- $f : \mathbb{R} \to \mathbb{R}$  
+- $f$ is differentiable  
+
+---
+### Gradient Descent Algorithm  
+
+#### Initialization  
+Choose an arbitrary starting point  
+$$
+x_0 \in \mathbb{R}
+$$  
+---
+#### Iterative Update Rule  
+
+For $t = 0,1,2,\dots$  
+$$
+x_{t+1} = x_t - \eta_t f'(x_t)
+$$  
+where  
+$$
+\eta_t = \frac{1}{t+1}
+$$  
+---
+#### Interpretation  
+- $-f'(x_t)$ is the **descent direction**  
+- $\eta_t$ is the **step size**  
+- The update moves in the direction of steepest decrease  
+
+This algorithm is called the **Gradient Descent Algorithm**.  
+It is a **first-order method** because it uses only first derivative information.  
+
+---
+### Generalization to Higher Dimensions  
+
+For  
+$$
+\min_{x \in \mathbb{R}^d} f(x)
+$$  
+where  
+$$
+f : \mathbb{R}^d \to \mathbb{R}
+$$  
+the derivative is replaced by the **gradient**  
+$$
+\nabla f(x)
+$$  
+Update rule becomes  
+$$
+x_{t+1} = x_t - \eta_t \nabla f(x_t)
+$$  
+---
+### Convergence Property  
+
+If  
+$$
+\eta_t = \frac{1}{t+1}
+$$  
+then the algorithm converges.  
+More precisely,  
+**Gradient descent converges to a local minimum.**
+
+---
+### Local vs Global Minimum  
+
+#### Global Minimum  
+A point $x^\star$ is a global minimum if  
+$$
+f(x^\star) \le f(x) \quad \text{for all } x
+$$  
+---
+#### Local Minimum  
+
+A point $\hat{x}$ is a local minimum if  
+there exists $\epsilon > 0$ such that  
+$$
+f(\hat{x}) \le f(x) 
+\quad \text{for all } 
+x \in (\hat{x}-\epsilon,\hat{x}+\epsilon)
+$$  
+Thus minimality holds only in a neighborhood.  
+
+---
+### Behavior of Gradient Descent  
+
+- Converges to a local minimum  
+- The final solution depends on initialization $x_0$  
+- Different starting points may lead to different local minima  
+
+---
+### Why Gradient Descent Stops at Local Minima  
+
+At a local minimum $\hat{x}$:  
+$$
+f'(\hat{x}) = 0
+$$  
+Thus  
+$$
+x_{t+1} = x_t - \eta_t f'(x_t)
+$$  
+becomes  
+$$
+x_{t+1} = x_t
+$$  
+The algorithm cannot move further because the descent direction vanishes.  
+
+---
+### Limitation  
+
+Gradient descent does not guarantee convergence to a global minimum for arbitrary functions.  
+It only guarantees convergence to a local minimum.  
+
+---
+### Special Case: Convex Functions  
+
+For certain functions, every local minimum is also a global minimum.  
+Formally, for such functions  
+$$
+\text{Local minimum} \Rightarrow \text{Global minimum}
+$$  
+Example:  
+$$
+f(x) = (x-5)^2
+$$  
+- Unique minimum at $x=5$  
+- Local minimum equals global minimum  
+
+For such functions, gradient descent finds the optimal solution.  
+These functions are called **convex functions**.  
+
+---
+### Summary  
+
+Gradient Descent Algorithm:  
+1. Initialize $x_0$  
+2. Update  
+$$
+x_{t+1} = x_t - \eta_t f'(x_t)
+$$  
+3. Choose step size  
+$$
+\eta_t = \frac{1}{t+1}
+$$  
+Properties:  
+- Uses first-order information  
+- Converges under suitable step sizes  
+- Converges to a local minimum  
+- For convex functions, local minimum equals global minimum  
+
+This forms the foundational algorithm for optimization in machine learning.
+
+---
+`***********************************************************************************`
+
+---
