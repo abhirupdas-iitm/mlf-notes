@@ -980,3 +980,274 @@ This provides the theoretical justification for the gradient descent update rule
 `***********************************************************************************`
 
 ---
+## Lecture 7
+### Gradient Descent in Higher Dimensions  
+
+### Unconstrained Optimization in Higher Dimensions  
+
+#### Problem Setup  
+We now consider the unconstrained optimization problem  
+$$
+\min_{x \in \mathbb{R}^d} f(x)
+$$
+where  
+$$
+x = (x_1, x_2, \dots, x_d)
+$$
+and  
+$$
+f : \mathbb{R}^d \to \mathbb{R}
+$$
+is differentiable.  
+In the one dimensional case, the update rule was  
+$$
+x_{t+1} = x_t - \eta_t f'(x_t)
+$$
+We now generalize this to multiple dimensions.
+
+---
+### Gradient as Generalization of Derivative  
+
+#### Definition: Partial Derivatives  
+
+For a function  
+$$
+f(x_1, x_2, \dots, x_d)
+$$
+the partial derivative with respect to coordinate $x_i$ is  
+$$
+\frac{\partial f}{\partial x_i}
+$$
+obtained by treating all other variables as constants.
+
+---
+#### Definition: Gradient  
+
+The gradient of $f$ at point $x \in \mathbb{R}^d$ is defined as  
+$$
+\nabla f(x)
+=
+\begin{bmatrix}
+\frac{\partial f}{\partial x_1}(x) \\
+\frac{\partial f}{\partial x_2}(x) \\
+\vdots \\
+\frac{\partial f}{\partial x_d}(x)
+\end{bmatrix}
+$$
+Thus  
+- $\nabla f(x)$ is a vector  
+- Each coordinate captures rate of change along one axis  
+
+The derivative in one dimension becomes the gradient vector in higher dimensions.
+
+---
+### Example 1  
+
+Consider  
+$$
+f(x_1, x_2) = x_1^2 + 4x_2 + 8x_2^2
+$$
+#### Step 1: Compute Gradient  
+$$
+\nabla f(x_1, x_2)
+=
+\begin{bmatrix}
+2x_1 \\
+4 + 16x_2
+\end{bmatrix}
+$$
+#### Step 2: Evaluate at a Point  
+At $(1,3)$:
+$$
+\nabla f(1,3)
+=
+\begin{bmatrix}
+2 \\
+4 + 16 \cdot 3
+\end{bmatrix}
+=
+\begin{bmatrix}
+2 \\
+52
+\end{bmatrix}
+$$
+This is a direction vector in $\mathbb{R}^2$.
+
+---
+### Example 2: Distance Function  
+
+Let grass be located at $(40,40)$ and define squared distance
+$$
+d(x_1, x_2)
+=
+(x_1 - 40)^2 + (x_2 - 40)^2
+$$
+#### Gradient  
+$$
+\nabla d(x_1, x_2)
+=
+\begin{bmatrix}
+2(x_1 - 40) \\
+2(x_2 - 40)
+\end{bmatrix}
+$$
+---
+#### Evaluate at $(5,2)$  
+$$
+\nabla d(5,2)
+=
+\begin{bmatrix}
+2(5-40) \\
+2(2-40)
+\end{bmatrix}
+=
+\begin{bmatrix}
+-70 \\
+-76
+\end{bmatrix}
+$$
+Thus negative gradient is  
+$$
+-\nabla d(5,2)
+=
+\begin{bmatrix}
+70 \\
+76
+\end{bmatrix}
+$$
+This direction points toward $(40,40)$.
+
+---
+#### Evaluate at $(30,50)$  
+$$
+\nabla d(30,50)
+=
+\begin{bmatrix}
+2(30-40) \\
+2(50-40)
+\end{bmatrix}
+=
+\begin{bmatrix}
+-20 \\
+20
+\end{bmatrix}
+$$
+Negative gradient:
+$$
+-\nabla d(30,50)
+=
+\begin{bmatrix}
+20 \\
+-20
+\end{bmatrix}
+$$
+Again, this direction moves toward $(40,40)$.
+
+---
+### Multivariate Taylor Expansion  
+
+To justify the negative gradient direction, consider first order Taylor expansion.
+For small $\eta$ and direction $d$:
+$$
+f(x + \eta d)
+=
+f(x) + \eta \nabla f(x)^T d + O(\eta^2)
+$$
+For sufficiently small $\eta$, higher order terms are negligible:
+$$
+f(x + \eta d)
+\approx
+f(x) + \eta \nabla f(x)^T d
+$$
+---
+### Descent Condition  
+
+We want function value to decrease:
+$$
+f(x + \eta d) - f(x) < 0
+$$
+Using approximation:
+$$
+\eta \nabla f(x)^T d < 0
+$$
+Since $\eta > 0$, this reduces to
+$$
+\nabla f(x)^T d < 0
+$$
+Thus any direction $d$ satisfying this gives descent.
+
+---
+### Choosing the Steepest Descent Direction  
+
+Let  
+$$
+d = -\nabla f(x)
+$$
+Then
+$$
+\nabla f(x)^T d
+=
+\nabla f(x)^T (-\nabla f(x))
+=
+- \|\nabla f(x)\|^2
+$$
+Since norm squared is nonnegative,
+$$
+-\|\nabla f(x)\|^2 \le 0
+$$
+Strictly negative unless gradient is zero.
+Thus negative gradient guarantees descent for sufficiently small step size.
+
+---
+### Gradient Descent Algorithm in $\mathbb{R}^d$  
+
+#### Initialization  
+Choose arbitrary  
+$$
+x_0 \in \mathbb{R}^d
+$$
+#### Iterative Update  
+$$
+x_{t+1}
+=
+x_t
+-
+\eta_t \nabla f(x_t)
+$$
+where  
+- $x_t$ is a vector  
+- $\nabla f(x_t)$ is a vector  
+- $\eta_t$ is a positive scalar step size  
+
+---
+### Important Observations  
+1. Gradient generalizes derivative to multiple dimensions.  
+2. Negative gradient gives direction of maximum local decrease.  
+3. Taylor expansion justifies the descent property.  
+4. With appropriate step sizes, gradient descent converges to a local minimum.  
+---
+### Convergence Property  
+
+For differentiable $f$:
+Gradient descent converges to a local minimum under suitable step size conditions.
+If $f$ is convex, then:
+$$
+\text{local minimum} \implies \text{global minimum}
+$$
+Thus for convex functions, gradient descent finds the global optimum.
+
+---
+### Final Algorithm Summary  
+
+Given differentiable $f : \mathbb{R}^d \to \mathbb{R}$:
+$$
+x_{t+1}
+=
+x_t - \eta_t \nabla f(x_t)
+$$
+This is the Gradient Descent algorithm for unconstrained optimization.
+
+---
+`***********************************************************************************`
+
+---
