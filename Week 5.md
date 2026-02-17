@@ -566,3 +566,264 @@ $$
 `***********************************************************************************`
 
 ---
+
+## Lecture 3
+### Unitary Matrices and Their Properties
+
+### 1. Definition of Unitary Matrix
+
+Let $U \in C^{n \times n}$.
+#### Definition
+$U$ is unitary if
+$$
+U^* U = I
+$$
+Equivalently,
+$$
+U^{-1} = U^*
+$$
+This is the complex analogue of an orthogonal matrix in $R^n$.
+
+---
+### 2. Orthonormal Columns Interpretation
+
+Let
+$$
+U = \{u_1 \ \dots \ u_n\}
+$$
+where $u_i$ are the columns of $U$.
+Then
+$$
+u_i^* u_j = 0 \quad \text{for } i \ne j
+$$
+$$
+u_i^* u_i = 1 \quad \text{for all } i
+$$
+Thus columns of a unitary matrix form an orthonormal set.
+
+---
+### 3. Relation to Orthogonal Matrices
+
+In the real case,
+$$
+Q^T Q = I
+$$
+implies
+$$
+Q^{-1} = Q^T
+$$
+In the complex case,
+$$
+U^* U = I
+$$
+implies
+$$
+U^{-1} = U^*
+$$
+---
+### 4. Examples
+
+#### Example 1
+$$
+U =
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 & i \\
+i & 1
+\end{pmatrix}
+$$
+Verify:
+$$
+U^* U = I
+$$
+---
+#### Example 2
+$$
+U =
+\begin{pmatrix}
+\cos t & -\sin t \\
+\sin t & \cos t
+\end{pmatrix}
+$$
+In the real case, this satisfies
+$$
+U^T U = I
+$$
+---
+### 5. Property 1: Length Preservation
+
+Let $U$ be unitary.
+For any $x, y \in C^n$,
+$$
+Ux \cdot Uy = x \cdot y
+$$
+#### Proof
+$$
+Ux \cdot Uy = (Ux)^* Uy
+$$
+$$
+= x^* U^* U y
+$$
+Since $U^* U = I$,
+$$
+= x^* y
+$$
+Thus
+$$
+Ux \cdot Uy = x \cdot y
+$$
+Taking $y = x$,
+$$
+\|Ux\|^2 = \|x\|^2
+$$
+Hence
+$$
+\|Ux\| = \|x\|
+$$
+Unitary transformations preserve length.
+
+---
+### 6. Property 2: Eigenvalues Have Absolute Value 1
+
+#### Theorem
+
+If $\lambda$ is an eigenvalue of a unitary matrix $U$, then
+$$
+|\lambda| = 1
+$$
+---
+#### Proof
+
+Let
+$$
+Ux = \lambda x
+$$
+with $x \ne 0$.
+Using length preservation:
+$$
+\|Ux\| = \|x\|
+$$
+But
+$$
+\|Ux\| = \|\lambda x\|
+$$
+$$
+= |\lambda| \|x\|
+$$
+Thus
+$$
+|\lambda| \|x\| = \|x\|
+$$
+Since $\|x\| \ne 0$,
+$$
+|\lambda| = 1
+$$
+---
+#### Alternative Proof
+
+Compute
+$$
+Ux \cdot Ux = \lambda x \cdot \lambda x
+$$
+Left side:
+$$
+Ux \cdot Ux = x \cdot x
+$$
+Right side:
+$$
+\lambda x \cdot \lambda x
+= \bar{\lambda} \lambda x \cdot x
+$$
+Thus
+$$
+\bar{\lambda} \lambda x \cdot x = x \cdot x
+$$
+Since $x \cdot x \ne 0$,
+$$
+\bar{\lambda} \lambda = 1
+$$
+Hence
+$$
+|\lambda| = 1
+$$
+---
+### 7. Property 3: Orthogonality of Eigenvectors
+
+Let
+$$
+Ux = \lambda_1 x
+$$
+$$
+Uy = \lambda_2 y
+$$
+with
+$$
+\lambda_1 \ne \lambda_2
+$$
+Then
+$$
+x^* y = 0
+$$
+---
+#### Proof
+
+Since $U$ preserves inner products,
+$$
+x \cdot y = Ux \cdot Uy
+$$
+Using eigen relations:
+$$
+Ux \cdot Uy = \lambda_1 x \cdot \lambda_2 y
+$$
+$$
+= \bar{\lambda_1} \lambda_2 x \cdot y
+$$
+Thus
+$$
+x \cdot y = \bar{\lambda_1} \lambda_2 x \cdot y
+$$
+Hence
+$$
+(\bar{\lambda_1} \lambda_2 - 1) x \cdot y = 0
+$$
+If
+$$
+\bar{\lambda_1} \lambda_2 = 1
+$$
+then multiplying both sides by $\lambda_1$,
+$$
+\lambda_2 = \lambda_1
+$$
+since $|\lambda_1| = 1$.
+This contradicts $\lambda_1 \ne \lambda_2$.
+Therefore
+$$
+\bar{\lambda_1} \lambda_2 \ne 1
+$$
+Hence
+$$
+x \cdot y = 0
+$$
+---
+### 8. Preview: Spectral Theorem
+
+For a Hermitian matrix $A$, there exists a unitary matrix $U$ such that
+$$
+A = U \Lambda U^*
+$$
+where $\Lambda$ is diagonal with eigenvalues of $A$.
+
+---
+### 9. Real Symmetric Case
+
+If $A$ is real symmetric, then there exists an orthogonal matrix $Q$ such that
+$$
+A = Q \Lambda Q^T
+$$
+This is the spectral theorem in the real case.
+
+---
+`***********************************************************************************`
+
+---
+
