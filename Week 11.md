@@ -1527,3 +1527,230 @@ $$
 `***********************************************************************************`
 
 ---
+## Lecture 7
+### Continuous Random Variables
+### Probability Space
+
+A probability experiment is defined by the tuple
+$$
+\Omega, \mathcal{F}, P
+$$
+where
+- $\Omega$ is the sample space
+- $\mathcal{F}$ is a collection of events
+- $P$ is a probability measure
+---
+### Sample Space
+
+In the continuous setting, the sample space $\Omega$ is uncountable.
+Example:
+- Measuring the height of a randomly chosen person
+- Waiting time for a bus
+- Price of a house
+- Thermal noise current in a wire
+---
+### Sigma Algebra
+
+The collection of events $\mathcal{F} \subseteq 2^\Omega$ satisfies:
+1. $\Omega \in \mathcal{F}$
+2. If $A \in \mathcal{F}$ then $A^c \in \mathcal{F}$
+3. If $A_1, A_2, \dots \in \mathcal{F}$ then
+$$
+\bigcup_{i=1}^{\infty} A_i \in \mathcal{F}
+$$
+---
+### Probability Measure
+
+The probability measure
+$$
+P : \mathcal{F} \to \mathbb{R}_+
+$$
+satisfies:
+1. $P A \ge 0$
+2. $P \Omega = 1$
+3. For disjoint $A_i$,
+$$
+P \left( \bigcup_{i=1}^{\infty} A_i \right)
+=
+\sum_{i=1}^{\infty} P A_i
+$$
+---
+### Definition of Continuous Random Variable
+
+A continuous random variable is a function
+$$
+X : \Omega \to \mathbb{R}
+$$
+where both domain and range are uncountable.
+
+For continuous random variables:
+$$
+P X = x = 0
+$$
+for every real number $x$.
+
+---
+### Probability Density Function
+#### Definition
+The probability density function is
+$$
+f_X x
+=
+\lim_{dx \to 0}
+\frac{P X \in x, x+dx}{dx}
+$$
+Interpretation:
+$$
+P X \in x, x+dx
+=
+f_X x \, dx
+$$
+---
+### Properties of PDF
+
+1.
+$$
+f_X x \ge 0
+$$
+2.
+$$
+\int_{-\infty}^{\infty} f_X x \, dx = 1
+$$
+The density may exceed 1.
+
+---
+### Cumulative Distribution Function
+#### Definition
+$$
+F_X x = P X \le x
+$$
+Relationship with PDF:
+$$
+F_X x
+=
+\int_{-\infty}^{x} f_X t \, dt
+$$
+---
+#### Properties of CDF
+1.
+$$
+F_X -\infty = 0
+$$
+2.
+$$
+F_X \infty = 1
+$$3. $F_X x$ is non decreasing.
+
+---
+### Example 1: Uniform Waiting Time
+
+Let
+$$
+X = \text{waiting time for bus}
+$$
+Assume arrival is uniform between two buses 15 minutes apart.
+Support:
+$$
+0 \le x \le 15
+$$
+#### PDF
+
+Since density is constant:
+$$
+f_X x =
+\begin{cases}
+c & 0 \le x \le 15 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+Using normalization:
+$$
+\int_0^{15} c \, dx = 1
+$$
+$$
+15 c = 1
+$$
+$$
+c = \frac{1}{15}
+$$
+Thus,
+$$
+f_X x =
+\begin{cases}
+\frac{1}{15} & 0 \le x \le 15 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+---
+#### CDF
+
+For $x < 0$:
+$$
+F_X x = 0
+$$
+For $0 \le x \le 15$:
+$$
+F_X x
+=
+\int_0^x \frac{1}{15} dt
+=
+\frac{x}{15}
+$$
+For $x > 15$:
+$$
+F_X x = 1
+$$
+---
+### Example 2: Linear Density
+
+Let
+$$
+f_X x =
+\begin{cases}
+\frac{x}{2} & 0 \le x \le 2 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+---
+#### Validity Check
+
+Compute total integral:
+$$
+\int_0^2 \frac{x}{2} dx
+=
+\frac{1}{2} \int_0^2 x dx
+=
+\frac{1}{2} \cdot \frac{x^2}{2} \Big|_0^2
+=
+\frac{1}{2} \cdot \frac{4}{2}
+=
+1
+$$
+Hence valid PDF.
+
+---
+#### CDF
+
+For $x < 0$:
+$$
+F_X x = 0
+$$
+For $0 \le x \le 2$:
+$$
+F_X x
+=
+\int_0^x \frac{t}{2} dt
+=
+\frac{1}{2} \cdot \frac{x^2}{2}
+=
+\frac{x^2}{4}
+$$
+For $x > 2$:
+$$
+F_X x = 1
+$$
+
+---
+`***********************************************************************************`
+
+---
