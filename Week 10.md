@@ -479,3 +479,174 @@ Convex optimization provides both theoretical guarantees and practical algorithm
 `***********************************************************************************`
 
 ---
+## Lecture 3
+### Constrained Optimization and Duality
+
+### Unconstrained Convex Optimization
+
+If $f : \mathbb{R}^n \to \mathbb{R}$ is convex and differentiable, then
+$$
+\nabla f(x^*) = 0
+$$
+is a first order optimality condition.
+For convex $f$, this condition is sufficient:
+$$
+\nabla f(x^*) = 0 \quad \Longrightarrow \quad x^* \text{ is global optimum}
+$$
+---
+### Constrained Optimization Problem
+
+Consider
+$$
+\min_{x \in \mathbb{R}^n} f(x)
+$$
+subject to
+$$
+h(x) \le 0
+$$
+This is a single inequality constrained optimization problem.
+
+---
+### Lagrangian Function
+
+Define the Lagrangian
+$$
+L(x,\lambda) = f(x) + \lambda h(x)
+$$
+where
+$$
+\lambda \ge 0
+$$
+- $x \in \mathbb{R}^n$
+- $\lambda \in \mathbb{R}$
+
+---
+### Key Observation
+
+Fix $x$ and consider
+$$
+\max_{\lambda \ge 0} L(x,\lambda)
+=
+\max_{\lambda \ge 0} \left( f(x) + \lambda h(x) \right)
+$$
+#### Case 1: Feasible Point
+If
+$$
+h(x) \le 0
+$$
+Since $\lambda \ge 0$,
+$$
+\lambda h(x) \le 0
+$$
+Thus maximum occurs at
+$$
+\lambda = 0
+$$
+and
+$$
+\max_{\lambda \ge 0} L(x,\lambda) = f(x)
+$$
+---
+#### Case 2: Infeasible Point
+
+If
+$$
+h(x) > 0
+$$
+Then
+$$
+f(x) + \lambda h(x) \to +\infty
+$$
+as $\lambda \to +\infty$.
+Thus
+$$
+\max_{\lambda \ge 0} L(x,\lambda) = +\infty
+$$
+---
+### Reformulation of Original Problem
+
+Original problem:
+$$
+\min_{x} f(x)
+\quad
+\text{s.t.}
+\quad
+h(x) \le 0
+$$
+Equivalent to
+$$
+\min_x \max_{\lambda \ge 0} L(x,\lambda)
+$$
+Reason:
+- If $x$ is feasible, value equals $f(x)$.
+- If $x$ is infeasible, value equals $+\infty$.
+
+Thus minimizing automatically enforces constraint.
+
+---
+### Primal Problem
+
+Define
+$$
+\min_x \max_{\lambda \ge 0} L(x,\lambda)
+$$
+Let $x^*$ denote primal optimal solution.
+This problem is equivalent to the original constrained problem.
+
+---
+### Dual Problem
+
+Swap min and max:
+$$
+\max_{\lambda \ge 0} \min_x L(x,\lambda)
+$$
+Define dual function
+$$
+g(\lambda) = \min_x L(x,\lambda)
+$$
+Thus dual problem becomes
+$$
+\max_{\lambda \ge 0} g(\lambda)
+$$
+---
+### Properties of Dual Function
+
+For each fixed $\lambda$,
+$$
+g(\lambda) = \min_x \left( f(x) + \lambda h(x) \right)
+$$
+- For fixed $x$, $L(x,\lambda)$ is affine in $\lambda$.
+- $g(\lambda)$ is pointwise minimum of affine functions.
+
+Therefore
+$$
+g(\lambda)
+$$
+is a concave function.
+Thus dual problem is:
+$$
+\max_{\lambda \ge 0} g(\lambda)
+$$
+which is a concave maximization problem.
+
+---
+### Key Insights
+
+1. Original constrained problem can be written as
+$$
+   \min_x \max_{\lambda \ge 0} L(x,\lambda)
+   $$
+2. Swapping order gives dual problem
+$$
+   \max_{\lambda \ge 0} \min_x L(x,\lambda)
+   $$
+3. Dual problem is often easier:
+   - Inner minimization is unconstrained.
+   - Outer maximization is over $\lambda \ge 0$.
+   - Dual function is concave.
+Next step: relate primal and dual solutions and understand when their optimal values coincide.
+
+---
+`***********************************************************************************`
+
+---
