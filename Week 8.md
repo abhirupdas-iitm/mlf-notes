@@ -828,3 +828,155 @@ This forms the foundational algorithm for optimization in machine learning.
 `***********************************************************************************`
 
 ---
+## Lecture 6 
+### Why Move in the Negative Derivative Direction
+
+### Unconstrained Minimization Setup
+
+We consider the unconstrained optimization problem
+$$
+\min_{x \in \mathbb{R}} f(x)
+$$
+The gradient descent update rule is
+$$
+x_{t+1} = x_t + \eta_t \left( - f'(x_t) \right)
+$$
+where  
+- $\eta_t > 0$ is the step size  
+- $-f'(x_t)$ is the descent direction  
+The central question:
+Why choose the direction $d = -f'(x)$?
+
+---
+### Taylor Series Expansion
+
+For a differentiable function $f$, the Taylor expansion around $x$ gives
+$$
+f(x + \eta d)
+=
+f(x)
++
+\eta d f'(x)
++
+\frac{\eta^2 d^2}{2} f''(x)
++
+\cdots
+$$
+#### Key Observation
+All derivatives are evaluated at the point $x$.
+Thus:
+Local information at $x$ determines the behavior of the function near $x$.
+
+---
+### First-Order Approximation
+
+If $\eta$ is small and positive, higher order terms become negligible.
+Hence, for sufficiently small $\eta$:
+$$
+f(x + \eta d)
+\approx
+f(x)
++
+\eta d f'(x)
+$$
+Subtracting $f(x)$:
+$$
+f(x + \eta d) - f(x)
+\approx
+\eta d f'(x)
+$$
+---
+### Condition for Descent
+
+To decrease the function value, we require
+$$
+f(x + \eta d) - f(x) < 0
+$$
+Using the approximation:
+$$
+\eta d f'(x) < 0
+$$
+Since $\eta > 0$, this reduces to
+$$
+d f'(x) < 0
+$$
+---
+### Choosing the Descent Direction
+
+We must choose $d$ such that
+$$
+d f'(x) < 0
+$$
+A natural choice is
+$$
+d = -f'(x)
+$$
+Then:
+$$
+d f'(x)
+=
+- f'(x)^2
+$$
+Since
+$$
+f'(x)^2 \ge 0
+$$
+we get
+$$
+- f'(x)^2 \le 0
+$$
+Strictly negative whenever $f'(x) \ne 0$.
+Thus, for small enough $\eta$:
+$$
+f(x + \eta d) < f(x)
+$$
+This guarantees descent.
+
+---
+### Interpretation
+
+- $f'(x)$ gives the slope at $x$  
+- Moving in direction $-f'(x)$ moves opposite to the slope  
+- For small step size, function value decreases  
+Hence:
+Negative derivative is a descent direction.
+
+---
+### Extension to Higher Dimensions
+
+For $x \in \mathbb{R}^d$:
+- Derivative generalizes to gradient $\nabla f(x)$  
+- Update rule becomes
+$$
+x_{t+1}
+=
+x_t
+-
+\eta_t
+\nabla f(x_t)
+$$
+The gradient is the vector of partial derivatives.
+Derivative in one dimension corresponds to gradient in higher dimensions.
+
+---
+### Core Insight
+
+Using Taylor expansion:
+$$
+f(x + \eta d)
+\approx
+f(x)
++
+\eta d f'(x)
+$$
+To decrease the function locally:
+$$
+d = - f'(x)
+$$
+Thus gradient descent moves in the direction of steepest local decrease.
+This provides the theoretical justification for the gradient descent update rule.
+
+---
+`***********************************************************************************`
+
+---
