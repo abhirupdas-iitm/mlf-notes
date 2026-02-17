@@ -236,3 +236,333 @@ $$
 `***********************************************************************************`
 
 ---
+
+## Lecture 2 
+### Properties of Hermitian Matrices
+
+## 1. Hermitian Matrix
+
+#### Definition
+
+A matrix $A \in C^{n \times n}$ is Hermitian if
+$$
+A^* = A
+$$
+where $A^*$ denotes the conjugate transpose of $A$.
+
+---
+#### Example
+Consider
+$$
+A =
+\begin{pmatrix}
+2 & 3 - 3i \\
+3 + 3i & 5
+\end{pmatrix}
+$$
+Compute conjugate:
+$$
+\bar{A} =
+\begin{pmatrix}
+2 & 3 + 3i \\
+3 - 3i & 5
+\end{pmatrix}
+$$
+Transpose:
+$$
+A^* =
+\begin{pmatrix}
+2 & 3 - 3i \\
+3 + 3i & 5
+\end{pmatrix}
+$$
+Thus
+$$
+A^* = A
+$$
+Hence $A$ is Hermitian.
+
+---
+#### Observation
+
+Diagonal entries of a Hermitian matrix are real.
+If $A^* = A$, then
+$$
+a_{ii} = \overline{a_{ii}}
+$$
+which implies $a_{ii}$ is real.
+
+---
+### 2. Property 1: Eigenvalues of Hermitian Matrices Are Real
+
+#### Theorem
+
+If $A$ is Hermitian, then every eigenvalue of $A$ is real.
+
+---
+#### Example
+
+For
+$$
+A =
+\begin{pmatrix}
+2 & 3 - 3i \\
+3 + 3i & 5
+\end{pmatrix}
+$$
+Compute characteristic polynomial:
+$$
+\det A - \lambda I =
+\begin{vmatrix}
+2 - \lambda & 3 - 3i \\
+3 + 3i & 5 - \lambda
+\end{vmatrix}
+$$
+$$
+= (2 - \lambda)(5 - \lambda) - (3 - 3i)(3 + 3i)
+$$
+$$
+= (2 - \lambda)(5 - \lambda) - |3 - 3i|^2
+$$
+$$
+= (2 - \lambda)(5 - \lambda) - 18
+$$
+$$
+= \lambda^2 - 7\lambda - 8
+$$
+$$
+= (\lambda - 8)(\lambda + 1)
+$$
+Eigenvalues:
+$$
+\lambda_1 = 8, \quad \lambda_2 = -1
+$$
+Both real.
+
+---
+#### Proof
+
+Let
+$$
+A x = \lambda x, \quad x \ne 0
+$$
+Take conjugate transpose:
+$$
+(Ax)^* = (\lambda x)^*
+$$
+Using properties:
+$$
+x^* A^* = \bar{\lambda} x^*
+$$
+Since $A$ is Hermitian:
+$$
+A^* = A
+$$
+Multiply by $x$:
+$$
+x^* A x = \bar{\lambda} x^* x
+$$
+But from eigen equation:
+$$
+x^* A x = x^* \lambda x = \lambda x^* x
+$$
+Thus
+$$
+\lambda x^* x = \bar{\lambda} x^* x
+$$
+Since $x \ne 0$, we have $x^* x \ne 0$.
+Therefore
+$$
+\lambda = \bar{\lambda}
+$$
+Hence $\lambda$ is real.
+
+---
+### 3. Property 2: Orthogonality of Eigenvectors
+
+#### Theorem
+
+Let $A$ be Hermitian.
+Suppose
+$$
+A x = \lambda_1 x
+$$
+$$
+A y = \lambda_2 y
+$$
+with
+$$
+\lambda_1 \ne \lambda_2
+$$
+Then
+$$
+x^* y = 0
+$$
+---
+#### Example
+
+Eigenvalues: $8$ and $-1$.
+Eigenvector for $8$:
+Solve
+$$
+A - 8I =
+\begin{pmatrix}
+-6 & 3 - 3i \\
+3 + 3i & -3
+\end{pmatrix}
+$$
+One eigenvector:
+$$
+x =
+\begin{pmatrix}
+1 \\
+1 + i
+\end{pmatrix}
+$$
+Eigenvector for $-1$:
+Solve
+$$
+A + I =
+\begin{pmatrix}
+3 & 3 - 3i \\
+3 + 3i & 6
+\end{pmatrix}
+$$
+One eigenvector:
+$$
+y =
+\begin{pmatrix}
+1 - i \\
+-1
+\end{pmatrix}
+$$
+Compute inner product:
+$$
+x^* y =
+\begin{pmatrix}
+1 & 1 - i
+\end{pmatrix}
+\begin{pmatrix}
+1 - i \\
+-1
+\end{pmatrix}
+= 0
+$$
+Thus eigenvectors are orthogonal.
+
+---
+#### Proof
+
+We have
+$$
+A x = \lambda_1 x
+$$
+$$
+A y = \lambda_2 y
+$$
+Compute
+$$
+x^* A y
+$$
+Using second equation:
+$$
+x^* A y = \lambda_2 x^* y
+$$
+Using Hermitian property:
+$$
+x^* A y = x^* A^* y = (Ax)^* y
+$$
+Using first equation:
+$$
+(Ax)^* y = (\lambda_1 x)^* y
+$$
+$$
+= \bar{\lambda_1} x^* y
+$$
+From Property 1, $\lambda_1$ is real, hence
+$$
+\bar{\lambda_1} = \lambda_1
+$$
+Thus
+$$
+x^* A y = \lambda_1 x^* y
+$$
+Equating both expressions:
+$$
+\lambda_2 x^* y = \lambda_1 x^* y
+$$
+Hence
+$$
+(\lambda_1 - \lambda_2) x^* y = 0
+$$
+Since $\lambda_1 \ne \lambda_2$,
+$$
+x^* y = 0
+$$
+---
+### 4. Relation to Real Symmetric Matrices
+
+If $A$ is real and symmetric,
+$$
+A^T = A
+$$
+Since conjugation has no effect on real numbers,
+$$
+A^* = A^T
+$$
+Thus every real symmetric matrix is Hermitian.
+
+---
+### 5. Diagonalizability with Distinct Eigenvalues
+
+If an $n \times n$ Hermitian matrix has $n$ distinct eigenvalues:
+From Property 2, eigenvectors are orthogonal.
+Orthogonal vectors are linearly independent.
+Hence we obtain $n$ linearly independent eigenvectors.
+Therefore $A$ is diagonalizable.
+
+---
+#### Diagonalization Structure
+
+Let $P$ be matrix whose columns are eigenvectors.
+Let $D$ be diagonal matrix of eigenvalues.
+Then
+$$
+A = P D P^{-1}
+$$
+---
+#### Example Diagonalization
+
+For the example:
+Eigenvalues: $8$, $-1$
+Eigenvectors:
+$$
+P =
+\begin{pmatrix}
+1 & 1 - i \\
+1 + i & -1
+\end{pmatrix}
+$$
+$$
+D =
+\begin{pmatrix}
+8 & 0 \\
+0 & -1
+\end{pmatrix}
+$$
+Thus
+$$
+A = P D P^{-1}
+$$
+---
+### 6. Key Conclusions
+
+1. Eigenvalues of Hermitian matrices are real.
+2. Eigenvectors corresponding to distinct eigenvalues are orthogonal.
+3. With distinct eigenvalues, Hermitian matrices are diagonalizable.
+4. Real symmetric matrices are special cases of Hermitian matrices.
+
+---
+`***********************************************************************************`
+
+---
