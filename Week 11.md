@@ -847,3 +847,203 @@ These form the foundation for further analysis including expectation, variance a
 `***********************************************************************************`
 
 ---
+## Lecture 4
+### Expectation and Variance
+### Expectation
+#### Definition
+Let $X : \Omega \to \mathbb{R}$ be a discrete random variable with probability mass function $f_X$.
+The expectation of $X$ is defined as
+$$
+E[X] = \sum_{x \in \mathrm{Range}(X)} x f_X(x)
+$$
+This is a weighted average of all possible values of $X$.
+#### Interpretation
+Expectation represents the center of mass of the probability mass function.
+
+---
+### Examples of Expectation
+#### Example 1: Single Dice Throw
+Let $X$ be the face value of a fair dice.
+$$
+f_X(x) = \frac{1}{6}, \quad x \in \{1,2,3,4,5,6\}
+$$
+Then
+$$
+E[X] = \frac{1}{6}(1+2+3+4+5+6) = 3.5
+$$
+---
+#### Example 2: Double Dice Throw
+Let $X$ be the sum of two fair dice.
+Possible values:
+$$
+2,3,4,5,6,7,8,9,10,11,12
+$$
+PMF:
+$$
+f_X(2)=\frac{1}{36}, \quad f_X(3)=\frac{2}{36}, \dots, f_X(7)=\frac{6}{36}, \dots, f_X(12)=\frac{1}{36}
+$$
+Then
+$$
+E[X] = \sum_x x f_X(x) = 7
+$$
+---
+#### Example 3: Absolute Difference of Two Dice
+
+Let $Y = |D_1 - D_2|$.
+PMF:
+$$
+f_Y(0)=\frac{6}{36}
+$$
+$$
+f_Y(1)=\frac{10}{36}
+$$
+$$
+f_Y(2)=\frac{8}{36}
+$$
+$$
+f_Y(3)=\frac{6}{36}
+$$
+$$
+f_Y(4)=\frac{4}{36}
+$$
+$$
+f_Y(5)=\frac{2}{36}
+$$
+Expectation:
+$$
+E[Y] = \frac{6}{36}0 + \frac{10}{36}1 + \frac{8}{36}2 + \frac{6}{36}3 + \frac{4}{36}4 + \frac{2}{36}5
+$$
+$$
+E[Y] = \frac{70}{36}
+$$
+---
+### Conditional Expectation
+#### Conditional PMF
+Let $A \subseteq \Omega$ be an event.
+The conditional PMF is
+$$
+f_{X|A}(x) = P(X = x \mid A)
+$$
+#### Conditional Expectation
+$$
+E[X \mid A] = \sum_{x \in \mathrm{Range}(X)} x f_{X|A}(x)
+$$
+---
+#### Example 1
+
+Let $X$ be sum of two dice and $A$ be the event that first die equals 2.
+Then
+$$
+f_{X|A}(3)=\frac{1}{6}, \dots, f_{X|A}(8)=\frac{1}{6}
+$$
+Thus
+$$
+E[X \mid A] = \frac{1}{6}(3+4+5+6+7+8) = 5.5
+$$
+---
+#### Example 2
+
+Let $A$ be the event that difference of dice equals 0.
+Possible sums: $2,4,6,8,10,12$ each with probability $\frac{1}{6}$.
+Then
+$$
+E[X \mid A] = \frac{1}{6}(2+4+6+8+10+12) = 7
+$$
+---
+### Linearity of Expectation
+
+For random variables $X$ and $Y$:
+$$
+E[X + Y] = E[X] + E[Y]
+$$
+For constant $a$:
+$$
+E[aX] = a E[X]
+$$
+Expectation is a linear operator.
+
+---
+#### Example: 10 Coin Toss Experiment
+
+Let $X$ be number of heads in 10 fair coin tosses.
+Define indicator variables
+$$
+X_i = \mathbf{1}\{\text{toss } i \text{ is head}\}
+$$
+Then
+$$
+X = \sum_{i=1}^{10} X_i
+$$
+By linearity:
+$$
+E[X] = \sum_{i=1}^{10} E[X_i]
+$$
+Since
+$$
+E[X_i] = P(\text{head}) = \frac{1}{2}
+$$
+Therefore
+$$
+E[X] = 10 \cdot \frac{1}{2} = 5
+$$
+---
+### Variance
+#### Definition
+Variance of $X$:
+$$
+\mathrm{Var}(X) = E[(X - E[X])^2]
+$$
+#### Equivalent Formula
+Expanding:
+$$
+(X - E[X])^2 = X^2 + (E[X])^2 - 2X E[X]
+$$
+Taking expectation:
+$$
+\mathrm{Var}(X) = E[X^2] - (E[X])^2
+$$
+---
+#### Interpretation
+
+Variance measures average squared deviation from the mean.
+If $X$ is constant:
+$$
+\mathrm{Var}(X) = 0
+$$
+---
+### Properties of Variance
+
+For constant $a$:
+$$
+\mathrm{Var}(aX) = a^2 \mathrm{Var}(X)
+$$
+For random variables $X$ and $Y$:
+$$
+\mathrm{Var}(X + Y) = \mathrm{Var}(X) + \mathrm{Var}(Y) + 2 \mathrm{Cov}(X,Y)
+$$
+Variance is not linear.
+
+---
+#### Example: Variance of Dice Face
+
+Let $X$ be face of fair dice.
+$$
+E[X] = 3.5
+$$
+Compute
+$$
+Y = (X - 3.5)^2
+$$
+Values:
+$$
+6.25, 2.25, 0.25, 0.25, 2.25, 6.25
+$$
+Thus
+$$
+\mathrm{Var}(X) = \frac{1}{6}(6.25 + 2.25 + 0.25 + 0.25 + 2.25 + 6.25)
+$$
+
+---
+`***********************************************************************************`
+
+---
