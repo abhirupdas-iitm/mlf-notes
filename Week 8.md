@@ -514,3 +514,153 @@ This motivates introducing a scaling factor in the update rule.
 `***********************************************************************************`
 
 ---
+## Lecture 4
+### Solving an Unconstrained Optimization Problem Part 2
+
+### Recap: Gradient Based Update
+We consider an unconstrained optimization problem:
+$$
+\min_{x \in \mathbb{R}} f(x)
+$$
+The iterative update rule is:
+$$
+x_{t+1} = x_t - \eta_t f'(x_t)
+$$
+Where:
+- $f'(x_t)$ determines the direction
+- $\eta_t > 0$ is a scalar step size
+- $-\!f'(x_t)$ is the descent direction
+
+The issue observed earlier:
+- Direction is correct.
+- Step magnitude may be too large.
+- This can cause oscillations.
+
+Hence we introduce a step size.
+
+---
+### Step Size
+
+Updated rule:
+$$
+x_{t+1} = x_t - \eta_t f'(x_t)
+$$
+Where:
+- $\eta_t$ is positive
+- It may depend on iteration $t$
+- It controls how far we move in the descent direction
+---
+### First Attempt at Step Size
+
+Consider:
+$$
+\eta_0 = 1, \quad \eta_1 = \frac{1}{2}, \quad \eta_2 = \frac{1}{4}, \quad \eta_3 = \frac{1}{8}, \dots
+$$
+General form:
+$$
+\eta_t = \frac{1}{2^t}
+$$
+Properties:
+- Step size decreases geometrically.
+- Appears reasonable to avoid oscillation.
+#### Cumulative Step Size
+Consider total movement if direction is constant:
+$$
+\sum_{t=0}^{\infty} \eta_t = \sum_{t=0}^{\infty} \frac{1}{2^t}
+$$
+This is a geometric series:
+$$
+1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \dots = 2
+$$
+Thus:
+$$
+\sum_{t=0}^{\infty} \eta_t = 2
+$$
+#### Observation
+- Total movement is bounded.
+- Even after infinitely many steps, we can move at most 2 units.
+- If optimum is farther away, we will never reach it.
+- Hence this step size sequence is not suitable.
+
+---
+### Desired Properties of Step Sizes
+
+We need:
+1. Step size decreases to avoid oscillations.
+2. Cumulative step sizes should not be bounded.
+
+That is:
+$$
+\eta_t \to 0
+$$
+and
+$$
+\sum_{t=0}^{\infty} \eta_t = \infty
+$$
+---
+### Improved Step Size Sequence
+
+Consider:
+$$
+\eta_0 = 1, \quad \eta_1 = \frac{1}{2}, \quad \eta_2 = \frac{1}{3}, \quad \eta_3 = \frac{1}{4}, \dots
+$$
+General form:
+$$
+\eta_t = \frac{1}{t+1}
+$$
+#### Cumulative Sum
+$$
+\sum_{t=0}^{\infty} \eta_t
+=
+\sum_{t=0}^{\infty} \frac{1}{t+1}
+=
+1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \dots
+$$
+This is the harmonic series.
+Key property:
+$$
+\sum_{t=0}^{\infty} \frac{1}{t+1} = \infty
+$$
+---
+### Important Observations
+- Step size decreases to zero.
+- Total cumulative movement is unbounded.
+- No matter how far the starting point is from optimum, it is theoretically possible to reach the optimum.
+- Avoids oscillation from large constant step sizes.
+- Avoids stagnation from overly fast geometric decay.
+
+---
+### Final Iterative Algorithm
+
+Given objective:
+$$
+\min_{x \in \mathbb{R}} f(x)
+$$
+Algorithm:
+1. Initialize $x_0$.
+2. For $t = 0,1,2,\dots,T$:
+$$
+x_{t+1} = x_t - \eta_t f'(x_t)
+$$
+with
+$$
+\eta_t = \frac{1}{t+1}
+$$
+3. Output $x_T$.
+---
+### Conceptual Insight
+
+Two conflicting objectives:
+- Reduce step size to avoid oscillations.
+- Maintain sufficient total movement to reach optimum.
+
+The harmonic step size balances both:
+- $\eta_t \to 0$
+- $\sum \eta_t = \infty$
+
+This completes the construction of a principled step size schedule for gradient based optimization.
+
+---
+`***********************************************************************************`
+
+---
