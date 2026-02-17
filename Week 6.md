@@ -274,3 +274,293 @@ Thus columns of $Q_2$ are eigenvectors of $A^T A$.
 `***********************************************************************************`
 
 ---
+## Lecture 2
+### Example of Singular Value Decomposition
+
+### Problem Setup
+
+Given the matrix
+$$
+A = \begin{pmatrix}
+\sqrt{2} & 1 \\
+0 & \sqrt{2}
+\end{pmatrix}
+$$
+Goal: Find the Singular Value Decomposition of $A$.
+
+---
+### Step 1: Check Diagonalizability
+
+#### Eigenvalues of $A$
+Solve $\det A - \lambda I = 0$.
+Eigenvalue:
+$$
+\lambda = \sqrt{2}
+$$
+with algebraic multiplicity $2$.
+Compute
+$$
+A - \sqrt{2} I =
+\begin{pmatrix}
+0 & 1 \\
+0 & 0
+\end{pmatrix}
+$$
+Solving
+$$
+A - \sqrt{2} I
+\begin{pmatrix}
+x_1 \\
+x_2
+\end{pmatrix}
+=
+0
+$$
+gives
+$$
+x_2 = 0
+$$
+Thus eigenvectors are multiples of
+$$
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}
+$$
+Only one linearly independent eigenvector.
+#### Conclusion
+
+$A$ is not diagonalizable.
+Therefore proceed with SVD.
+
+---
+### Step 2: Compute $A^T A$
+$$
+A^T =
+\begin{pmatrix}
+\sqrt{2} & 0 \\
+1 & \sqrt{2}
+\end{pmatrix}
+$$
+Then
+$$
+A^T A =
+\begin{pmatrix}
+2 & \sqrt{2} \\
+\sqrt{2} & 3
+\end{pmatrix}
+$$
+This is real symmetric.
+
+---
+### Step 3: Eigenvalues of $A^T A$
+
+Solve
+$$
+\det
+\begin{pmatrix}
+2 - \lambda & \sqrt{2} \\
+\sqrt{2} & 3 - \lambda
+\end{pmatrix}
+= 0
+$$
+This gives
+$$
+\lambda_1 = 4, \quad \lambda_2 = 1
+$$
+---
+### Step 4: Singular Values
+
+Singular values are
+$$
+\sigma_i = \sqrt{\lambda_i}
+$$
+Thus
+$$
+\sigma_1 = 2, \quad \sigma_2 = 1
+$$
+So
+$$
+\Sigma =
+\begin{pmatrix}
+2 & 0 \\
+0 & 1
+\end{pmatrix}
+$$
+---
+### Step 5: Eigenvectors of $A^T A$
+
+#### For $\lambda_1 = 4$
+Solve
+$$
+A^T A - 4I =
+\begin{pmatrix}
+-2 & \sqrt{2} \\
+\sqrt{2} & -1
+\end{pmatrix}
+$$
+Eigenvector:
+$$
+\begin{pmatrix}
+1 \\
+\sqrt{2}
+\end{pmatrix}
+$$
+Normalize:
+Length is $\sqrt{3}$.
+$$
+x_1 =
+\frac{1}{\sqrt{3}}
+\begin{pmatrix}
+1 \\
+\sqrt{2}
+\end{pmatrix}
+$$
+---
+#### For $\lambda_2 = 1$
+
+Solve
+$$
+A^T A - I =
+\begin{pmatrix}
+1 & \sqrt{2} \\
+\sqrt{2} & 2
+\end{pmatrix}
+$$
+Eigenvector:
+$$
+\begin{pmatrix}
+\sqrt{2} \\
+-1
+\end{pmatrix}
+$$
+Normalize:
+Length is $\sqrt{3}$.
+$$
+x_2 =
+\frac{1}{\sqrt{3}}
+\begin{pmatrix}
+\sqrt{2} \\
+-1
+\end{pmatrix}
+$$
+---
+### Step 6: Construct $Q_2$
+$$
+Q_2 =
+\frac{1}{\sqrt{3}}
+\begin{pmatrix}
+1 & \sqrt{2} \\
+\sqrt{2} & -1
+\end{pmatrix}
+$$
+Columns are orthonormal eigenvectors of $A^T A$.
+
+---
+### Step 7: Compute Left Singular Vectors
+
+Using
+$$
+\sigma_i y_i = A x_i
+$$
+#### Compute $y_1$
+$$
+A x_1 =
+\frac{1}{\sqrt{3}}
+\begin{pmatrix}
+2\sqrt{2} \\
+2
+\end{pmatrix}
+$$
+Divide by $\sigma_1 = 2$:
+$$
+y_1 =
+\frac{1}{\sqrt{3}}
+\begin{pmatrix}
+\sqrt{2} \\
+1
+\end{pmatrix}
+$$
+---
+#### Compute $y_2$
+$$
+A x_2 =
+\frac{1}{\sqrt{3}}
+\begin{pmatrix}
+\sqrt{2} \\
+- \sqrt{2}
+\end{pmatrix}
+$$
+Divide by $\sigma_2 = 1$:
+$$
+y_2 =
+\frac{1}{\sqrt{3}}
+\begin{pmatrix}
+\sqrt{2} \\
+- \sqrt{2}
+\end{pmatrix}
+$$
+Normalize:
+$$
+y_2 =
+\frac{1}{\sqrt{3}}
+\begin{pmatrix}
+1 \\
+- \sqrt{2}
+\end{pmatrix}
+$$
+---
+### Step 8: Construct $Q_1$
+$$
+Q_1 =
+\frac{1}{\sqrt{3}}
+\begin{pmatrix}
+\sqrt{2} & 1 \\
+1 & -\sqrt{2}
+\end{pmatrix}
+$$
+Columns are orthonormal.
+
+---
+### Final SVD
+$$
+A = Q_1 \Sigma Q_2^T
+$$
+Where
+$$
+Q_1 =
+\frac{1}{\sqrt{3}}
+\begin{pmatrix}
+\sqrt{2} & 1 \\
+1 & -\sqrt{2}
+\end{pmatrix}
+$$
+$$
+\Sigma =
+\begin{pmatrix}
+2 & 0 \\
+0 & 1
+\end{pmatrix}
+$$
+$$
+Q_2 =
+\frac{1}{\sqrt{3}}
+\begin{pmatrix}
+1 & \sqrt{2} \\
+\sqrt{2} & -1
+\end{pmatrix}
+$$
+---
+### Important Observations
+
+1. $A$ is not diagonalizable.
+2. $A^T A$ is symmetric and diagonalizable.
+3. Singular values are square roots of eigenvalues of $A^T A$.
+4. Columns of $Q_2$ are eigenvectors of $A^T A$.
+5. Columns of $Q_1$ are eigenvectors of $A A^T$.
+6. SVD exists even when $A$ is not diagonalizable.
+
+---
+`***********************************************************************************`
+
+---
