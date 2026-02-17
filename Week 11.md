@@ -2380,3 +2380,278 @@ Hence $X$ and $Y$ are not independent.
 `***********************************************************************************`
 
 ---
+## Lecture 11
+### Sum of Independent Random Variables
+
+Let $X$ and $Y$ be independent continuous random variables.
+Define
+$$
+Z = X + Y
+$$
+#### Convolution Formula
+
+If $X$ and $Y$ are independent with densities $f_X$ and $f_Y$, then the density of $Z$ is
+$$
+f_Z(z) = \int_{-\infty}^{\infty} f_X(x) f_Y(z - x) dx
+$$
+This operation is called **convolution**.
+
+---
+#### Example: $X, Y \sim \text{Uniform}(0,1)$ Independent
+
+Then
+$$
+f_X(x) =
+\begin{cases}
+1 & 0 \le x \le 1 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+Similarly for $f_Y(y)$.
+Since $0 \le X, Y \le 1$, we have
+$$
+0 \le Z \le 2
+$$
+Outside $[0,2]$, $f_Z(z) = 0$.
+
+---
+#### Case 1: $0 \le z \le 1$
+$$
+f_Z(z) = \int_0^1 f_Y(z - x) dx
+$$
+$f_Y(z - x)$ is nonzero only when
+$$
+0 \le z - x \le 1
+$$
+For $0 \le z \le 1$, this implies
+$$
+0 \le x \le z
+$$
+Thus
+$$
+f_Z(z) = \int_0^z 1 dx = z
+$$
+---
+#### Case 2: $1 \le z \le 2$
+
+Now $f_Y(z - x)$ is nonzero when
+$$
+0 \le z - x \le 1
+$$
+This implies
+$$
+z - 1 \le x \le 1
+$$
+Hence
+$$
+f_Z(z) = \int_{z-1}^1 1 dx = 2 - z
+$$
+---
+### Final Density
+$$
+f_Z(z) =
+\begin{cases}
+z & 0 \le z \le 1 \\
+2 - z & 1 \le z \le 2 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+This is a triangular density.
+
+---
+### Maximum of Independent Random Variables
+
+Let
+$$
+Z = \max(X, Y)
+$$
+#### CDF Method
+$$
+F_Z(z) = P(Z \le z)
+$$
+Since $Z \le z$ iff both $X \le z$ and $Y \le z$,
+$$
+F_Z(z) = P(X \le z, Y \le z)
+$$
+If $X$ and $Y$ are independent,
+$$
+F_Z(z) = F_X(z) F_Y(z)
+$$
+Density obtained by differentiation:
+$$
+f_Z(z) = \frac{d}{dz} F_Z(z)
+$$
+---
+#### Example: $X, Y \sim \text{Uniform}(0,1)$
+
+CDF of $X$:
+$$
+F_X(x) =
+\begin{cases}
+0 & x \le 0 \\
+x & 0 \le x \le 1 \\
+1 & x \ge 1
+\end{cases}
+$$
+Hence
+$$
+F_Z(z) =
+\begin{cases}
+0 & z \le 0 \\
+z^2 & 0 \le z \le 1 \\
+1 & z \ge 1
+\end{cases}
+$$
+Density:
+$$
+f_Z(z) =
+\begin{cases}
+2z & 0 \le z \le 1 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+---
+### Minimum of Independent Random Variables
+
+Let
+$$
+Z = \min(X, Y)
+$$
+#### CDF Derivation
+$$
+F_Z(z) = P(Z \le z)
+$$
+$Z \le z$ iff at least one of $X$ or $Y$ is $\le z$:
+$$
+F_Z(z) = P(X \le z \cup Y \le z)
+$$
+Using De Morgan's law:
+$$
+F_Z(z) = 1 - P(X > z, Y > z)
+$$
+Independence gives
+$$
+F_Z(z) = 1 - P(X > z) P(Y > z)
+$$
+Since
+$$
+P(X > z) = 1 - F_X(z)
+$$
+we obtain
+$$
+F_Z(z) = 1 - (1 - F_X(z))(1 - F_Y(z))
+$$
+Density obtained by differentiation.
+For $X, Y \sim \text{Uniform}(0,1)$,
+$$
+F_Z(z) =
+\begin{cases}
+0 & z \le 0 \\
+1 - (1 - z)^2 & 0 \le z \le 1 \\
+1 & z \ge 1
+\end{cases}
+$$
+Differentiating,
+$$
+f_Z(z) =
+\begin{cases}
+2(1 - z) & 0 \le z \le 1 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+---
+### Covariance and Correlation
+
+#### Covariance
+For random variables $X$ and $Y$,
+$$
+\operatorname{Cov}(X,Y) = E[(X - EX)(Y - EY)]
+$$
+Using linearity,
+$$
+\operatorname{Cov}(X,Y) = E[XY] - EX \, EY
+$$
+---
+#### Correlation Coefficient
+$$
+\rho_{X,Y} =
+\frac{\operatorname{Cov}(X,Y)}
+{\sqrt{\operatorname{Var}(X)} \sqrt{\operatorname{Var}(Y)}}
+$$
+Properties:
+- $-1 \le \rho_{X,Y} \le 1$
+- $\rho = 0$ implies uncorrelated
+- Independence implies uncorrelated
+---
+### Independence Implies Uncorrelated
+
+If $X$ and $Y$ are independent,
+$$
+E[XY] = EX \, EY
+$$
+Thus
+$$
+\operatorname{Cov}(X,Y) = 0
+$$
+---
+### Uncorrelated Does Not Imply Independence
+
+Let
+$$
+X \sim \text{Uniform}(-1,1)
+$$
+Define
+$$
+Y = X^2
+$$
+Then
+$$
+E[XY] = E[X^3]
+$$
+Since $X^3$ is odd over symmetric interval,
+$$
+E[X^3] = 0
+$$
+Also
+$$
+EX = 0
+$$
+Hence
+$$
+E[XY] = EX \, EY
+$$
+So $X$ and $Y$ are uncorrelated.
+However, $Y = X^2$ implies dependence.
+
+---
+### Random Vectors and Covariance Matrix
+
+Let
+$$
+X =
+\begin{pmatrix}
+X_1 \\
+X_2 \\
+\vdots \\
+X_n
+\end{pmatrix}
+$$
+The covariance matrix is the $n \times n$ matrix
+$$
+\operatorname{Cov}(X) =
+\begin{pmatrix}
+\operatorname{Var}(X_1) & \operatorname{Cov}(X_1,X_2) & \cdots & \operatorname{Cov}(X_1,X_n) \\
+\operatorname{Cov}(X_2,X_1) & \operatorname{Var}(X_2) & \cdots & \operatorname{Cov}(X_2,X_n) \\
+\vdots & \vdots & \ddots & \vdots \\
+\operatorname{Cov}(X_n,X_1) & \operatorname{Cov}(X_n,X_2) & \cdots & \operatorname{Var}(X_n)
+\end{pmatrix}
+$$
+Properties:
+- Symmetric matrix
+- Diagonal entries are variances
+- Off diagonal entries are covariances
+
+---
+`***********************************************************************************`
+
+---
