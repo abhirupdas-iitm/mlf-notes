@@ -800,3 +800,207 @@ This leads to the definition of positive definite matrices.
 `***********************************************************************************`
 
 ---
+## Lecture 4 
+### Positive Definite Matrices
+
+### 1. From Quadratic Forms to Matrices
+
+Consider the quadratic form
+$$
+f(x,y) = ax^2 + 2bxy + cy^2
+$$
+This can be written as
+$$
+\begin{pmatrix}
+x & y
+\end{pmatrix}
+\begin{pmatrix}
+a & b \\
+b & c
+\end{pmatrix}
+\begin{pmatrix}
+x \\
+y
+\end{pmatrix}
+$$
+Let
+$$
+v =
+\begin{pmatrix}
+x \\
+y
+\end{pmatrix},
+\quad
+A =
+\begin{pmatrix}
+a & b \\
+b & c
+\end{pmatrix}
+$$
+Then
+$$
+f(x,y) = v^T A v
+$$
+Previously, we showed:
+$$
+f(x,y) \text{ is positive definite}
+$$
+if and only if
+$$
+a > 0
+$$
+and
+$$
+ac - b^2 > 0
+$$
+---
+### 2. Eigenvalue Interpretation in 2 by 2 Case
+
+Let eigenvalues of $A$ be $\lambda_1, \lambda_2$.
+We have
+$$
+\det A = ac - b^2 = \lambda_1 \lambda_2
+$$
+$$
+\operatorname{trace} A = a + c = \lambda_1 + \lambda_2
+$$
+If
+$$
+a > 0
+$$
+and
+$$
+ac - b^2 > 0
+$$
+then
+$$
+\lambda_1 \lambda_2 > 0
+$$
+and
+$$
+\lambda_1 + \lambda_2 > 0
+$$
+Thus
+$$
+\lambda_1 > 0, \quad \lambda_2 > 0
+$$
+---
+### 3. Definition: Positive Definite Matrix
+
+Let $A$ be a real symmetric $n \times n$ matrix.
+#### Condition 1
+$A$ is positive definite if
+$$
+v^T A v > 0
+$$
+for all nonzero $v \in R^n$.
+
+---
+### 4. Equivalent Characterization
+
+#### Condition 2
+All eigenvalues of $A$ are strictly positive.
+
+---
+### 5. Theorem
+
+For a real symmetric matrix $A$, the following are equivalent:
+1. $v^T A v > 0$ for all $v \ne 0$.
+2. All eigenvalues of $A$ are positive.
+
+---
+### 6. Proof: Condition 1 Implies Condition 2
+
+Assume
+$$
+v^T A v > 0
+$$
+for all $v \ne 0$.
+Let
+$$
+A x = \lambda x
+$$
+be an eigenpair with $x \ne 0$.
+Then
+$$
+x^T A x = x^T \lambda x
+$$
+$$
+= \lambda x^T x
+$$
+Since $x^T A x > 0$ and $x^T x > 0$,
+$$
+\lambda > 0
+$$
+Thus all eigenvalues are positive.
+
+---
+### 7. Proof: Condition 2 Implies Condition 1
+
+Assume all eigenvalues satisfy
+$$
+\lambda_i > 0
+$$
+Since $A$ is real symmetric, by spectral theorem there exists an orthonormal basis of eigenvectors
+$$
+x_1, \dots, x_n
+$$
+Any vector $x \in R^n$ can be written as
+$$
+x = c_1 x_1 + \dots + c_n x_n
+$$
+Then
+$$
+A x = c_1 \lambda_1 x_1 + \dots + c_n \lambda_n x_n
+$$
+Now compute
+$$
+x^T A x
+$$
+$$
+= (c_1 x_1 + \dots + c_n x_n)^T
+(c_1 \lambda_1 x_1 + \dots + c_n \lambda_n x_n)
+$$
+Using orthonormality:
+$$
+x_i^T x_j = 0 \text{ if } i \ne j
+$$
+$$
+x_i^T x_i = 1
+$$
+Thus
+$$
+x^T A x = c_1^2 \lambda_1 + \dots + c_n^2 \lambda_n
+$$
+Since each $\lambda_i > 0$ and not all $c_i$ are zero for $x \ne 0$,
+$$
+x^T A x > 0
+$$
+Thus Condition 1 holds.
+
+---
+### 8. Final Definition
+
+A real symmetric matrix $A$ is positive definite if
+$$
+v^T A v > 0
+$$
+for all $v \ne 0$.
+Equivalently,
+$A$ is positive definite if and only if all eigenvalues of $A$ are strictly positive.
+
+---
+### 9. Observations
+
+1. Positive definiteness requires symmetry.
+2. Quadratic form positivity and eigenvalue positivity are equivalent.
+3. In the 2 by 2 case, positivity reduces to
+   $$
+   a > 0, \quad ac - b^2 > 0
+   $$
+4. Spectral theorem is essential in proving equivalence.
+
+---
+`***********************************************************************************`
+
+---
