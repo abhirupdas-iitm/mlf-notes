@@ -1,5 +1,5 @@
 ---
-layout: default
+title: Machine Learning Notes
 ---
 
 # Machine Learning Notes
