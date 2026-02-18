@@ -282,79 +282,53 @@ Uncorrelated components of a multivariate normal are independent.
 
 ---
 ## Lecture 2
-
-# Parameter Estimation
-
-Let $ \mathcal{P} = \{ P_\theta : \theta \in \Theta \} $ be a family of probability distributions indexed by parameter $ \theta $.
-
+### Parameter Estimation
+Let $\mathcal{P} = \{ P_\theta : \theta \in \Theta \}$ be a family of probability distributions indexed by parameter $\theta$.
 Given data
 $$
 X_1, X_2, \dots, X_n \stackrel{iid}{\sim} P_{\theta_0}
 $$
-for some unknown $ \theta_0 \in \Theta $,
-
-Goal: Estimate the true parameter $ \theta_0 $ from data.
+for some unknown $\theta_0 \in \Theta$,
+Goal: Estimate the true parameter $\theta_0$ from data.
 
 ---
-
-# Maximum Likelihood Estimation
-
-## Likelihood Function
-
-Given observations $ x_1, \dots, x_n $,
-
+### Maximum Likelihood Estimation
+#### Likelihood Function
+Given observations $x_1, \dots, x_n$,
 $$
 L(\theta) = P(X_1 = x_1, \dots, X_n = x_n \mid \theta)
 $$
-
 Under independence,
-
 $$
 L(\theta) = \prod_{i=1}^{n} f_\theta(x_i)
 $$
-
-where $ f_\theta $ denotes the pmf or pdf.
-
-## Log-Likelihood
-
+where $f_\theta$ denotes the pmf or pdf.
+#### Log-Likelihood
 $$
 \ell(\theta) = \log L(\theta) = \sum_{i=1}^{n} \log f_\theta(x_i)
 $$
-
-## Negative Log-Likelihood
-
+#### Negative Log-Likelihood
 Define the risk function
-
 $$
 R(\theta) = -\ell(\theta) = - \sum_{i=1}^{n} \log f_\theta(x_i)
 $$
-
 Maximum likelihood estimate
-
 $$
 \hat{\theta}_{ML} = \arg\max_\theta L(\theta)
 = \arg\max_\theta \ell(\theta)
 = \arg\min_\theta R(\theta)
 $$
-
 ---
-
-# Example 1: Bernoulli Bias
-
-## Model
-
+### Example 1: Bernoulli Bias
+#### Model
 $$
 \mathcal{P} = \{ \text{Bern}(\theta) : \theta \in 0,1 \}
 $$
-
 Data:
-
 $$
 X_i \in \{0,1\}
 $$
-
-## pmf
-
+#### pmf
 $$
 P_\theta(X = x) =
 \begin{cases}
@@ -362,67 +336,48 @@ P_\theta(X = x) =
 1 - \theta & x = 0
 \end{cases}
 $$
-
 Compact form:
-
 $$
 P_\theta(x) = \theta^x (1-\theta)^{1-x}
 $$
-
-## Negative Log-Likelihood
-
+#### Negative Log-Likelihood
 $$
 R(\theta)
 = - \sum_{i=1}^{n} \log \left( \theta^{x_i} (1-\theta)^{1-x_i} \right)
 $$
-
 $$
 = - \sum_{i=1}^{n}
 \left(
 x_i \log \theta + (1-x_i)\log(1-\theta)
 \right)
 $$
-
 Let
-
 $$
 a = \sum_{i=1}^{n} x_i
 $$
-
 Then
-
 $$
 R(\theta)
 = a \log \frac{1}{\theta}
 + (n-a)\log \frac{1}{1-\theta}
 $$
-
-## Minimization
-
+#### Minimization
 Setting derivative to zero gives
-
 $$
 \hat{\theta}_{ML}
 = \frac{a}{n}
 = \frac{1}{n} \sum_{i=1}^{n} x_i
 $$
-
 Important observation:
-
 ML estimate equals sample mean.
 
 ---
-
-# Example 2: Uniform Distribution
-
-## Model
-
+### Example 2: Uniform Distribution
+#### Model
 $$
 \mathcal{P} = \{ \text{Unif}(a,b) : a,b \in \mathbb{R}, a<b \}
 $$
-
 Density:
-
 $$
 f_\theta(x) =
 \begin{cases}
@@ -430,15 +385,11 @@ f_\theta(x) =
 0 & \text{otherwise}
 \end{cases}
 $$
-
 Equivalent form:
-
 $$
 f_\theta(x) = \frac{1}{b-a} \mathbf{1}(x \in a,b)
 $$
-
-## Negative Log-Likelihood
-
+#### Negative Log-Likelihood
 $$
 R(\theta)
 = - \sum_{i=1}^{n}
@@ -446,51 +397,35 @@ R(\theta)
 \frac{1}{b-a} \mathbf{1}(x_i \in a,b)
 \right)
 $$
-
-If any $ x_i \notin a,b $, then
-
+If any $x_i \notin a,b$, then
 $$
 R(\theta) = \infty
 $$
-
 Thus require
-
 $$
 a \le \min_i x_i,
 \quad
 b \ge \max_i x_i
 $$
-
 Then
-
 $$
 R(\theta) = n \log(b-a)
 $$
-
-## Minimization
-
+#### Minimization
 To minimize $ \log(b-a) $, choose smallest interval containing data:
-
 $$
 \hat{a}_{ML} = \min_i x_i
 $$
-
 $$
 \hat{b}_{ML} = \max_i x_i
 $$
-
 ---
-
-# Example 3: Normal Mean, Variance Known
-
-## Model
-
+### Example 3: Normal Mean, Variance Known
+#### Model
 $$
 \mathcal{P} = \{ \mathcal{N}(\mu,1) : \mu \in \mathbb{R} \}
 $$
-
 Density:
-
 $$
 f_\mu(x)
 = \frac{1}{\sqrt{2\pi}}
@@ -498,54 +433,39 @@ f_\mu(x)
 -\frac{1}{2}(x-\mu)^2
 \right)
 $$
-
-## Negative Log-Likelihood
-
+#### Negative Log-Likelihood
 Ignoring constants independent of $ \mu $,
-
 $$
 R(\mu)
 = \sum_{i=1}^{n}
 \frac{1}{2}(x_i - \mu)^2
 + C
 $$
-
-## First-Order Condition
-
+#### First-Order Condition
 $$
 \frac{\partial R}{\partial \mu}
 = - \sum_{i=1}^{n} (x_i - \mu)
 $$
-
 Setting to zero,
-
 $$
 \sum_{i=1}^{n} (x_i - \mu) = 0
 $$
-
 $$
 \hat{\mu}_{ML}
 = \frac{1}{n} \sum_{i=1}^{n} x_i
 $$
-
 Important observation:
-
 ML estimate equals sample mean.
 
 ---
-
-# Example 4: Normal Mean and Variance Unknown
-
-## Model
-
+### Example 4: Normal Mean and Variance Unknown
+#### Model
 $$
 \mathcal{P} = \{ \mathcal{N}(\mu,\sigma^2) :
 \mu \in \mathbb{R},
 \sigma^2 > 0 \}
 $$
-
 Density:
-
 $$
 f_{\mu,\sigma^2}(x)
 =
@@ -555,11 +475,8 @@ f_{\mu,\sigma^2}(x)
 \frac{(x-\mu)^2}{\sigma^2}
 \right)
 $$
-
-## Negative Log-Likelihood
-
+#### Negative Log-Likelihood
 Ignoring constants:
-
 $$
 R(\mu,\sigma^2)
 =
@@ -569,29 +486,22 @@ R(\mu,\sigma^2)
 \sum_{i=1}^{n}
 \frac{(x_i-\mu)^2}{\sigma^2}
 $$
-
-## Derivative with Respect to $ \mu $
-
+#### Derivative with Respect to $\mu$
 $$
 \frac{\partial R}{\partial \mu}
 =
 \sum_{i=1}^{n}
 \frac{x_i-\mu}{\sigma^2}
 $$
-
 Setting to zero:
-
 $$
 \hat{\mu}_{ML}
 =
 \frac{1}{n}
 \sum_{i=1}^{n} x_i
 $$
-
-## Derivative with Respect to $ \sigma^2 $
-
+#### Derivative with Respect to $\sigma^2$
 Rewrite:
-
 $$
 R =
 \frac{n}{2}\log(\sigma^2)
@@ -600,9 +510,7 @@ R =
 \sum_{i=1}^{n}
 (x_i-\mu)^2
 $$
-
 Derivative:
-
 $$
 \frac{\partial R}{\partial \sigma^2}
 =
@@ -611,17 +519,13 @@ $$
 \frac{1}{2}
 \frac{\sum_{i=1}^{n}(x_i-\mu)^2}{(\sigma^2)^2}
 $$
-
 Setting to zero:
-
 $$
 \frac{n}{\sigma^2}
 =
 \frac{\sum_{i=1}^{n}(x_i-\mu)^2}{(\sigma^2)^2}
 $$
-
 Solving:
-
 $$
 \hat{\sigma}^2_{ML}
 =
@@ -629,17 +533,12 @@ $$
 \sum_{i=1}^{n}
 (x_i-\hat{\mu}_{ML})^2
 $$
-
 Important observation:
-
-ML variance uses denominator $ n $, not $ n-1 $.
+ML variance uses denominator $n$, not $n-1$.
 
 ---
-
-# Extension: Multivariate Normal
-
+### Extension: Multivariate Normal
 Model:
-
 $$
 \mathcal{P}
 =
@@ -649,22 +548,17 @@ $$
 \Sigma \succ 0
 \}
 $$
-
 Data:
-
 $$
 x_1, \dots, x_N \in \mathbb{R}^d
 $$
-
 ML estimates:
-
 $$
 \hat{\mu}
 =
 \frac{1}{N}
 \sum_{i=1}^{N} x_i
 $$
-
 $$
 \hat{\Sigma}
 =
@@ -673,43 +567,31 @@ $$
 (x_i-\hat{\mu})
 (x_i-\hat{\mu})^T
 $$
-
 ---
-
-# Linear Regression with Gaussian Noise
-
-## Model
-
+### Linear Regression with Gaussian Noise
+#### Model
 $$
 X \in \mathbb{R}^d,
 \quad
 Y \in \mathbb{R}
 $$
-
 $$
 Y = w^T X + \varepsilon
 $$
-
 $$
 \varepsilon \sim \mathcal{N}(0,\sigma^2)
 $$
-
 Thus,
-
 $$
 Y \mid X
 \sim
 \mathcal{N}(w^T X,\sigma^2)
 $$
-
 Data:
-
 $$
 (x_1,y_1), \dots, (x_n,y_n)
 $$
-
-## Likelihood
-
+#### Likelihood
 $$
 L(w)
 =
@@ -721,11 +603,8 @@ L(w)
 (y_i - w^T x_i)^2
 \right)
 $$
-
-## Negative Log-Likelihood
-
+#### Negative Log-Likelihood
 Ignoring constants:
-
 $$
 R(w)
 =
@@ -734,16 +613,12 @@ R(w)
 (y_i - w^T x_i)^2
 + C
 $$
-
 Important observation:
-
 Maximum likelihood estimation reduces to minimizing
-
 $$
 \sum_{i=1}^{n}
 (y_i - w^T x_i)^2
 $$
-
 Thus ML for linear regression with Gaussian noise is equivalent to least squares.
 
 ---
