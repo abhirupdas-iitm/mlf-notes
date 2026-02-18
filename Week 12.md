@@ -818,72 +818,49 @@ Gaussian mixture models form a foundational building block in machine learning.
 `***********************************************************************************`
 
 ---
-### Lecture 4
-
-## Tail Bounds and Concentration
+## Lecture 4
+### Tail Bounds and Concentration
 
 Two types of results:
 1. Bounds on deviation of a random variable from its mean.
 2. Behavior of averages of many random variables.
-
 ---
-
-## Markov Inequality
-
-### Setup
-
+### Markov Inequality
+#### Setup
 Let $X$ be a positive random variable such that
-
 $$
 X \ge 0
 $$
-
 Let
-
 $$
 \mathbb{E}[X] = \mu
 $$
-
-### Statement
-
+#### Statement
 For any $t > 0$,
-
 $$
 \mathbb{P}(X \ge t) \le \frac{\mathbb{E}[X]}{t}
 $$
-
-### Interpretation
-
+#### Interpretation
 If $t < \mu$, then
-
 $$
 \frac{\mu}{t} > 1
 $$
-
 and the bound is vacuous since probability is at most 1.
-
 The bound is meaningful for $t \ge \mu$.
 
 ---
-
-### Proof
-
+#### Proof
 Since $X \ge 0$,
-
 $$
 \mathbb{E}[X] = \int_0^\infty x f_X(x) dx
 $$
-
 Split the integral at $t$:
-
 $$
-\mathbb{E}[X] =
+mathbb{E}[X] =
 \int_0^t x f_X(x) dx +
 \int_t^\infty x f_X(x) dx
 $$
-
 Since $x \ge t$ on $[t, \infty)$,
-
 $$
 \int_t^\infty x f_X(x) dx
 \ge
@@ -891,138 +868,95 @@ $$
 =
 t \int_t^\infty f_X(x) dx
 $$
-
 Thus,
-
 $$
 \mathbb{E}[X] \ge t \mathbb{P}(X \ge t)
 $$
-
 Rearranging,
-
 $$
 \mathbb{P}(X \ge t) \le \frac{\mathbb{E}[X]}{t}
 $$
-
 ---
-
-### Tightness Example
-
+#### Tightness Example
 Let $X$ be discrete:
-
 $$
 \mathbb{P}(X = 0) = \frac{4}{5}
 $$
-
 $$
 \mathbb{P}(X = 50) = \frac{1}{5}
 $$
-
 Then,
-
 $$
 \mathbb{E}[X] = \frac{1}{5} \cdot 50 = 10
 $$
-
 Compute:
-
 $$
 \mathbb{P}(X \ge 50) = \frac{1}{5}
 $$
-
 Markov bound:
-
 $$
 \frac{\mathbb{E}[X]}{50} = \frac{10}{50} = \frac{1}{5}
 $$
-
 Equality holds.
 
 ---
-
-## Chebyshev Inequality
-
-### Setup
-
+### Chebyshev Inequality
+#### Setup
 Let
-
 $$
 \mathbb{E}[X] = \mu
 $$
-
 $$
 \mathrm{Var}(X) = \sigma^2
 $$
-
-### Statement
-
+#### Statement
 For any $t > 0$,
-
 $$
 \mathbb{P}(|X - \mu| \ge t) \le \frac{\sigma^2}{t^2}
 $$
-
 ---
-
-### Proof via Markov
-
+#### Proof via Markov
 Observe:
-
 $$
 |X - \mu| \ge t
 \iff
 (X - \mu)^2 \ge t^2
 $$
-
 Thus,
-
 $$
 \mathbb{P}(|X - \mu| \ge t)
 =
 \mathbb{P}((X - \mu)^2 \ge t^2)
 $$
-
 Apply Markov to $(X - \mu)^2$:
-
 $$
 \le
 \frac{\mathbb{E}[(X - \mu)^2]}{t^2}
 =
 \frac{\mathrm{Var}(X)}{t^2}
 $$
-
 ---
-
-## Sample Mean and Concentration
+### Sample Mean and Concentration
 
 Let $X_1, X_2, \dots, X_n$ be independent and identically distributed.
-
 Assume
-
 $$
 \mathbb{E}[X_i] = \mu
 $$
-
 Define the sample mean:
-
 $$
 \overline{X}_n =
 \frac{1}{n}
 \sum_{i=1}^n X_i
 $$
-
 Then,
-
 $$
 \mathbb{E}[\overline{X}_n] = \mu
 $$
-
 ---
-
-### Variance of Sample Mean
+#### Variance of Sample Mean
 
 Since variables are independent,
-
 $$
 \mathrm{Var}(\overline{X}_n)
 =
@@ -1033,37 +967,25 @@ $$
 =
 \frac{\sigma^2}{n}
 $$
-
 ---
-
-### Chebyshev Bound for Sample Mean
-
+#### Chebyshev Bound for Sample Mean
 $$
 \mathbb{P}(|\overline{X}_n - \mu| \ge \epsilon)
 \le
 \frac{\sigma^2}{n \epsilon^2}
 $$
-
 Decay rate:
-
 $$
 O\left(\frac{1}{n}\right)
 $$
-
 ---
-
-## Hoeffding Inequality
-
-### Additional Assumption
-
+### Hoeffding Inequality
+#### Additional Assumption
 Assume
-
 $$
 a \le X_i \le b
 $$
-
 Then,
-
 $$
 \mathbb{P}(|\overline{X}_n - \mu| \ge \epsilon)
 \le
@@ -1071,23 +993,16 @@ $$
 -\frac{2 n \epsilon^2}{(b - a)^2}
 \right)
 $$
-
 Decay rate:
-
 $$
 O(e^{-n})
 $$
-
 Exponential decay is much faster than $1/n$.
 
 ---
-
-## Convergence Concepts
-
-### Convergence in Probability
-
+### Convergence Concepts
+#### Convergence in Probability
 A sequence $X_n$ converges to $X$ in probability if
-
 $$
 \lim_{n \to \infty}
 \mathbb{P}(|X_n - X| \ge \epsilon)
@@ -1096,13 +1011,9 @@ $$
 \quad
 \forall \epsilon > 0
 $$
-
 ---
-
-### Convergence in Distribution
-
+#### Convergence in Distribution
 $X_n$ converges to $X$ in distribution if
-
 $$
 \lim_{n \to \infty}
 F_{X_n}(x)
@@ -1111,29 +1022,21 @@ F_X(x)
 \quad
 \forall x
 $$
-
 Convergence in probability implies convergence in distribution.
 
 ---
-
-## Law of Large Numbers
-
+### Law of Large Numbers
 Let $X_1, \dots, X_n$ be iid with
-
 $$
 \mathbb{E}[X_i] = \mu
 $$
-
 Define
-
 $$
 \overline{X}_n =
 \frac{1}{n}
 \sum_{i=1}^n X_i
 $$
-
-### Weak Law of Large Numbers
-
+#### Weak Law of Large Numbers
 $$
 \overline{X}_n
 \to
@@ -1141,53 +1044,38 @@ $$
 \quad
 \text{in probability}
 $$
-
 ---
-
-### Proof Using Chebyshev
-
+#### Proof Using Chebyshev
 If variance is finite,
-
 $$
 \mathbb{P}(|\overline{X}_n - \mu| \ge \epsilon)
 \le
 \frac{\sigma^2}{n \epsilon^2}
 $$
-
 As $n \to \infty$,
-
 $$
 \frac{\sigma^2}{n \epsilon^2} \to 0
 $$
-
 Thus convergence in probability holds.
 
 ---
-
-## Central Limit Theorem
-
+### Central Limit Theorem
 Let $X_1, X_2, \dots$ be iid with
-
 $$
 \mathbb{E}[X_i] = \mu
 $$
-
 $$
 \mathrm{Var}(X_i) = \sigma^2
 $$
-
 Define
-
 $$
 Y_n =
 \frac{1}{\sqrt{n}}
 \sum_{i=1}^n (X_i - \mu)
 $$
-
 ---
 
-### Statement
-
+#### Statement
 $$
 Y_n
 \to
@@ -1195,39 +1083,28 @@ Y_n
 \quad
 \text{in distribution}
 $$
-
 ---
-
 ### Interpretation
 
 Scaled sums of independent random variables converge to a normal distribution.
-
 This explains ubiquity of the normal distribution in additive phenomena.
-
 Even for moderate $n$, the approximation is accurate.
 
 ---
-
-## Summary of Results
-
+### Summary of Results
 Markov:
-
 $$
 \mathbb{P}(X \ge t)
 \le
 \frac{\mathbb{E}[X]}{t}
 $$
-
 Chebyshev:
-
 $$
 \mathbb{P}(|X - \mu| \ge t)
 \le
 \frac{\sigma^2}{t^2}
 $$
-
 Hoeffding:
-
 $$
 \mathbb{P}(|\overline{X}_n - \mu| \ge \epsilon)
 \le
@@ -1235,9 +1112,7 @@ $$
 -\frac{2 n \epsilon^2}{(b - a)^2}
 \right)
 $$
-
 Weak Law:
-
 $$
 \overline{X}_n
 \to
@@ -1245,9 +1120,7 @@ $$
 \quad
 \text{in probability}
 $$
-
 Central Limit Theorem:
-
 $$
 \frac{1}{\sqrt{n}}
 \sum_{i=1}^n (X_i - \mu)
@@ -1256,7 +1129,6 @@ $$
 \quad
 \text{in distribution}
 $$
-
 ---
 `***********************************************************************************`
 
