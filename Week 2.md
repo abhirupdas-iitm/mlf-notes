@@ -296,7 +296,7 @@ In this lecture, we introduced:
 These tools form the mathematical foundation required for the rest of the course.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
   
@@ -561,11 +561,11 @@ represents the **slope of the tangent line** to the curve at $x^\star$.
 With this, we complete our recap of continuity and differentiability in one dimension.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
   
-## Lecture 2 
+## Lecture 3 
 ### Univariate Calculus: Continuity and Differentiability  
 
 ### Continuity of Functions  
@@ -825,10 +825,10 @@ represents the **slope of the tangent line** to the curve at $x^\star$.
 With this, we complete our recap of continuity and differentiability in one dimension.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
-## Lecture 3  
+## Lecture 4  
 ### Univariate Calculus – Derivatives and Linear Approximations  
 
 ### 1. Derivative of a Differentiable Function
@@ -1098,11 +1098,11 @@ $$
 We recognize that linear approximation simplifies complicated functions into linear forms locally, and this idea forms the foundation of optimization and machine learning.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 
-## Lecture 4 
+## Lecture 5 
 ### Applications and Advanced Rules of Derivatives  
 
 ### 1. Higher Order Approximations  
@@ -1386,7 +1386,7 @@ This completes the univariate calculus component. We next transition to multivar
 
 ---
 
-## Lecture 5 
+## Lecture 6
 ### Multivariate Calculus: Lines, Hyperplanes, Partial Derivatives, and Gradients  
 
 ### 1. From Univariate to Multivariate Functions
@@ -1608,11 +1608,11 @@ These points are candidates for minima, maxima, or saddle points.
 We now have the foundational geometric and differential tools required for multivariate calculus, which we will use extensively in machine learning for optimization and modeling.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 
-## Lecture 6 
+## Lecture 7 
 ### Gradient Interpretations and Higher-Order Approximations  
 
 ### Multivariate Linear Approximation
@@ -1876,6 +1876,6 @@ Critical points may be:
 - Saddle points  
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---

@@ -275,13 +275,11 @@ Eigenvectors determine invariant directions.
 These concepts are fundamental to diagonalization and further decomposition methods.
 
 ---
-`***********************************************************************************`
+`**********************************************************************************`
 
 ---
 ## Lecture 2
-
 ### Similarity and Diagonalization
-
 ### Motivation
 
 In the previous lecture we studied eigenvalues and eigenvectors.  
@@ -592,10 +590,9 @@ Therefore it is not diagonalizable.
 6. Real symmetric matrices will later be shown to always be diagonalizable.
 
 ---
-`***********************************************************************************`
+`**********************************************************************************`
 
 ---
-
 ## Lecture 3
 ### Fibonacci Sequence and Diagonalization
 
@@ -826,10 +823,9 @@ $$
 Recursive growth becomes exponential growth governed by eigenvalues.
 
 ---
-`***********************************************************************************`
+`**********************************************************************************`
 
 ---
-
 ## Lecture 4
 ### Spectral Theorem for Real Symmetric Matrices
 
@@ -1009,10 +1005,9 @@ This result is the real case of the spectral theorem.
 In subsequent development, this theorem generalizes to Hermitian matrices in complex vector spaces.
 
 ---
-`***********************************************************************************`
+`**********************************************************************************`
 
 ---
-
 ## Lecture 5
 ### Spectral Theorem and Orthogonal Diagonalization
 
@@ -1187,6 +1182,6 @@ $$
 This is orthogonal diagonalization and is a central consequence of the spectral theorem.
 
 ---
-`***********************************************************************************`
+`**********************************************************************************`
 
 ---

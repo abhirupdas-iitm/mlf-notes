@@ -135,7 +135,7 @@ Machine learning requires:
 Together, these three pillars form the foundation upon which machine learning theory is built.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 2
@@ -331,7 +331,7 @@ Thus all optimization problems can be written in minimization form.
 Next step: developing algorithms to solve optimization problems.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 3
@@ -511,7 +511,7 @@ Findings from this example:
 This motivates introducing a scaling factor in the update rule.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 4
@@ -661,7 +661,7 @@ The harmonic step size balances both:
 This completes the construction of a principled step size schedule for gradient based optimization.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 5
@@ -825,7 +825,7 @@ Properties:
 This forms the foundational algorithm for optimization in machine learning.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 6 
@@ -977,7 +977,7 @@ Thus gradient descent moves in the direction of steepest local decrease.
 This provides the theoretical justification for the gradient descent update rule.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 7
@@ -1248,7 +1248,7 @@ $$
 This is the Gradient Descent algorithm for unconstrained optimization.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 8
@@ -1434,6 +1434,6 @@ moving in the negative gradient direction may violate feasibility.
 This motivates development of constrained optimization techniques.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---

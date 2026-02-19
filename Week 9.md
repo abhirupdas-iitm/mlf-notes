@@ -145,10 +145,10 @@ $$
 which characterizes constrained optimality.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
-## Lecture 3
+## Lecture 2
 
 ### Relationship Between Gradients at Optimality
 
@@ -325,7 +325,7 @@ The scalar $\lambda$ is called the Lagrange multiplier.
 This condition provides the foundation for solving constrained optimization problems using the method of Lagrange multipliers.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 3
@@ -611,7 +611,7 @@ $$
 Projected gradient descent extends gradient descent to constrained optimization.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 4
@@ -821,7 +821,7 @@ Therefore, intersection of convex sets is convex.
 Convex sets play a fundamental role in optimization and machine learning, as many feasible regions are intersections of half spaces, and therefore convex.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 5
@@ -1061,7 +1061,7 @@ Therefore Euclidean balls are convex.
 Convex sets, convex combinations, convex hulls, and intersections form foundational tools for optimization and machine learning.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 6
@@ -1220,7 +1220,7 @@ A function $f : \mathbb{R}^d \to \mathbb{R}$ is convex if any one of the followi
 These characterizations provide multiple tools to verify convexity in optimization and machine learning.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 7
@@ -1345,6 +1345,6 @@ If $f$ is convex:
 Convexity ensures that optimization is globally well behaved.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---

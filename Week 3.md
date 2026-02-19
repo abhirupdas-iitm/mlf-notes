@@ -250,7 +250,7 @@ We conclude:
 These four spaces completely describe the structure of a matrix and form the backbone of linear algebra used in machine learning.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 
@@ -505,7 +505,7 @@ In this lecture, we established:
 These results form the geometric foundation for projections and least squares.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 
@@ -669,7 +669,7 @@ This geometric idea forms the foundation of:
 > Least squares solutions.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 
@@ -861,7 +861,7 @@ which geometrically means:
 This is the geometric foundation of least squares.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
   
@@ -1051,6 +1051,6 @@ which geometrically corresponds to projecting $b$ onto the column space of $A$.
 - Least squares is orthogonal projection.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---

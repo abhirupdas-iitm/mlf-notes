@@ -235,7 +235,7 @@ $$
 This represents the fundamental ML framework.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 
@@ -469,7 +469,7 @@ $$
 - We view the learning algorithm as the mechanism that converts data into a model.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 
@@ -739,7 +739,7 @@ Hence we conclude that $f$ is the better model for this dataset.
 We therefore interpret supervised learning as curve fitting under a specified loss function.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 
@@ -980,7 +980,7 @@ We typically divide data as follows:
 - We use validation data for model selection.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 5
@@ -1209,7 +1209,7 @@ $$
 Dimensionality reduction is the foundation for many modern representation learning techniques.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 
@@ -1441,6 +1441,6 @@ Across Week 1, we have introduced:
 In later lectures, we will develop concrete algorithms that search over infinite model classes and compute optimal solutions efficiently.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---

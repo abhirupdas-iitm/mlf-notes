@@ -233,10 +233,9 @@ $$
 7. Established foundational tools for spectral theorem in complex spaces.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
-
 ## Lecture 2 
 ### Properties of Hermitian Matrices
 
@@ -563,10 +562,9 @@ $$
 4. Real symmetric matrices are special cases of Hermitian matrices.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
-
 ## Lecture 3
 ### Unitary Matrices and Their Properties
 
@@ -823,7 +821,7 @@ $$
 This is the spectral theorem in the real case.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 4
@@ -1121,10 +1119,9 @@ This is upper triangular.
 4. This theorem enables diagonalization of Hermitian matrices in the next step.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
-
 ## Lecture 5
 ### Spectral Theorem for Hermitian Matrices
 
@@ -1406,6 +1403,6 @@ Thus $A$ is unitarily diagonalizable but not Hermitian.
 4. Converse does not hold: unitarily diagonalizable does not imply Hermitian.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---

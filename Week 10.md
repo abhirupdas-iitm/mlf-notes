@@ -272,7 +272,7 @@ is concave.
 These structural properties allow us to build complex convex functions from simpler ones, which is essential in machine learning optimization.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 2
@@ -476,7 +476,7 @@ as $T \to \infty$.
 Convex optimization provides both theoretical guarantees and practical algorithms for machine learning.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 3
@@ -647,7 +647,7 @@ $$
 Next step: relate primal and dual solutions and understand when their optimal values coincide.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 4
@@ -886,7 +886,7 @@ For convex problems:
 These are called the **Karush-Kuhn-Tucker conditions**.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
 ## Lecture 5
@@ -1065,6 +1065,6 @@ $$
 This completes the optimization framework and its connection to machine learning.
 
 ---
-`***********************************************************************************`
+`*********************************************************************************`
 
 ---
